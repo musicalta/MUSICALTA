@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="event_event_form_view_inherit" model="ir.ui.view">
+            <field name="name">event.event.form.view.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                <field name="date_end" position="before">
+                    <field name="parent_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
