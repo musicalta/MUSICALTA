@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="event_event_view_form_inherit" model="ir.ui.view">
+            <field name="name">Event event view form inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='tickets']" position="after">
+                    <page name="event_teachers" string="Teachers">
+                        <label for="teacher_ids" string="Teachers"/>
+                        <field name="teacher_ids" widget="many2many"/>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
