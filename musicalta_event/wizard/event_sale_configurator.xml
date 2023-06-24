@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="event_configurator_view_form_inherit" model="ir.ui.view">
+            <field name="name">Event configurator view form inherit</field>
+            <field name="model">event.event.configurator</field>
+            <field name="inherit_id" ref="event_sale.event_configurator_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='event_ticket_id']" position="after">
+                    <field name="teacher_ids" invisible="1"/>
+                    <field name="teacher_id"
+                           domain="[('id', '=', teacher_ids)]"
+                           attrs="{
+                                'invisible': ['|',('event_id', '=', False), ('event_ticket_id', '=', False)],
+                                'required': [('event_id', '!=', False)],
+                            }"
+                    />
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

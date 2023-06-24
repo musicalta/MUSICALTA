@@ -14,9 +14,12 @@
         'base',
         'hr',
         'event',
+        'event_sale',
     ],
     'data': [
         'views/event_event_views.xml',
+        'views/sale_order_view.xml',
+        'wizard/event_sale_configurator.xml',
     ],
 
 }
