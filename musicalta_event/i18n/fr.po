@@ -1,0 +1,75 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* musicalta_event
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-26 13:29+0000\n"
+"PO-Revision-Date: 2023-06-26 15:29+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_event_ticket__teacher_id
+#: model:ir.model.fields,help:musicalta_event.field_event_registration__teacher_id
+msgid "Choose the teacher related to this ticket"
+msgstr "Choisissez le professeur correspondant à ce billet"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_registration_editor_line
+msgid "Edit Attendee Line on Sales Confirmation"
+msgstr "Editer la ligne du participant sur la confirmation de la vente"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_event
+msgid "Event"
+msgstr "Événement"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_registration
+msgid "Event Registration"
+msgstr "Inscription à l'événement"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_event_ticket
+msgid "Event Ticket"
+msgstr "Ticket d'événement"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de commande"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__teacher_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_registration__teacher_id
+#: model:ir.model.fields,field_description:musicalta_event.field_registration_editor_line__teacher_id
+#: model:ir.model.fields,field_description:musicalta_event.field_sale_order_line__teacher_id
+msgid "Teacher"
+msgstr "Professeur"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event__teacher_ids
+#: model:ir.model.fields,field_description:musicalta_event.field_sale_order_line__teacher_ids
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_view_form_inherit
+msgid "Teachers"
+msgstr "Professeurs"
+
+#. module: musicalta_event
+#. odoo-python
+#: code:addons/musicalta_event/models/sale_order_line.py:0
+#, python-format
+msgid ""
+"You have chosen an \"event\" type product. You must provide a teacher for "
+"this event."
+msgstr ""
+"Vous avez choisi un produit de type \"événement\". Vous devez renseigner "
+"un enseignant pour cet événement."

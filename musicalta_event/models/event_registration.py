@@ -10,3 +10,6 @@ class EventRegistration(models.Model):
         required=True,
         help='Choose the teacher related to this ticket'
     )
+    teacher_ids = fields.Many2many(
+        related='event_id.teacher_ids'
+    )

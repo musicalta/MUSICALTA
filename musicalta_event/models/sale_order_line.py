@@ -17,5 +17,5 @@ class SaleOrderLineInherit(models.Model):
     def _check_model(self):
         for record in self:
             if record.product_id.detailed_type == 'event' and not record.teacher_id:
-                raise ValidationError(_('You choose an product with type "event" type. You must provide a teacher for '
-                                        'this event'))
+                raise ValidationError(_('You have chosen an "event" type product. You must provide a teacher for this '
+                                        'event.'))
