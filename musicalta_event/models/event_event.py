@@ -11,3 +11,6 @@ class Event(models.Model):
         column1='employee_id',
         column2='event_id'
     )
+    limit_registration_by_teacher = fields.Boolean(
+        related='event_type_id.limit_registration_by_teacher'
+    )

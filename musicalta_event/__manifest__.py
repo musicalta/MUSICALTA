@@ -19,6 +19,7 @@
     'data': [
         'views/event_event_views.xml',
         'views/event_registration_view.xml',
+        'views/event_type_view.xml',
         'views/sale_order_view.xml',
     ],
 

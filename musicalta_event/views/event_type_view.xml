@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="event_type_view_form_inherit" model="ir.ui.view">
+            <field name="name">Event type view form inherit</field>
+            <field name="model">event.type</field>
+            <field name="inherit_id" ref="event.view_event_type_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//label[@for='has_seats_limitation']" position="replace">
+                    <label for="has_seats_limitation" string="Limit Registrations" attrs="{'invisible': [('limit_registration_by_teacher', '=', True)]}"/>
+                    <div attrs="{'invisible': [('limit_registration_by_teacher', '=', False)]}"/>
+
+                </xpath>
+                <xpath expr="//field[@name='has_seats_limitation']" position="replace">
+                    <field name="has_seats_limitation" attrs="{'invisible': [('limit_registration_by_teacher', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//span" position="replace">
+                    <span attrs="{'invisible': ['|', ('has_seats_limitation', '=', False), ('limit_registration_by_teacher', '=' , True)],
+                                    'required': [('has_seats_limitation', '=', False)]}">
+                            to <field name="seats_max" class="oe_inline o_input_9ch"/>
+                            Confirmed Attendees
+                    </span>
+                </xpath>
+                <xpath expr="//label[@for='has_seats_limitation']" position="before">
+                        <label for="limit_registration_by_teacher" string="Limit Registrations by teachers"/>
+                        <field name="limit_registration_by_teacher" nolabel="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

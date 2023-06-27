@@ -13,6 +13,18 @@
                     </page>
                 </xpath>
 
+                <xpath expr="//label[@for='seats_limited']" position="replace">
+                    <field name="limit_registration_by_teacher" invisible="1"/>
+                    <label for="seats_limited" string="Limit Registrations" attrs="{'invisible': [('limit_registration_by_teacher', '=', True)]}"/>
+
+                </xpath>
+                <xpath expr="//label[@for='seats_limited']/following-sibling::div" position="replace">
+                    <div attrs="{'invisible': [('limit_registration_by_teacher', '=', True)]}">
+                        <field name="seats_limited"/>
+                        <span attrs="{'invisible': ['|', ('seats_limited', '=', False), ('limit_registration_by_teacher', '=', True)], 'required': [('seats_limited', '=', False)]}">to <field name="seats_max" class="oe_inline o_input_9ch"/> Confirmed Attendees</span>
+                    </div>
+                </xpath>
+
             </field>
         </record>
     </data>
