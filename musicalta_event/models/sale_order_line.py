@@ -8,6 +8,7 @@ class SaleOrderLineInherit(models.Model):
     teacher_id = fields.Many2one(
         string='Teacher',
         comodel_name='hr.employee',
+        related='event_ticket_id.teacher_id'
     )
     teacher_ids = fields.Many2many(
         related='event_id.teacher_ids'

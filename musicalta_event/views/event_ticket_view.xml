@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="event_event_ticket_view_tree_from_event_inherit" model="ir.ui.view">
+            <field name="name">Event event ticket view tree from event inherit</field>
+            <field name="model">event.event.ticket</field>
+            <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='description']" position="after">
+                    <field name="teacher_ids" invisible="1"/>
+                    <field name="teacher_id" domain="[('id', 'in', teacher_ids)]"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
