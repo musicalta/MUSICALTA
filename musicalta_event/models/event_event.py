@@ -51,7 +51,7 @@ class Event(models.Model):
                 if not teacher.discipline_ids:
                     raise ValidationError(
                         _('Selected teacher have no discipline registred. You must fill a discpline for this teacher '
-                          '{teacher}'.format(teacher=teacher.name)))
+                          '"{teacher}"'.format(teacher=teacher.name)))
                 for discipline in teacher.discipline_ids:
                     value = {
                         'event_id': self.id,

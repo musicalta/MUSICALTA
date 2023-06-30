@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 13:13+0000\n"
-"PO-Revision-Date: 2023-06-27 15:14+0200\n"
+"POT-Creation-Date: 2023-06-30 10:04+0000\n"
+"PO-Revision-Date: 2023-06-30 12:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -21,6 +21,16 @@ msgstr ""
 #: model:ir.model.fields,help:musicalta_event.field_event_registration__teacher_id
 msgid "Choose the teacher related to this ticket"
 msgstr "Choisissez le professeur correspondant à ce billet"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__discipline_id
+msgid "Discipline"
+msgstr "Discipline"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__discipline_ids
+msgid "Disciplines"
+msgstr "Disciplines"
 
 #. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_registration_editor_line
@@ -46,6 +56,17 @@ msgstr "Ticket d'événement"
 #: model:ir.model,name:musicalta_event.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Ligne de commande"
+
+#. module: musicalta_event
+#. odoo-python
+#: code:addons/musicalta_event/models/event_event.py:0
+#, python-format
+msgid ""
+"Selected teacher have no discipline registred. You must fill a discpline "
+"for this teacher \"{teacher}\""
+msgstr ""
+"L'enseignant sélectionné n'a pas de discipline enregistrée. Vous devez "
+"renseigner une discipline pour cet enseignant \"{teacher}\""
 
 #. module: musicalta_event
 #: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__teacher_id
