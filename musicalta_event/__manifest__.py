@@ -15,11 +15,8 @@
         "event_sale",
     ],
     "data": [
-        # SECURITY
-        "security/ir.model.access.csv",
         # VIEWS
         "views/event_event_views.xml",
-        "views/event_parent.xml",
         "views/event_registration_view.xml",
         "views/event_ticket_view.xml",
         "views/sale_order_view.xml",

@@ -7,7 +7,7 @@
     """,
     "author": "IROKOO, Maxence Royer",
     "website": "https://irokoo.fr",
-    'category': 'customizationustomization',
+    'category': 'customization',
     'version': '16.0.1.0.0',
     'depends': [
         'base',

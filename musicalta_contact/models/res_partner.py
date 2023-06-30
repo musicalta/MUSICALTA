@@ -2,6 +2,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 
+
 class Partner(models.Model):
     _inherit = 'res.partner'
 
@@ -15,7 +16,6 @@ class Partner(models.Model):
     preferal_professor_id = fields.Many2one('res.partner', string='Professeur')
     piece_played = fields.Html(string='Pièce jouée')
     school = fields.Char(string='Ecole')
-
 
     @api.depends('date_of_birth')
     def _compute_old(self):
@@ -35,7 +35,6 @@ class Partner(models.Model):
                 record.is_adult = True
             else:
                 record.is_adult = False
-
 
     @api.model
     def create(self, vals):
