@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="discipline_list_view">
+            <field name="name">employee discipline list view</field>
+            <field name="model">employee.discipline</field>
+            <field name="arch" type="xml">
+                <tree create="1">
+                    <field name="name"/>
+                    <field name="teacher_ids" widget="many2many_tags_avatar"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="discipline_form_view">
+            <field name="name">employee discipline form view</field>
+            <field name="model">employee.discipline</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <label for="name" string="Discipline"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </group>
+
+                        <group>
+                            <field name="teacher_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="discipline_action_view">
+            <field name="name">employee disciplines</field>
+            <field name="res_model">employee.discipline</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                name="Disciplines"
+                id="employee_discipline_menu_discipline"
+                parent="hr.menu_config_employee"
+                sequence="3"
+                action="discipline_action_view"/>
+    </data>
+</odoo>
