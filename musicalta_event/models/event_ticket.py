@@ -11,3 +11,11 @@ class EventTicket(models.Model):
     teacher_ids = fields.Many2many(
         related='event_id.teacher_ids'
     )
+    discipline_ids = fields.Many2many(
+        related='teacher_id.discipline_ids'
+    )
+    discipline_id = fields.Many2one(
+        string='Discipline',
+        comodel_name='employee.discipline',
+        readonly=True
+    )
