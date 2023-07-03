@@ -24,5 +24,18 @@
 
             </field>
         </record>
+        <record id="view_employee_filter_inherit" model="ir.ui.view">
+            <field name="name">View employee filter inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='group_category_ids']" position="after">
+                    <separator/>
+                    <filter name="group_discipline_ids" string="Disciplines" domain="[]" context="{'group_by': 'discipline_ids'}"/>
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </odoo>
