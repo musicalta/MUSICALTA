@@ -1,5 +1,5 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class Event(models.Model):
@@ -45,17 +45,25 @@ class Event(models.Model):
             ticket_model = self.env['event.event.ticket']
             already_exist = ticket_model.search([
                 ('event_id', '=', self.id),
-                ('teacher_id', '=', teacher.id)], limit=1)
+                ('teacher_id', '=', teacher.id),
+                ('discipline_id.id', 'in', teacher.discipline_ids.ids)], limit=1)
             if not already_exist:
-                value = {
-                    'event_id': self.id,
-                    'name': f"{self.name} - {teacher.name}",
-                    'teacher_id': teacher.id,
-                    'seats_max': teacher.student_count_max
-                }
-                new_ticket = ticket_model.create(value)
-                updated_values = {
-                    'price': new_ticket.price + teacher.additional_cost
-                }
-                new_ticket.update(updated_values)
+                if not teacher.discipline_ids:
+                    raise ValidationError(
+                        _('Selected teacher have no discipline registred. You must fill a discpline for this teacher '
+                          '"{teacher}"'.format(teacher=teacher.name)))
+                for discipline in teacher.discipline_ids:
+                    value = {
+                        'event_id': self.id,
+                        'name': f"{self.name} - {teacher.name}",
+                        'teacher_id': teacher.id,
+                        'seats_max': teacher.student_count_max,
+                        'discipline_id': discipline.id
+                    }
+                    new_ticket = ticket_model.create(value)
+                    updated_values = {
+                        'price': new_ticket.price + teacher.additional_cost
+                    }
+                    new_ticket.update(updated_values)
+
         self.remove_old_ticket()

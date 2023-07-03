@@ -10,6 +10,7 @@
                 <xpath expr="//field[@name='description']" position="after">
                     <field name="teacher_ids" invisible="1"/>
                     <field name="teacher_id" domain="[('id', 'in', teacher_ids)]"/>
+                    <field name="discipline_id"/>
                 </xpath>
 
             </field>
