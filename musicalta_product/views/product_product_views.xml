@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="product_product_form_inherit" model="ir.ui.view">
+            <field name="name">Product template only form inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='detailed_type']" position="after">
+                    <field name="is_bundle"/>
+                    <field name="is_in_bundle" invisible="1"/>
+                    <field name="bundle_id" attrs="{'invisible': [('is_in_bundle', '=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//page[@name='sales']" position="before">
+                    <page string="Bundle products" attrs="{'invisible': [('is_bundle', '=', False)]}">
+                        <field name="product_bundle_ids" widget="many2many"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
