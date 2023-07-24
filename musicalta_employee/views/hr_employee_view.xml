@@ -11,6 +11,18 @@
                     <field name="additional_cost"/>
                 </xpath>
 
+                <xpath expr="//div[@id='o_work_employee_main']" position="inside">
+                    <group string="Musicalta information">
+                        <field name="conservatory"/>
+                        <field name="not_call_back"/>
+                        <field name="guso_number"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="second_mail" widget="email"/>
+                </xpath>
+
             </field>
         </record>
     </data>

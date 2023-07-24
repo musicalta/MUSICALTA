@@ -31,7 +31,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="discipline_action_view">
-            <field name="name">employee disciplines</field>
+            <field name="name">Disciplines</field>
             <field name="res_model">employee.discipline</field>
             <field name="view_mode">tree,form</field>
         </record>

@@ -15,3 +15,19 @@ class HrEmployeeInherit(models.Model):
         string='Additional cost',
         help='The extra cost for this teacher',
     )
+    second_mail = fields.Char(
+        string='Second mail',
+        help='The second mail for this teacher',
+    )
+    not_call_back = fields.Boolean(
+        string='Do not call back',
+        help='If this teacher does not want to be called back',
+    )
+    conservatory = fields.Char(
+        string='Conservatory',
+        help='The conservatory where this teacher studied or worked',
+    )
+    guso_number = fields.Char(
+        string='GUSO number',
+        help='The GUSO number of this teacher',
+    )

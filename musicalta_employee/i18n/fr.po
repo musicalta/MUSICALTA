@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:26+0000\n"
-"PO-Revision-Date: 2023-06-22 16:28+0200\n"
+"POT-Creation-Date: 2023-07-24 06:43+0000\n"
+"PO-Revision-Date: 2023-07-24 08:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 3.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. module: musicalta_employee
 #: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__additional_cost
@@ -23,14 +23,55 @@ msgid "Additional cost"
 msgstr "Coût additionnel"
 
 #. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__conservatory
+msgid "Conservatory"
+msgstr "Conservatoire"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__not_call_back
+msgid "Do not call back"
+msgstr "Ne pas rappeler"
+
+#. module: musicalta_employee
 #: model:ir.model,name:musicalta_employee.model_hr_employee
 msgid "Employee"
 msgstr "Employé"
 
 #. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__guso_number
+msgid "GUSO number"
+msgstr "Numéro GUSO"
+
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__not_call_back
+msgid "If this teacher does not want to be called back"
+msgstr "Si l'enseignant ne souhaite pas être rappelé"
+
+#. module: musicalta_employee
+#: model_terms:ir.ui.view,arch_db:musicalta_employee.teacher_view_form
+msgid "Musicalta information"
+msgstr "Informations Musicalta"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__second_mail
+msgid "Second mail"
+msgstr "Second email"
+
+#. module: musicalta_employee
 #: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__student_count_max
 msgid "Student Count max"
 msgstr "Nombre d'étudiants max"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__conservatory
+msgid "The conservatory where this teacher studied or worked"
+msgstr "Le conservatoire où ce professeur a étudié ou travaillé"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__guso_number
+msgid "The GUSO number of this teacher"
+msgstr "Le numéro GUSO de cet enseignant"
 
 #. module: musicalta_employee
 #: model:ir.model.fields,help:musicalta_employee.field_hr_employee__additional_cost
@@ -40,4 +81,11 @@ msgstr "Le coût supplémentaire pour cet enseignant"
 #. module: musicalta_employee
 #: model:ir.model.fields,help:musicalta_employee.field_hr_employee__student_count_max
 msgid "The maximum number that this teacher can supervise in one session"
-msgstr "Le nombre maximum d'élèves que cet enseignant peut encadrer au cours d'une session"
+msgstr ""
+"Le nombre maximum d'élèves que cet enseignant peut encadrer au cours d'une "
+"session"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__second_mail
+msgid "The second mail for this teacher"
+msgstr "Le second email de ce professeur"
