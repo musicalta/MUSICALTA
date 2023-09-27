@@ -7,6 +7,10 @@ class ProductProduct(models.Model):
     is_bundle = fields.Boolean(
         string='Is a bundle'
     )
+    available_for_event = fields.Boolean(
+        string='Available for event',
+        help='If checked, this product will be available for events',
+    )
     bundle_id = fields.Many2one(
         string='Is in bundle of',
         comodel_name='product.product',

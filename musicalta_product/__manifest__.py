@@ -12,6 +12,9 @@
         'sale',
     ],
     'data': [
+        # DATA
+        'data/event_ticket.xml',
+        # VIEWS
         'views/product_product_views.xml',
     ],
 }

@@ -6,6 +6,7 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='detailed_type']" position="after">
+                    <field name="available_for_event"/>
                     <field name="is_bundle"/>
                     <field name="is_in_bundle" invisible="1"/>
                     <field name="bundle_id" attrs="{'invisible': [('is_in_bundle', '=', False)]}"/>

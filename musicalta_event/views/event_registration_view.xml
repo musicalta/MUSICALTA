@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='event_ticket_id']" position="after">
                     <field name="teacher_id"/>
+                    <field name="discipline_id"/>
                 </xpath>
 
             </field>
@@ -20,6 +21,7 @@
                 <xpath expr="//field[@name='event_ticket_id']" position="after">
                     <field name="teacher_ids" invisible="1"/>
                     <field name="teacher_id" domain="[('id', 'in', teacher_ids)]"/>
+                    <field name="discipline_id"/>
                 </xpath>
             </field>
         </record>
@@ -31,6 +33,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//tree//field[@name='event_ticket_id']" position="after">
                     <field name="teacher_id"/>
+                    <field name="discipline_id"/>
                 </xpath>
             </field>
         </record>

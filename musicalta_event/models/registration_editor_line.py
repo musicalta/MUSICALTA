@@ -9,6 +9,12 @@ class RegistrationEditorLine(models.TransientModel):
         comodel_name='hr.employee',
         related='sale_order_line_id.teacher_id'
     )
+    discipline_id = fields.Many2one(
+        string='Discipline',
+        comodel_name='employee.discipline',
+        related='sale_order_line_id.discipline_id',
+        readonly=True
+    )
 
     def get_registration_data(self):
         self.ensure_one()
@@ -22,5 +28,6 @@ class RegistrationEditorLine(models.TransientModel):
             'email': self.email or self.editor_id.sale_order_id.partner_id.email,
             'sale_order_id': self.editor_id.sale_order_id.id,
             'sale_order_line_id': self.sale_order_line_id.id,
-            'teacher_id': self.sale_order_line_id.teacher_id.id
+            'teacher_id': self.sale_order_line_id.teacher_id.id,
+            'discipline_id': self.sale_order_line_id.discipline_id.id
         }
