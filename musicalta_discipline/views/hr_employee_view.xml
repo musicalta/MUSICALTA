@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="hr_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">View employee form inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='coach_id']" position="after">
+                    <field name="discipline_ids" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="view_employee_tree_inherit" model="ir.ui.view">
+            <field name="name">View employee tree inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="discipline_ids" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="view_employee_filter_inherit" model="ir.ui.view">
+            <field name="name">View employee filter inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='group_category_ids']" position="after">
+                    <separator/>
+                    <filter name="group_discipline_ids" string="Disciplines" domain="[]" context="{'group_by': 'discipline_ids'}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

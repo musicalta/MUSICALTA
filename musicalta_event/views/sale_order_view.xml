@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="sale_order_view_form_inherit" model="ir.ui.view">
+            <field name="name">Sale order view form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="event_sale.sale_order_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']//tree//field[@name='event_ticket_id']" position="after">
+                    <field name="teacher_ids" invisible="1"/>
+                    <field name="teacher_id" optional="hide" domain="[('id', 'in', teacher_ids)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
