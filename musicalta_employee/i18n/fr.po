@@ -6,16 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:26+0000\n"
-"PO-Revision-Date: 2023-06-22 16:28+0200\n"
+"POT-Creation-Date: 2023-10-12 10:28+0000\n"
+"PO-Revision-Date: 2023-10-12 10:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 3.3.1\n"
 
 #. module: musicalta_employee
 #: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__additional_cost
@@ -23,14 +21,49 @@ msgid "Additional cost"
 msgstr "Coût additionnel"
 
 #. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__contact_info
+msgid "Contact Info"
+msgstr "Informations de contact"
+
+#. module: musicalta_employee
+#: model_terms:ir.ui.view,arch_db:musicalta_employee.teacher_view_form
+msgid "Contact Name"
+msgstr "Nom du contact"
+
+#. module: musicalta_employee
+#: model_terms:ir.ui.view,arch_db:musicalta_employee.teacher_view_form
+msgid "Contact Phone"
+msgstr "Téléphone du contact"
+
+#. module: musicalta_employee
 #: model:ir.model,name:musicalta_employee.model_hr_employee
 msgid "Employee"
 msgstr "Employé"
 
 #. module: musicalta_employee
+#: model_terms:ir.ui.view,arch_db:musicalta_employee.teacher_view_form
+msgid "Notes"
+msgstr "Notes"
+
+#. module: musicalta_employee
+#: model_terms:ir.ui.view,arch_db:musicalta_employee.teacher_view_form
+msgid "Other contact"
+msgstr "Autre contact"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__private_email
+msgid "Private Email"
+msgstr "Adresse email privée"
+
+#. module: musicalta_employee
 #: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__student_count_max
 msgid "Student Count max"
 msgstr "Nombre d'étudiants max"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__contact_info
+msgid "The contact info for this teacher"
+msgstr "Les informations de contact pour cet enseignant"
 
 #. module: musicalta_employee
 #: model:ir.model.fields,help:musicalta_employee.field_hr_employee__additional_cost
@@ -40,4 +73,16 @@ msgstr "Le coût supplémentaire pour cet enseignant"
 #. module: musicalta_employee
 #: model:ir.model.fields,help:musicalta_employee.field_hr_employee__student_count_max
 msgid "The maximum number that this teacher can supervise in one session"
-msgstr "Le nombre maximum d'élèves que cet enseignant peut encadrer au cours d'une session"
+msgstr ""
+"Le nombre maximum d'élèves que cet enseignant peut encadrer au cours d'une "
+"session"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,help:musicalta_employee.field_hr_employee__website
+msgid "The website for this teacher"
+msgstr "Le site web de cet enseignant"
+
+#. module: musicalta_employee
+#: model:ir.model.fields,field_description:musicalta_employee.field_hr_employee__website
+msgid "Website"
+msgstr "Site web"
