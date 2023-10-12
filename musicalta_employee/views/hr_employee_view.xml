@@ -10,6 +10,25 @@
                     <field name="student_count_max"/>
                     <field name="additional_cost"/>
                 </xpath>
+                <xpath expr="//separator[@name='emergency']" position="attributes">
+                    <attribute name="string">Other contact</attribute>
+                </xpath>
+                <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                    <attribute name="string">Contact Name</attribute>
+                </xpath>
+                <xpath expr="//field[@name='emergency_phone']" position="attributes">
+                    <attribute name="string">Contact Phone</attribute>
+                </xpath>
+                <xpath expr="//field[@name='emergency_phone']" position="after">
+                    <field name="contact_info"/>
+                    <field name="website"/>
+                </xpath>
+                <xpath expr="//div[@id='o_work_employee_main']" position="inside">
+                    <group string="Notes">
+                        <field name="notes"/>
+                        <field name="additional_note"/>
+                    </group>
+                </xpath>
 
             </field>
         </record>

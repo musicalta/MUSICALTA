@@ -15,3 +15,14 @@ class HrEmployeeInherit(models.Model):
         string='Additional cost',
         help='The extra cost for this teacher',
     )
+    contact_info = fields.Char(
+        string='Contact Info',
+        help='The contact info for this teacher',
+    )
+    website = fields.Char(
+        string='Website',
+        help='The website for this teacher',
+    )
+    private_email = fields.Char(
+        readonly=False,
+    )
