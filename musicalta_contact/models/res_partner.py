@@ -12,6 +12,7 @@ class Partner(models.Model):
     email_2 = fields.Char(string='Email 2')
     email_3 = fields.Char(string='Email 3')
     phone_2 = fields.Char(string='Phone 2')
+    phone_3 = fields.Char(string='Phone 3')
     lang_spoken_ids = fields.Many2many('res.lang', string='Lang Spoken')
     preferal_professor_id = fields.Many2one('res.partner', string='Professeur')
     speakings = fields.Char(string='Langues parlées')
