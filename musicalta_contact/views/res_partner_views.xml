@@ -17,6 +17,7 @@
                         <field name="email_2"/>
                         <field name="email_3"/>
                         <field name="phone_2"/>
+                        <field name="phone_3"/>
                         <field name="nationality"/>
                     </group>
                     <group name="praticals_informations" string="Praticals Informations">
