@@ -12,9 +12,24 @@ class Partner(models.Model):
     email_2 = fields.Char(string='Email 2')
     email_3 = fields.Char(string='Email 3')
     phone_2 = fields.Char(string='Phone 2')
+    phone_3 = fields.Char(string='Phone 3')
     lang_spoken_ids = fields.Many2many('res.lang', string='Lang Spoken')
     preferal_professor_id = fields.Many2one('res.partner', string='Professeur')
+    speakings = fields.Char(string='Langues parlées')
+    regular_teacher = fields.Char(string='Professeur régulier')
+    gender = fields.Selection(
+        string='Genre',
+        selection=[
+            ('nc', 'Non communiqué'),
+            ('man', 'Homme'),
+            ('female', 'Femme')
+        ],
+        default='nc',
+    )
     piece_played = fields.Html(string='Pièce jouée')
+    level = fields.Char(string='Niveau')
+    range = fields.Char(string='Tessiture')
+    nationality = fields.Char(string='Nationalité')
     school = fields.Char(string='Ecole')
 
     @api.depends('date_of_birth')
