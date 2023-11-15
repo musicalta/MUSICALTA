@@ -11,6 +11,11 @@ class WizardEventInscription(models.TransientModel):
         comodel_name='event.event',
         domain = "[('stage_id.pipe_end', '!=', True)]",
     )
+    teacher_ids = fields.Many2many(
+        string='Professeurs',
+        comodel_name='hr.employee',
+        related='session_id.teacher_ids',
+    )
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
@@ -34,13 +39,16 @@ class WizardEventInscription(models.TransientModel):
     teacher_id_1 = fields.Many2one(
         'hr.employee',
         string='Professeur 1',
-        domain="[('discipline_ids', 'in', discipline_id_1)]"
+        domain="[('discipline_ids', 'in', discipline_id_1), ('id', 'in', teacher_ids)]"
     )
-    discipline_id_2 = fields.Many2one('employee.discipline', string='Discipline 2')
+    discipline_id_2 = fields.Many2one(
+        'employee.discipline', 
+        string='Discipline 2'
+    )
     teacher_id_2 = fields.Many2one(
         'hr.employee',
         string='Professeur 2',
-        domain="[('discipline_ids', 'in', discipline_id_2)]"
+        domain="[('discipline_ids', 'in', discipline_id_2), ('id', 'in', teacher_ids)]"
     )
     options_ids = fields.Many2many(
         'event.event.ticket',
