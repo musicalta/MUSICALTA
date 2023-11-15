@@ -8,14 +8,19 @@ class EventTicket(models.Model):
         string='Teacher',
         comodel_name='hr.employee',
     )
-    teacher_ids = fields.Many2many(
-        related='event_id.teacher_ids'
-    )
-    discipline_ids = fields.Many2many(
-        related='teacher_id.discipline_ids'
-    )
     discipline_id = fields.Many2one(
         string='Discipline',
         comodel_name='employee.discipline',
-        readonly=True
     )
+    is_option = fields.Boolean(
+        string='Is option',
+        default=False,
+    )
+
+    @api.onchange('teacher_id')
+    def _onchange_teacher_id(self):
+        return {
+            'domain': {
+                'discipline_id': [('id', 'in', self.teacher_id.discipline_ids.ids)]
+            }
+        }

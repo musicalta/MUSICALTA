@@ -11,7 +11,7 @@
 
             </field>
         </record>
-
+<!-- 
         <record id="view_event_registration_form_inherit" model="ir.ui.view">
             <field name="name">View event registration form inherit</field>
             <field name="model">event.registration</field>
@@ -19,10 +19,9 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='event_ticket_id']" position="after">
                     <field name="teacher_ids" invisible="1"/>
-                    <field name="teacher_id" domain="[('id', 'in', teacher_ids)]"/>
                 </xpath>
             </field>
-        </record>
+        </record> -->
 
         <record id="registration_editor_view_form_inherit" model="ir.ui.view">
             <field name="name">Registration editor view form inherit</field>

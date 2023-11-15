@@ -5,9 +5,22 @@
             <field name="model">event.event</field>
             <field name="inherit_id" ref="event.view_event_form"/>
             <field name="arch" type="xml">
-                <field name="date_end" position="before">
-                    <field name="parent_id"/>
-                </field>
+                <!-- <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="lunch_order_ids"></field>
+                </xpath> -->
+                <xpath expr="//page[@name='tickets']" position="after">
+                    <page name="options" string="Options">
+                        <field name="options_event_ticket_id" >
+                            <tree create="1" editable="top">
+                                <field name="product_id"></field>
+                                <field name="teacher_id"></field>
+                                <field name="discipline_id"></field>
+                                <field name="seats_max"></field>
+                                <field name="is_option"></field>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
             </field>
         </record>
     </data>

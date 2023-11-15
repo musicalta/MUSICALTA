@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_lunch_order_form" model="ir.ui.view">
+        <field name="name">event.lunch.order.form</field>
+        <field name="model">event.lunch.order</field>
+        <field name="arch" type="xml">
+            <form string="Lunch Order">
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="session_id"/>
+                        <field name="meal_product_id"/>
+                        <field name="meal_quantity"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lunch_order_tree" model="ir.ui.view">
+        <field name="name">event.lunch.order.tree</field>
+        <field name="model">event.lunch.order</field>
+        <field name="arch" type="xml">
+            <tree string="Lunch Orders">
+                <field name="student_id"/>
+                <field name="session_id"/>
+                <field name="meal_product_id"/>
+                <field name="meal_quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lunch_order" model="ir.actions.act_window">
+        <field name="name">Lunch Orders</field>
+        <field name="res_model">event.lunch.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Repas"
+        id="menu_lunch_order"
+        sequence="3"
+        action="action_lunch_order"
+        parent="event.menu_event_configuration"/>
+
+</odoo>

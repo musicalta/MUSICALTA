@@ -14,3 +14,11 @@ class EventRegistration(models.Model):
     teacher_ids = fields.Many2many(
         related='event_id.teacher_ids'
     )
+    discipline_id = fields.Many2one(
+        'employee.discipline',
+        string='Discipline',
+    )
+    number_of_repas = fields.Integer(
+        string='Nombre de repas',
+        default=0,
+    )

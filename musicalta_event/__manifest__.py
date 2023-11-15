@@ -15,8 +15,11 @@
         "event_sale",
     ],
     "data": [
+        # SECURITY
+        "security/ir_model_access.xml",
         # VIEWS
         "views/event_event_views.xml",
+        "views/event_event.xml",
         "views/event_registration_view.xml",
         "views/event_ticket_view.xml",
         "views/sale_order_view.xml",

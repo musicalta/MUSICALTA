@@ -12,6 +12,18 @@ class Event(models.Model):
         column1='employee_id',
         column2='event_id'
     )
+    event_options_ids = fields.One2many(
+        'event.option',
+        'event_id',
+        string='Event Options'
+    )
+    options_event_ticket_id = fields.One2many(
+        'event.event.ticket',
+        'event_id',
+        string='string',
+        domain=[('is_option', '=', True)]
+    )
+
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -67,3 +79,11 @@ class Event(models.Model):
                     new_ticket.update(updated_values)
 
         self.remove_old_ticket()
+
+    def calculate_days(self):
+        self.ensure_one()
+        if self.date_begin and self.date_end:
+            date_begin = fields.Datetime.from_string(self.date_begin)
+            date_end = fields.Datetime.from_string(self.date_end)
+            return (date_end - date_begin).days
+        return 0
