@@ -23,6 +23,10 @@ class Event(models.Model):
         string='string',
         domain=[('is_option', '=', True)]
     )
+    available_product_ids = fields.Many2many(
+        'product.product',
+        string='Available Products',
+    )
 
 
     @api.model_create_multi

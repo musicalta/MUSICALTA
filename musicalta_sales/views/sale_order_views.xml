@@ -2,7 +2,7 @@
     <record id="action_open_event_inscription_wizard" model="ir.actions.act_window">
         <field name="name">Event Registration</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.event.inscription</field>
+        <field name="res_model">sale.inscription</field>
         <field name="view_mode">form</field>
         <field name="view_mode">form</field>
         <field name="domain">[]</field>
@@ -15,6 +15,12 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+            <button name="action_preview_sale_order" position="before">
+                <button name="action_view_registration_list" type="object"
+                        class="oe_stat_button" icon="fa-users" attrs="{'invisible': [('registration_count', '=', 0)]}">
+                    <field name="registration_count" widget="statinfo" string="Inscription"/>
+                </button>
+            </button>
             <xpath expr="//header" position="inside">
                 <button string="Inscription" type="object" name="action_open_event_inscription"/>
             </xpath>

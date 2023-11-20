@@ -8,7 +8,5 @@ class EventLunchOrder(models.Model):
     session_id = fields.Many2one('event.event', string='Session', required=True)
     meal_product_id = fields.Many2one('product.product', string='Meal Type', required=True)
     meal_quantity = fields.Integer(string='Number of Meals', required=True)
-    sale_order_id = fields.Many2one(
-        'sale.order', 
-        string='Sale Order'
-    )
+    sale_order_id = fields.Many2one('sale.order', string='Sale Order')
+    inscription_id = fields.Many2one('sale.inscription', string='Inscription')

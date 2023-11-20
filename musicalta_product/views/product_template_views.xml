@@ -13,6 +13,7 @@
                 <field name="number_of_meal"/>
                 <field name="discipline_id"/>
                 <field name="is_fees"/>
+                <field name="is_product_for_adults"/>
             </xpath>
         </field>
     </record>

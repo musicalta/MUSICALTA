@@ -1,25 +1,46 @@
 import json
+from dateutil.relativedelta import relativedelta
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
-class WizardEventInscription(models.TransientModel):
-    _name = 'wizard.event.inscription'
-    _description = 'Event Registration Wizard'
+class SaleInscription(models.Model):
+    _name = 'sale.inscription'
+    _description = 'Sale Inscription'
 
+    name = fields.Char(
+        string='Name',
+    )
     session_id = fields.Many2one(
         string='Session',
         comodel_name='event.event',
         domain = "[('stage_id.pipe_end', '!=', True)]",
+    )
+    sale_order_id = fields.Many2one(
+        string='Order',
+        comodel_name='sale.order',
     )
     teacher_ids = fields.Many2many(
         string='Professeurs',
         comodel_name='hr.employee',
         related='session_id.teacher_ids',
     )
+    available_product_ids = fields.Many2many(
+        'product.product', 
+        related='session_id.available_product_ids'
+    )
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Client',
+    )
+    is_adult = fields.Boolean(
+        'Adulte',
+        compute='_compute_is_adult',
+    )
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
-        domain=[('pack_ok', '=', True)],
+        domain="[('pack_ok', '=', True), ('id', 'in', available_product_ids), ('is_product_for_adults', '=', is_adult)]",
     )
     is_auditor = fields.Boolean(
         string='Auditeur',
@@ -58,8 +79,9 @@ class WizardEventInscription(models.TransientModel):
     product_work_rooms_id = fields.Many2one(
         'product.product', 
         string='Salles de travail',
-        domain = "[('is_work_rooms', '=', True)]",
+        domain = "[('is_work_rooms', '=', True), ('id', 'in', available_product_ids)]"
     )
+
     
     @api.onchange('product_pack_id')
     def _onchange_product_pack_id(self):
@@ -73,17 +95,69 @@ class WizardEventInscription(models.TransientModel):
                 ('is_work_rooms', '=', True),
                 ('discipline_id', '=', self.discipline_id_1.id),
             ],).id
+    
+    @api.depends('partner_id')
+    def _compute_is_adult(self):
+        for record in self:
+            if record.partner_id.date_of_birth and record.session_id.date_begin:
+                # Calculer l'âge à la date de la session
+                age_at_session = relativedelta(record.session_id.date_begin, record.partner_id.date_of_birth).years
+                record.is_adult = age_at_session >= 18
+            else:
+                record.is_adult = False
+    
+    def action_open_sale_order(self):
+        return {
+            'name': 'Sale Order',
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.order',
+            'view_mode': 'form',
+            'res_id': self.sale_order_id.id,
+        }
+    
+    def action_update_or_create(self):
+        self._update_or_create({})
+        return True
 
+    def unlink(self):
+        for record in self:
+            record.sale_order_id.order_line.filtered(lambda x: x.inscription_id.id == record.id).unlink()
+        return super(SaleInscription, self).unlink()
+    
+    def _update_or_create(self, vals):
+        if self.sale_order_id:
+            self.sale_order_id.order_line.filtered(lambda x: x.inscription_id.id == self.id).unlink()
+            events_registrations_ids = self.env['event.registration'].search([
+                ('inscription_id', '=', self.id),
+            ])
+            event_lunch_ids = self.env['event.lunch.order'].search([
+                ('inscription_id', '=', self.id),
+            ])
+            event_lunch_ids.unlink()
+            events_registrations_ids.unlink()
+        return self.process_registration()
+        
+    def _create_sale_order(self):
+        SaleOrder = self.env['sale.order']
+        sale_order = SaleOrder.create({
+            'partner_id': self.partner_id.id,
+        })
+        self.sale_order_id = sale_order.id
+        return sale_order
 
     def process_registration(self):
-        SaleOrder = self.env['sale.order']
-        sale_order = SaleOrder.browse(self._context.get('active_id'))
+        if not self.sale_order_id:
+            sale_order = self._create_sale_order()
+            self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
+        sale_order = self.sale_order_id
         sale_order_line = []
         if self.product_pack_id:
             sale_order_line.append({
                 'sequence': 0,
                 'order_id': sale_order.id,
-                'product_id': self.product_pack_id.id
+                'product_id': self.product_pack_id.id,
+                'price_unit': self.product_pack_id.list_price,
+                'inscription_id': self.id,
             })
         event_registration = []
         pairs = []
@@ -100,6 +174,7 @@ class WizardEventInscription(models.TransientModel):
                 'sequence': 1,
                 'order_id': sale_order.id,
                 'product_id': product_fees.id,
+                'inscription_id': self.id,
                 'name': product_fees.display_name + ' - ' + \
                     self.session_id.name + ' - ' + self.teacher_id_2.name,
             })
@@ -119,6 +194,7 @@ class WizardEventInscription(models.TransientModel):
                 'event_id': self.session_id.id,
                 'event_ticket_id': event_ticket_id.id,
                 'sale_order_id': sale_order.id,
+                'inscription_id': self.id,
             })
         for option in self.options_ids:
             event_ticket_id = self.env['event.event.ticket'].search([
@@ -131,6 +207,7 @@ class WizardEventInscription(models.TransientModel):
                 raise UserError(_('No ticket found for this teacher and discipline'))
             sale_order_line.append({
                 'order_id': sale_order.id,
+                'inscription_id': self.id,
                 'product_id': event_ticket_id.product_id.id,
             })
             event_registration.append({
@@ -141,10 +218,10 @@ class WizardEventInscription(models.TransientModel):
                 'event_ticket_id': option.id,
                 'discipline_id': option.discipline_id.id,
                 'sale_order_id': sale_order.id,
+                'inscription_id': self.id,
             })
         if self.product_hebergement_id or self.product_launch_id:
-            meal_product_id = self.product_launch_id or self.product_hebergement_id
-            self._lunch_management(meal_product_id, sale_order)
+            self._lunch_management(self.product_launch_id, self.product_hebergement_id , sale_order)
         if self.product_work_rooms_id:
             self._work_room_management(self.product_work_rooms_id, sale_order)
         self.env['sale.order.line'].create(sale_order_line)
@@ -155,40 +232,32 @@ class WizardEventInscription(models.TransientModel):
         self.env['sale.order.line'].create({
             'sequence': 2, # TODO: check if this is the right sequence
             'order_id': sale_order.id,
+            'inscription_id': self.id,
             'product_id': product_work_rooms_id.id,
         })
 
-    def _lunch_management(self, meal_product_id, sale_order):
-        self.env['event.lunch.order'].create({
-            'student_id': sale_order.partner_id.id,
-            'meal_product_id': meal_product_id.id,
-            'meal_quantity': self.session_id.calculate_days() * meal_product_id.number_of_meal,
-            'session_id': self.session_id.id,
-            # 'sale_order_id': sale_order.id,
-        })
+    def _lunch_management(self, product_launch_id, product_hebergement_id, sale_order):
+        lunch_order = []
         if self.product_launch_id:
+            lunch_order.append({
+                'student_id': sale_order.partner_id.id,
+                'meal_product_id': product_launch_id.id,
+                'meal_quantity': self.session_id.calculate_days() * product_launch_id.number_of_meal,
+                'session_id': self.session_id.id,
+                'inscription_id': self.id,
+            })
             self.env['sale.order.line'].create({
                 'order_id': sale_order.id,
+                'inscription_id': self.id,
                 'product_id': self.product_launch_id.id,
             })
+        if self.product_hebergement_id:
+            lunch_order.append({
+                'student_id': sale_order.partner_id.id,
+                'meal_product_id': product_hebergement_id.id,
+                'meal_quantity': self.session_id.calculate_days() * product_hebergement_id.number_of_meal,
+                'session_id': self.session_id.id,
+                'inscription_id': self.id,
+            })
+        self.env['event.lunch.order'].create(lunch_order)
     
-
-
-class WizardEventInscriptionTraining(models.TransientModel):
-    _name = "wizard.event.inscription.training"
-    _description = "Event Registration Training Wizard"
-
-    professor_id = fields.Many2one(
-        string='Professor',
-        comodel_name='hr.employee',
-        required=True,
-    )
-    discipline_id = fields.Many2one(
-        string='Discipline',
-        comodel_name='employee.discipline',
-        required=True,
-    )
-    wizard_id = fields.Many2one(
-        'wizard.event.inscription',
-        string='Wizard'
-    )
