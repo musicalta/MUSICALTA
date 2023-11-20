@@ -25,6 +25,15 @@ class SaleInscription(models.Model):
         comodel_name='hr.employee',
         related='session_id.teacher_ids',
     )
+    usual_teacher_id = fields.Many2one(
+        'hr.employee',
+        string='Professeur habituel'
+    )
+    musical_level_id = fields.Many2one(
+        'musical.level',
+        string='Niveau musical'
+    )
+    partition = fields.Char('Partition')
     available_product_ids = fields.Many2many(
         'product.product', 
         related='session_id.available_product_ids'
@@ -49,7 +58,7 @@ class SaleInscription(models.Model):
     product_hebergement_id = fields.Many2one(
         'product.product',
         string='Hébergement',
-        domain="[('is_product_hebergement', '=', True)]",
+        domain="[('is_product_hebergement', '=', True), ('id', 'in', available_product_ids)]",
     )
     product_launch_id = fields.Many2one(
         'product.product',
@@ -151,45 +160,58 @@ class SaleInscription(models.Model):
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
         sale_order = self.sale_order_id
         sale_order_line = []
-        if self.product_pack_id:
-            sale_order_line.append({
-                'sequence': 0,
-                'order_id': sale_order.id,
-                'product_id': self.product_pack_id.id,
-                'price_unit': self.product_pack_id.list_price,
-                'inscription_id': self.id,
-            })
         event_registration = []
-        pairs = []
         if self.discipline_id_1 and self.teacher_id_1:
-            pairs.append((self.discipline_id_1, self.teacher_id_1))
+            if self.product_pack_id:
+                event_ticket_id = self.env['event.event.ticket'].search([
+                    ('event_id', '=', self.session_id.id),
+                    ('teacher_id', '=', self.teacher_id_1.id),
+                    ('discipline_id', '=', self.discipline_id_1.id),
+                ])
+                if not event_ticket_id:
+                    raise UserError(_('No ticket found for this teacher and discipline'))
+                sale_order_line.append({
+                    'sequence': 0,
+                    'order_id': sale_order.id,
+                    'product_id': self.product_pack_id.id,
+                    'price_unit': self.product_pack_id.list_price,
+                    'inscription_id': self.id,
+                    'event_ticket_id': event_ticket_id.id,
+                    'name': self.product_pack_id.display_name + ' - ' + \
+                        self.session_id.name + ' - ' + self.teacher_id_1.name,
+                })
+                event_registration.append({
+                    'teacher_id': self.teacher_id_1.id,
+                    'discipline_id': self.discipline_id_1.id,
+                    'partner_id': sale_order.partner_id.id,
+                    'event_id': self.session_id.id,
+                    'event_ticket_id': event_ticket_id.id,
+                    'sale_order_id': sale_order.id,
+                    'inscription_id': self.id,
+                })
         if self.discipline_id_2 and self.teacher_id_2:
-            pairs.append((self.discipline_id_2, self.teacher_id_2))
             product_fees = self.env['product.product'].search([
                 ('is_fees', '=', True),
             ])
             if not product_fees:
                 raise UserError(_('No fees product found'))
+            event_ticket_id = self.env['event.event.ticket'].search([
+                    ('event_id', '=', self.session_id.id),
+                    ('teacher_id', '=', self.teacher_id_2.id),
+                    ('discipline_id', '=', self.discipline_id_2.id),
+                ])
             sale_order_line.append({
                 'sequence': 1,
                 'order_id': sale_order.id,
                 'product_id': product_fees.id,
                 'inscription_id': self.id,
+                'event_ticket_id': event_ticket_id.id,
                 'name': product_fees.display_name + ' - ' + \
                     self.session_id.name + ' - ' + self.teacher_id_2.name,
             })
-        for discpline,teacher in pairs:
-            event_ticket_id = self.env['event.event.ticket'].search([
-                ('event_id', '=', self.session_id.id),
-                ('teacher_id', '=', teacher.id),
-                ('discipline_id', '=', discpline.id),
-            ])
-            if not event_ticket_id:
-                raise UserError(_('No ticket found for this teacher and discipline'))
-
             event_registration.append({
-                'teacher_id': teacher.id,
-                'discipline_id': discpline.id,
+                'teacher_id': self.teacher_id_2.id,
+                'discipline_id': self.discipline_id_2.id,
                 'partner_id': sale_order.partner_id.id,
                 'event_id': self.session_id.id,
                 'event_ticket_id': event_ticket_id.id,
