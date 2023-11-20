@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <menuitem id="musicalta_menu_root"
+        name="Musicalta"
+        web_icon="musicalta_sales,static/description/icon.svg"
+        sequence="30">
+
+        <menuitem id="musicalta_inscription_menu"
+            name="Demande d'Inscription"
+            sequence="10">
+
+            <menuitem id="menu_sale_inscription"
+                name="Demande d'inscription"
+                action="action_sale_inscription"
+                sequence="10"/>
+
+            <menuitem id="menu_registration"
+                name="Enregistrement"
+                action="event.event_registration_action_tree"
+                sequence="20"/>
+
+        </menuitem>
+        <menuitem id="menu_lunch"
+                name="Repas"
+                action="action_lunch_order"
+                sequence="30"/>
+    </menuitem>
+
+</odoo>

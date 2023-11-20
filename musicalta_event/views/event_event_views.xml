@@ -7,8 +7,14 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='tickets']" position="after">
                     <page name="event_teachers" string="Teachers">
-                        <label for="teacher_ids" string="Teachers"/>
-                        <field name="teacher_ids" widget="many2many"/>
+                        <field name="teacher_ids">
+                            <tree create="1" editable="top">
+                                <field name="name"/>
+                                <field name="discipline_ids" widget="many2many_tags"/>
+                                <field name="student_count_max"/>
+                                <field name="additional_cost"/>
+                            </tree>
+                        </field>
                     </page>
                 </xpath>
 
