@@ -27,4 +27,22 @@
         <field name="perm_unlink">1</field>
     </record>
 
+    <record id="musical_tessiture_access_rule" model="ir.model.access">
+        <field name="name">musical.tessiture.access</field>
+        <field name="model_id" ref="model_musical_tessiture"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="res_family" model="ir.model.access">
+        <field name="name">res.family.access</field>
+        <field name="model_id" ref="model_res_family"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
 </odoo>

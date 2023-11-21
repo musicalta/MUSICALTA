@@ -4,3 +4,7 @@ from . import sale_order_line
 from . import event_launch_order
 from . import event_registration
 from . import musical_level
+from . import musical_tessiture
+from . import event_type
+from . import res_family
+from . import res_partner

@@ -58,8 +58,9 @@
                                 </group>
                                 <group string="Autres informations">
                                     <field name="musical_level_id" />
-                                    <field name="usual_teacher_id" />
+                                    <field name="usual_teacher" />
                                     <field name="partition" />
+                                    <field name="tessiture_id" />
                                 </group>
                             </group>
                         </page>

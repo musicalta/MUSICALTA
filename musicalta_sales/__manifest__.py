@@ -26,6 +26,8 @@
         "views/sale_order_views.xml",
         "views/lunch_order_views.xml",
         "views/musicalta_sales_menu.xml",
+        "views/event_type.xml",
+        "views/res_partner.xml",
     ],
     "installable": True,
     "license": "LGPL-3",

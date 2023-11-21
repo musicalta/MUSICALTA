@@ -1,4 +1,6 @@
 import json
+import datetime
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import models, fields, api, _
@@ -14,6 +16,7 @@ class SaleInscription(models.Model):
     session_id = fields.Many2one(
         string='Session',
         comodel_name='event.event',
+        required=True,
         domain = "[('stage_id.pipe_end', '!=', True)]",
     )
     sale_order_id = fields.Many2one(
@@ -25,10 +28,7 @@ class SaleInscription(models.Model):
         comodel_name='hr.employee',
         related='session_id.teacher_ids',
     )
-    usual_teacher_id = fields.Many2one(
-        'hr.employee',
-        string='Professeur habituel'
-    )
+    usual_teacher = fields.Char('Professeur habituel')
     musical_level_id = fields.Many2one(
         'musical.level',
         string='Niveau musical'
@@ -40,6 +40,7 @@ class SaleInscription(models.Model):
     )
     partner_id = fields.Many2one(
         'res.partner',
+        required=True,
         string='Client',
     )
     is_adult = fields.Boolean(
@@ -49,6 +50,7 @@ class SaleInscription(models.Model):
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
+        required=True,
         domain="[('pack_ok', '=', True), ('id', 'in', available_product_ids), ('is_product_for_adults', '=', is_adult)]",
     )
     is_auditor = fields.Boolean(
@@ -65,7 +67,10 @@ class SaleInscription(models.Model):
         string='Repas',
         domain="[('is_product_launch', '=', True)]"
     )
-    discipline_id_1 = fields.Many2one('employee.discipline', string='Discipline 1')
+    discipline_id_1 = fields.Many2one(
+        'employee.discipline', 
+        string='Discipline 1'
+    )
     teacher_id_1 = fields.Many2one(
         'hr.employee',
         string='Professeur 1',
@@ -90,6 +95,7 @@ class SaleInscription(models.Model):
         string='Salles de travail',
         domain = "[('is_work_rooms', '=', True), ('id', 'in', available_product_ids)]"
     )
+    tessiture_id = fields.Many2one('musical.tessiture', string='Tessiture')
 
     
     @api.onchange('product_pack_id')
@@ -104,6 +110,8 @@ class SaleInscription(models.Model):
                 ('is_work_rooms', '=', True),
                 ('discipline_id', '=', self.discipline_id_1.id),
             ],).id
+            if self.teacher_id_1:
+                self.teacher_id_1 = False
     
     @api.depends('partner_id')
     def _compute_is_adult(self):
@@ -248,6 +256,7 @@ class SaleInscription(models.Model):
             self._work_room_management(self.product_work_rooms_id, sale_order)
         self.env['sale.order.line'].create(sale_order_line)
         self.env['event.registration'].create(event_registration)
+        self._discount_process()
         return True
 
     def _work_room_management(self, product_work_rooms_id, sale_order):
@@ -282,4 +291,40 @@ class SaleInscription(models.Model):
                 'inscription_id': self.id,
             })
         self.env['event.lunch.order'].create(lunch_order)
+    
+    def _discount_process(self):
+        if self.session_id.event_type_id.product_familiy_affiliation_id:
+            family_id = self.partner_id.family_id
+            if family_id:
+                sale_inscription = self.env['sale.inscription'].search([
+                    ('partner_id', '!=', self.partner_id.id),
+                    ('partner_id.family_id', '=', family_id.id),
+                    ('session_id.event_type_id', '=', self.session_id.event_type_id.id),
+                    ('id', '!=', self.id),
+                ])
+                if sale_inscription:
+                    sale_order = sale_inscription.mapped('sale_order_id')
+                    invoices = sale_order.mapped('invoice_ids')
+                    account_payment = self.env['account.payment'].search([
+                        ('partner_id', 'in', family_id.member_ids.ids),
+                        ('payment_type', '=', 'inbound'),
+                    ]).filtered(lambda x: x.reconciled_invoice_ids in invoices)
+                    if account_payment:
+                        self.env['sale.order.line'].create({
+                            'order_id': self.sale_order_id.id,
+                            'product_id': self.session_id.event_type_id.product_familiy_affiliation_id.id,
+                            'price_unit': -self.session_id.event_type_id.product_familiy_affiliation_id.list_price,
+                        })
+        if self.session_id.event_type_id.product_remise_multi_session_id:
+            if self.env['sale.inscription'].search([
+                ('partner_id', '=', self.partner_id.id),
+                ('session_id.event_type_id', '=', self.session_id.event_type_id.id),
+                ('id', '!=', self.id),
+            ]):
+                self.env['sale.order.line'].create({
+                    'order_id': self.sale_order_id.id,
+                    'product_id': self.session_id.event_type_id.product_remise_multi_session_id.id,
+                    'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
+                })
+        return True
     
