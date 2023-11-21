@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_event_type_musicalta_sales_form" model="ir.ui.view">
+            <field name="name">event.type.form.view.inherit</field>
+            <field name="model">event.type</field>
+            <field name="inherit_id" ref="event.view_event_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="product_familiy_affiliation_id" />
+                    <field name="product_remise_multi_session_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

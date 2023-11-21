@@ -33,7 +33,7 @@
                                     <field name="discipline_id_1" />
                                     <field name="available_product_ids" invisible="1"/>
                                     <field name="teacher_ids" invisible="1"/>
-                                    <field name="is_adult"/>
+                                    <field name="is_adult" invisible="1"/>
                                     <field 
                                         name="teacher_id_1"
                                         attrs="{'invisible': [('discipline_id_1', '=', False)]}" 
@@ -41,18 +41,26 @@
                                     <field name="discipline_id_2" attrs="{'invisible': [('discipline_id_1', '=', False)]}" />
                                     <field name="teacher_id_2" attrs="{'invisible': [('discipline_id_2', '=', False)]}" />
                                 </group>
-                                <field name="options_ids">
-                                    <tree create="1" editable="bottom">
-                                        <field name="discipline_id"/>
-                                        <field name="teacher_id"/>
-                                    </tree>
-                                </field>
+                                <group string="Options" name="options">
+                                    <field name="options_ids">
+                                        <tree create="1" editable="bottom">
+                                            <field name="discipline_id"/>
+                                            <field name="teacher_id"/>
+                                        </tree>
+                                    </field>
+                                </group>
                                 <group string="Hébergement">
                                     <field name="product_hebergement_id" />
                                     <field name="product_launch_id" />
                                 </group>
                                 <group string="Salle de travail">
                                     <field name="product_work_rooms_id" />
+                                </group>
+                                <group string="Autres informations">
+                                    <field name="musical_level_id" />
+                                    <field name="usual_teacher" />
+                                    <field name="partition" />
+                                    <field name="tessiture_id" />
                                 </group>
                             </group>
                         </page>
@@ -68,6 +76,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="session_id"/>
+                <field name="partner_id"/>
                 <field name="product_pack_id"/>
                 <field name="is_auditor"/>
                 <field name="discipline_id_1" />
