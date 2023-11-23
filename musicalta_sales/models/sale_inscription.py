@@ -131,7 +131,7 @@ class SaleInscription(models.Model):
                 self.teacher_id_1 = False
 
     @api.onchange('discipline_id_2')
-    def _onchange_discipline_id_1(self):
+    def _onchange_discipline_id_2(self):
         if self.discipline_id_2:
             if self.teacher_id_2:
                 self.teacher_id_2 = False
