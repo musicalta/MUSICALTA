@@ -25,6 +25,9 @@
                             </h1>
                         </group>
                         <field name="teacher_ids" widget="many2many"/>
+                        <field name="is_harpe" />
+                        <field name="is_piano" />
+                        <field name="product_work_room_ids" widget="many2many"/>
                     </sheet>
                 </form>
             </field>

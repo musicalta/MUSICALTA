@@ -16,3 +16,14 @@ class EmployeeDiscipline(models.Model):
         comodel_name='hr.employee',
         help=_('Teachers who master this discipline')
     )
+    is_harpe = fields.Boolean(
+        string='Is harpe',
+        default=False,
+    )
+    is_piano = fields.Boolean(
+        string='Is piano',
+        default=False,
+    )
+    product_work_room_ids = fields.Many2many(
+        'product.template', string='Work rooms'
+    )
