@@ -1,27 +1,44 @@
 <odoo>
-    <record id="event_inscription_wizard_access" model="ir.model.access">
-        <field name="name">wizard.event.inscription.access</field>
-        <field name="model_id" ref="model_wizard_event_inscription"/>
-        <field name="group_id" ref="sales_team.group_sale_salesman"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_unlink" eval="False"/>
-    </record>
-
-    <record id="event_inscription_training_access" model="ir.model.access">
-        <field name="name">wizard.event.inscription.training.access</field>
-        <field name="model_id" ref="model_wizard_event_inscription_training"/>
+    <record id="sale_inscription_wizard_access" model="ir.model.access">
+        <field name="name">sale.inscription.wizard.access</field>
+        <field name="model_id" ref="model_sale_inscription"/>
         <field name="group_id" ref="sales_team.group_sale_salesman"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_create" eval="True"/>
         <field name="perm_write" eval="True"/>
         <field name="perm_unlink" eval="True"/>
     </record>
-    
+
     <record id="lunch_order_access_rule" model="ir.model.access">
         <field name="name">lunch.order.access</field>
         <field name="model_id" ref="model_event_lunch_order"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="musical_level_access_rule" model="ir.model.access">
+        <field name="name">musical.level.access</field>
+        <field name="model_id" ref="model_musical_level"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="musical_tessiture_access_rule" model="ir.model.access">
+        <field name="name">musical.tessiture.access</field>
+        <field name="model_id" ref="model_musical_tessiture"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="res_family" model="ir.model.access">
+        <field name="name">res.family.access</field>
+        <field name="model_id" ref="model_res_family"/>
         <field name="perm_read">1</field>
         <field name="perm_write">1</field>
         <field name="perm_create">1</field>

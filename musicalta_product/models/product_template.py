@@ -17,8 +17,10 @@ class ProductTemplate(models.Model):
         default=0,
     )
     is_work_rooms = fields.Boolean('Salles de travail')
+    is_one_day_room = fields.Boolean('Salle de travail à la journée')
     discipline_id = fields.Many2one('employee.discipline', string='Discipline')
     is_fees = fields.Boolean('Frais')
+    is_product_for_adults = fields.Boolean('Produit pour majeurs')
 
     @api.onchange('professor_id')
     def _onchange_professor_id(self):

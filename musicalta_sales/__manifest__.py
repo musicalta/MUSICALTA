@@ -13,17 +13,21 @@
         "product",
         "sale_management",
         "musicalta_event",
+        "product_pack",
+        "sale_product_pack",
     ],
     "data": [
         # #DATA
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",
-        # WIZARDS
-        "wizards/wizard_event_inscription.xml",
         # # VIEWS
+        "views/sale_inscription.xml",
         "views/sale_order_views.xml",
         "views/lunch_order_views.xml",
+        "views/musicalta_sales_menu.xml",
+        "views/event_type.xml",
+        "views/res_partner.xml",
     ],
     "installable": True,
     "license": "LGPL-3",

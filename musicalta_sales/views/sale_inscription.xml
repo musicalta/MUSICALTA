@@ -1,0 +1,116 @@
+<odoo>
+    <record id="view_sale_inscription_form" model="ir.ui.view">
+        <field name="name">sale.inscription.form</field>
+        <field name="model">sale.inscription</field>
+        <field name="arch" type="xml">
+            <form string="Event Registration">
+                <header>
+                    <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_open_sale_order"
+                                type="object" icon="fa-bars"
+                                attrs="{'invisible': [('sale_order_id', '=', False)]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Devis
+                                </span>
+                            </div>
+                        </button>
+                        </div>
+                    <group>
+                        <field name="session_id"/>
+                        <field name="sale_order_id"/>
+                        <field name="partner_id"/>
+                        <field name="pricelist_id"/>
+                    </group>
+                    <notebook>
+                        <page name="information" string="Informations">
+                            <group>
+                                <group string="Pack/Discipline">
+                                    <field name="product_pack_id"/>
+                                    <field name="is_auditor"/>
+                                    <field name="discipline_id_1" />
+                                    <field name="available_product_ids" invisible="1"/>
+                                    <field name="teacher_ids" invisible="1"/>
+                                    <field name="is_adult" invisible="1"/>
+                                    <field 
+                                        name="teacher_id_1"
+                                        attrs="{'invisible': [('discipline_id_1', '=', False)]}" 
+                                    />
+                                    <field name="discipline_id_2" attrs="{'invisible': [('discipline_id_1', '=', False)]}" />
+                                    <field name="teacher_id_2" attrs="{'invisible': [('discipline_id_2', '=', False)]}" />
+                                </group>
+                                <group string="Options" name="options">
+                                    <field name="options_ids">
+                                        <tree create="1" editable="bottom">
+                                            <field name="discipline_id"/>
+                                            <field name="teacher_id"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Hébergement">
+                                    <field name="product_hebergement_id" />
+                                    <field name="product_launch_id" />
+                                </group>
+                                <group string="Salle de travail">
+                                    <field name="is_harpiste" invisible="1"/>
+                                    <field 
+                                        name="is_harpiste_with_instruments" 
+                                        attrs="{'invisible': [('is_harpiste', '=', False)]}"
+                                    />
+                                    <field name="product_work_room_domain_id" invisible="1"/>
+                                    <field name="product_work_rooms_id" domain="product_work_room_domain_id" />
+                                </group>
+                                <group string="Autres informations">
+                                    <field name="musical_level_id" />
+                                    <field name="usual_teacher" />
+                                    <field name="partition" />
+                                    <field name="tessiture_id" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_sale_inscription_tree" model="ir.ui.view">
+        <field name="name">sale.inscription.tree</field>
+        <field name="model">sale.inscription</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="session_id"/>
+                <field name="partner_id"/>
+                <field name="product_pack_id"/>
+                <field name="is_auditor"/>
+                <field name="discipline_id_1" />
+                <field name="teacher_id_1" />
+                <field name="discipline_id_2" />
+                <field name="teacher_id_2" />
+                <field name="product_hebergement_id" />
+                <field name="product_launch_id" />
+                <field name="product_work_rooms_id" />
+            </tree>
+        </field>
+    </record>
+
+     <record id="action_sale_inscription" model="ir.actions.act_window">
+        <field name="name">Inscription</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.inscription</field>
+        <field name="view_id" ref="view_sale_inscription_tree"/>
+        <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new quotation, the first step of a new sale!
+            </p><p>
+            Once the quotation is confirmed by the customer, it becomes a sales order.<br/> You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    
+</odoo>
