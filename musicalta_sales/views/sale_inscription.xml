@@ -23,6 +23,7 @@
                         <field name="session_id"/>
                         <field name="sale_order_id"/>
                         <field name="partner_id"/>
+                        <field name="pricelist_id"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
@@ -54,7 +55,13 @@
                                     <field name="product_launch_id" />
                                 </group>
                                 <group string="Salle de travail">
-                                    <field name="product_work_rooms_id" />
+                                    <field name="is_harpiste" invisible="1"/>
+                                    <field 
+                                        name="is_harpiste_with_instruments" 
+                                        attrs="{'invisible': [('is_harpiste', '=', False)]}"
+                                    />
+                                    <field name="product_work_room_domain_id" invisible="1"/>
+                                    <field name="product_work_rooms_id" domain="product_work_room_domain_id" />
                                 </group>
                                 <group string="Autres informations">
                                     <field name="musical_level_id" />

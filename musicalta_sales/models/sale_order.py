@@ -8,6 +8,10 @@ class SaleOrder(models.Model):
         'sale_order_id',
         string='Event Inscriptions',
     )
+    event_type_id = fields.Many2one(
+        'event.type',
+        string='Type d\'événement'
+    )
     registration_count = fields.Integer('Inscription', compute='_compute_inscription_count')
 
     def action_open_event_inscription(self):
