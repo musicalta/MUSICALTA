@@ -258,7 +258,6 @@ class SaleInscription(models.Model):
             sale_order = self._find_or_create_sale()
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
         sale_order = self.sale_order_id
-        self.sale_order_id.pricelist_id = self.pricelist_id.id
         sale_order_line = []
         event_registration = []
         if self.discipline_id_1 and self.teacher_id_1:
