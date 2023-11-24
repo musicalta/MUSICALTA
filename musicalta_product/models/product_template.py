@@ -21,6 +21,7 @@ class ProductTemplate(models.Model):
     discipline_id = fields.Many2one('employee.discipline', string='Discipline')
     is_fees = fields.Boolean('Frais')
     is_product_for_adults = fields.Boolean('Produit pour majeurs')
+    is_product_for_adults_and_minors = fields.Boolean('Produit pour majeurs et mineurs')
 
     @api.onchange('professor_id')
     def _onchange_professor_id(self):
