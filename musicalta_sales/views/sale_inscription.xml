@@ -21,8 +21,8 @@
                         </div>
                     <group>
                         <field name="session_id"/>
-                        <field name="sale_order_id"/>
                         <field name="partner_id"/>
+                        <field name="pricelist_id"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
