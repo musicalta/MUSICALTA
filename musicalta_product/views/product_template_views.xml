@@ -15,6 +15,7 @@
                 <field name="discipline_id"/>
                 <field name="is_fees"/>
                 <field name="is_product_for_adults"/>
+                <field name="is_product_for_adults_and_minors"/>
             </xpath>
         </field>
     </record>

@@ -56,7 +56,7 @@ class SaleInscription(models.Model):
         string='Pack',
         comodel_name='product.product',
         required=True,
-        domain="[('pack_ok', '=', True), ('id', 'in', available_product_ids), ('is_product_for_adults', '=', is_adult)]",
+        domain="['|',('is_product_for_adults_and_minors', '=', True),('is_product_for_adults', '=', is_adult),('pack_ok', '=', True), ('id', 'in', available_product_ids)]",
     )
     is_auditor = fields.Boolean(
         string='Auditeur',
