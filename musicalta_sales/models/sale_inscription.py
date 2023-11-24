@@ -23,11 +23,6 @@ class SaleInscription(models.Model):
         string='Order',
         comodel_name='sale.order',
     )
-    pricelist_id = fields.Many2one(
-        'product.pricelist',
-        string='Pricelist',
-        required=True,
-    )
     teacher_ids = fields.Many2many(
         string='Professeurs',
         comodel_name='hr.employee',
