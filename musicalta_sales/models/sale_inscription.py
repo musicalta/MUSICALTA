@@ -162,13 +162,13 @@ class SaleInscription(models.Model):
             # Cas de base : utiliser tous les produits disponibles
             available_product_ids = self.available_product_ids.ids
 
-            # Vérification des disciplines spécifiques
-            if rec.discipline_id_1 or rec.discipline_id_2:
-                available_product_ids = rec._get_discipline_specific_products()
+            # # Vérification des disciplines spécifiques
+            # if rec.discipline_id_1 or rec.discipline_id_2:
+            #     available_product_ids = rec._get_discipline_specific_products()
 
-            if rec.is_harpiste_with_instruments:
-                # Cas spécifique pour un harpiste avec instruments
-                available_product_ids = rec._get_one_day_room_product_ids()
+            # if rec.is_harpiste_with_instruments:
+            #     # Cas spécifique pour un harpiste avec instruments
+            #     available_product_ids = rec._get_one_day_room_product_ids()
 
             # Construire le domaine JSON pour le champ product_work_room_domain_id
             rec.product_work_room_domain_id = json.dumps(

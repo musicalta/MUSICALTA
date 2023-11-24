@@ -59,7 +59,8 @@
                                         name="is_harpiste_with_instruments" 
                                         attrs="{'invisible': [('is_harpiste', '=', False)]}"
                                     />
-                                    <field name="product_work_rooms_id"/>
+                                    <field name="product_work_room_domain_id" invisible="1"/>
+                                    <field name="product_work_rooms_id" domain="product_work_room_domain_id" />
                                 </group>
                                 <group string="Autres informations">
                                     <field name="musical_level_id" />
