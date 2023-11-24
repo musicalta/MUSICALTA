@@ -19,6 +19,7 @@ class SaleInscription(models.Model):
         required=True,
         domain = "[('stage_id.pipe_end', '!=', True)]",
     )
+    pricelist_id = fields.Many2one('product.pricelist', string='Pricelist')
     sale_order_id = fields.Many2one(
         string='Order',
         comodel_name='sale.order',
@@ -258,6 +259,8 @@ class SaleInscription(models.Model):
             sale_order = self._find_or_create_sale()
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
         sale_order = self.sale_order_id
+        if self.pricelist_id:
+            sale_order.pricelist_id = self.pricelist_id.id
         sale_order_line = []
         event_registration = []
         if self.discipline_id_1 and self.teacher_id_1:
