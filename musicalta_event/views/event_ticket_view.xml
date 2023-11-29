@@ -8,7 +8,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='description']" position="after">
                     <field name="teacher_id"/>
-                    <field name="discipline_id"/>
                 </xpath>
             </field>
         </record>

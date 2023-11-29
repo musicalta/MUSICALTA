@@ -12,6 +12,10 @@ class EventTicket(models.Model):
         string='Discipline',
         comodel_name='employee.discipline',
     )
+    option_id = fields.Many2one(
+        string='Option',
+        comodel_name='employee.option',
+    )
     is_option = fields.Boolean(
         string='Is option',
         default=False,
@@ -22,6 +26,7 @@ class EventTicket(models.Model):
     def _onchange_teacher_id(self):
         return {
             'domain': {
-                'discipline_id': [('id', 'in', self.teacher_id.discipline_ids.ids)]
+                'discipline_id': [('id', 'in', self.teacher_id.discipline_ids.ids)],
+                'option_id': [('id', 'in', self.teacher_id.options_ids.ids)]
             }
         }

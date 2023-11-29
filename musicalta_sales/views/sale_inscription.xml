@@ -7,6 +7,20 @@
                 <header>
                     <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight"/>
                 </header>
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('is_adult', '=', True)]}"
+                >
+                    <strong><field name="partner_id"/></strong> est mineur(e).
+                </div>
+                <div
+                    class="alert alert-success"
+                    role="alert"
+                    attrs="{'invisible': [('is_adult', '=', False)]}"
+                >
+                    <strong><field name="partner_id"/></strong> est majeur(e).
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <field name="sale_order_id" invisible="1"/>
@@ -23,6 +37,7 @@
                     <group>
                         <field name="session_id"/>
                         <field name="partner_id"/>
+                        <field name="date_of_birth"/>
                         <field name="pricelist_id"/>
                     </group>
                     <notebook>
@@ -45,7 +60,8 @@
                                 <group string="Options" name="options">
                                     <field name="options_ids">
                                         <tree create="1" editable="bottom">
-                                            <field name="discipline_id"/>
+                                            <field name="product_id"/>
+                                            <field name="option_id"/>
                                             <field name="teacher_id"/>
                                         </tree>
                                     </field>
@@ -73,6 +89,11 @@
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>
