@@ -9,6 +9,7 @@ from odoo.exceptions import UserError
 class SaleInscription(models.Model):
     _name = 'sale.inscription'
     _description = 'Sale Inscription'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(
         string='Name',
@@ -43,6 +44,10 @@ class SaleInscription(models.Model):
         'res.partner',
         required=True,
         string='Client',
+    )
+    date_of_birth = fields.Date(
+        'Date de naissance',
+        related='partner_id.date_of_birth',
     )
     is_adult = fields.Boolean(
         'Adulte',
