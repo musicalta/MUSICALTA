@@ -15,6 +15,7 @@ class EventTicket(models.Model):
     is_option = fields.Boolean(
         string='Is option',
         default=False,
+        related='product_id.is_option'
     )
 
     @api.onchange('teacher_id')
