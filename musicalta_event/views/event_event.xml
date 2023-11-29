@@ -47,6 +47,21 @@
             </field>
         </record>
 
+        <record id="event_event_ticket_tree_view" model="ir.ui.view">
+            <field name="name">event.event.tree.view</field>
+            <field name="model">event.event.ticket</field>
+            <field name="arch" type="xml">
+                <tree string="Options" create="1" editable="top">
+                    <field name="name"/>
+                    <field name="event_id"/>
+                    <field name="product_id"/>
+                    <field name="teacher_id"/>
+                    <field name="discipline_id"/>                    
+                    <field name="price"/>
+                </tree>
+            </field>
+        </record>
+
         <!-- Action pour ouvrir la vue en liste des tickets -->
         <record id="action_view_event_tickets" model="ir.actions.act_window">
             <field name="name">Tickets</field>
