@@ -30,12 +30,13 @@ class Event(models.Model):
 
     def action_view_tickets(self):
         self.ensure_one()
+        view_id = self.env.ref('musicalta_event.event_event_ticket_tree_view').id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Tickets',
             'res_model': 'event.event.ticket',
-            'view_mode': 'tree,form',
-            'domain': [('event_id', '=', self.id)],
+            'views': [(view_id, 'tree')],
+            'domain': [('event_id', '=', self.id), ('is_option', '=', False)],
             'context': {'default_event_id': self.id},
         }
     
