@@ -325,30 +325,8 @@ class SaleInscription(models.Model):
                 'sale_order_id': sale_order.id,
                 'inscription_id': self.id,
             })
-        for option in self.options_ids:
-            event_ticket_id = self.env['event.event.ticket'].search([
-                ('event_id', '=', self.session_id.id),
-                ('teacher_id', '=', option.teacher_id.id),
-                ('discipline_id', '=', option.discipline_id.id),
-                ('is_option', '=', True),
-            ])
-            if not event_ticket_id:
-                raise UserError(_('No ticket found for this teacher and discipline'))
-            sale_order_line.append({
-                'order_id': sale_order.id,
-                'inscription_id': self.id,
-                'product_id': event_ticket_id.product_id.id,
-            })
-            event_registration.append({
-                'teacher_id': option.teacher_id.id,
-                'discipline_id': option.discipline_id.id,
-                'partner_id': sale_order.partner_id.id,
-                'event_id': self.session_id.id,
-                'event_ticket_id': option.id,
-                'discipline_id': option.discipline_id.id,
-                'sale_order_id': sale_order.id,
-                'inscription_id': self.id,
-            })
+        if self.options_ids:
+            self._option_management(sale_order, sale_order_line, event_registration)
         if self.product_hebergement_id or self.product_launch_id:
             self._lunch_management(self.product_launch_id, self.product_hebergement_id , sale_order)
         if self.product_work_rooms_id:
@@ -357,6 +335,44 @@ class SaleInscription(models.Model):
         self.env['event.registration'].create(event_registration)
         self._discount_process()
         return True
+    
+    def _option_management(self, sale_order, sale_order_line, event_registration):
+        """
+            Create sale order line and event registration for options
+
+        Args:
+            sale_order (obj): sale order
+            sale_order_line (dict): sale order line dict
+            event_registration (dict): event registration dict
+
+        Raises:
+            UserError: No ticket found for this teacher and discipline
+        """
+        for option in self.options_ids:
+            event_ticket_id = self.env['event.event.ticket'].search([
+                ('event_id', '=', self.session_id.id),
+                ('option_id', '=', option.option_id.id),
+                ('teacher_id', '=', option.teacher_id.id),
+                ('product_id', '=', option.product_id.id),
+                ('is_option', '=', True),
+            ])
+            if not event_ticket_id:
+                raise UserError(_('No ticket found for this teacher and discipline'))
+            sale_order_line.append({
+                'name': option.product_id.display_name + ' - ' + option.teacher_id.name + ' - ' + option.option_id.name,
+                'order_id': sale_order.id,
+                'inscription_id': self.id,
+                'product_id': event_ticket_id.product_id.id,
+            })
+            event_registration.append({
+                'teacher_id': option.teacher_id.id,
+                'option_id': option.option_id.id,
+                'partner_id': sale_order.partner_id.id,
+                'event_id': self.session_id.id,
+                'event_ticket_id': event_ticket_id.id,
+                'sale_order_id': sale_order.id,
+                'inscription_id': self.id,
+            })
 
     def _work_room_management(self, product_work_rooms_id, sale_order):
         self.env['sale.order.line'].create({
