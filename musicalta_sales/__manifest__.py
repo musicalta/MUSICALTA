@@ -28,6 +28,7 @@
         "views/musicalta_sales_menu.xml",
         "views/event_type.xml",
         "views/res_partner.xml",
+        "views/product_pricelist_item_views.xml",
     ],
     "installable": True,
     "license": "LGPL-3",

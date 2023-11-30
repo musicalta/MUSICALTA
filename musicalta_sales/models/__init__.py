@@ -8,3 +8,5 @@ from . import musical_tessiture
 from . import event_type
 from . import res_family
 from . import res_partner
+from . import product_pricelist
+from . import product_pricelist_item

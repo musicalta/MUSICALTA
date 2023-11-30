@@ -164,12 +164,15 @@ class SaleInscription(models.Model):
             available_product_ids = self.available_product_ids.ids
 
             # # Vérification des disciplines spécifiques
-            # if rec.discipline_id_1 or rec.discipline_id_2:
-            #     available_product_ids = rec._get_discipline_specific_products()
-
-            # if rec.is_harpiste_with_instruments:
-            #     # Cas spécifique pour un harpiste avec instruments
-            #     available_product_ids = rec._get_one_day_room_product_ids()
+            if rec.discipline_id_1.is_piano or \
+                  rec.discipline_id_2.is_piano or \
+                    rec.discipline_id_1.is_harpe or \
+                        rec.discipline_id_2.is_harpe:
+                            available_product_ids = rec._get_discipline_specific_products()
+        
+            if rec.is_harpiste_with_instruments:
+                # Cas spécifique pour un harpiste avec instruments
+                available_product_ids = rec._get_one_day_room_product_ids()
 
             # Construire le domaine JSON pour le champ product_work_room_domain_id
             rec.product_work_room_domain_id = json.dumps(
@@ -180,13 +183,21 @@ class SaleInscription(models.Model):
         """
         Récupère les ID de produits associés aux disciplines spécifiques (harpe, piano).
         """
-        available_product_ids = []
-        for discipline_field in ['discipline_id_1', 'discipline_id_2']:
-            discipline = getattr(self, discipline_field)
-            if discipline and (discipline.is_harpe or discipline.is_piano):
-                available_product_ids += discipline.product_work_room_ids.ids
-
-        return available_product_ids if available_product_ids else self.available_product_ids.ids
+        ProductTmpl = self.env['product.template']
+        discipline_ids = []
+        if self.discipline_id_1.is_piano:
+            discipline_ids.append(self.discipline_id_1.id)
+        if self.discipline_id_2.is_piano:
+            discipline_ids.append(self.discipline_id_2.id)
+        if self.discipline_id_1.is_harpe:
+            discipline_ids.append(self.discipline_id_1.id)
+        if self.discipline_id_2.is_harpe:
+            discipline_ids.append(self.discipline_id_2.id)
+        product_ids = ProductTmpl.search([
+            ('is_work_rooms', '=', True),
+            ('discipline_id', 'in', discipline_ids),
+        ])
+        return product_ids.ids
 
     def _get_one_day_room_product_ids(self):
         """
@@ -196,11 +207,11 @@ class SaleInscription(models.Model):
         product_ids = self.env['product.product'].search([
             ('is_work_rooms', '=', True),
             ('is_one_day_room', '=', True),
+            ('id', 'in', self.available_product_ids.ids)
         ])
         return product_ids.ids
 
 
-        
     def action_open_sale_order(self):
         return {
             'name': 'Sale Order',
@@ -375,9 +386,26 @@ class SaleInscription(models.Model):
             })
 
     def _work_room_management(self, product_work_rooms_id, sale_order):
+        """_summary_
+
+        Args:
+            product_work_rooms_id (_type_): _description_
+            sale_order (_type_): _description_
+        """
+        kwargs = {}
+        if self.discipline_id_1.is_piano or self.discipline_id_1.is_harpe:
+            kwargs.update({
+                'discipline_id': self.discipline_id_1.id,
+            })
+        elif self.discipline_id_2.is_piano or self.discipline_id_2.is_harpe:
+            kwargs.update({
+                'discipline_id': self.discipline_id_2.id,
+            })
+        price  = self.pricelist_id._get_product_price(product_work_rooms_id, 1, **kwargs)
         self.env['sale.order.line'].create({
             'sequence': 2, # TODO: check if this is the right sequence
             'order_id': sale_order.id,
+            'price_unit': price,
             'inscription_id': self.id,
             'product_id': product_work_rooms_id.id,
         })
