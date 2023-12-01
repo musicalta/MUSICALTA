@@ -2,7 +2,7 @@
 
 {
     "name": "Contact Specifics for Musicalta",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "summary": """Add product specifics for Musicalta.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -14,7 +14,7 @@
         "hr",
     ],
     "data": [
-        #DATA
+        # DATA
         "data/ir_sequence_data.xml",
         # VIEWS
         "views/res_partner_views.xml",
