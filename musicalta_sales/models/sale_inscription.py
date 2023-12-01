@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
+
 class SaleInscription(models.Model):
     _name = 'sale.inscription'
     _description = 'Sale Inscription'
@@ -18,7 +19,7 @@ class SaleInscription(models.Model):
         string='Session',
         comodel_name='event.event',
         required=True,
-        domain = "[('stage_id.pipe_end', '!=', True)]",
+        domain="[('stage_id.pipe_end', '!=', True)]",
     )
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist')
     sale_order_id = fields.Many2one(
@@ -30,6 +31,11 @@ class SaleInscription(models.Model):
         comodel_name='hr.employee',
         related='session_id.teacher_ids',
     )
+    discipline_ids = fields.Many2many(
+        string='Disciplines',
+        comodel_name='employee.discipline',
+        compute='_compute_discipline_ids',
+    )
     usual_teacher = fields.Char('Professeur habituel')
     musical_level_id = fields.Many2one(
         'musical.level',
@@ -37,7 +43,7 @@ class SaleInscription(models.Model):
     )
     partition = fields.Char('Partition')
     available_product_ids = fields.Many2many(
-        'product.product', 
+        'product.product',
         related='session_id.available_product_ids'
     )
     partner_id = fields.Many2one(
@@ -74,8 +80,9 @@ class SaleInscription(models.Model):
         domain="[('is_product_launch', '=', True)]"
     )
     discipline_id_1 = fields.Many2one(
-        'employee.discipline', 
-        string='Discipline 1'
+        'employee.discipline',
+        string='Discipline 1',
+        domain="[('id', 'in', discipline_ids)]"
     )
     teacher_id_1 = fields.Many2one(
         'hr.employee',
@@ -83,8 +90,9 @@ class SaleInscription(models.Model):
         domain="[('discipline_ids', 'in', discipline_id_1), ('id', 'in', teacher_ids)]"
     )
     discipline_id_2 = fields.Many2one(
-        'employee.discipline', 
-        string='Discipline 2'
+        'employee.discipline',
+        string='Discipline 2',
+        domain="[('id', 'in', discipline_ids)]"
     )
     teacher_id_2 = fields.Many2one(
         'hr.employee',
@@ -94,11 +102,11 @@ class SaleInscription(models.Model):
     options_ids = fields.Many2many(
         'event.event.ticket',
         string='Options',
-        domain = "[('event_id', '=', session_id),('is_option', '=', True)]",
+        domain="[('event_id', '=', session_id),('is_option', '=', True)]",
     )
     product_work_rooms_id = fields.Many2one(
-        'product.product', 
-        string='Salles de travail',        
+        'product.product',
+        string='Salles de travail',
     )
     product_work_room_domain_id = fields.Char(
         compute="_compute_product_work_room_domain_id",
@@ -119,12 +127,29 @@ class SaleInscription(models.Model):
     )
     is_harpiste_with_instruments = fields.Boolean("J'ai mon instrument")
 
-    
+    @api.onchange('session_id')
+    def _onchange_session_id(self):
+        return {'domain': {'discipline_id': [('id', 'in', self.discipline_ids.ids)]}}
+
+    @api.depends('session_id')
+    def _compute_discipline_ids(self):
+        for record in self:
+            if record.session_id:
+                teacher_ids = record.session_id.teacher_ids
+                disciplines = self.env['employee.discipline']
+                for teacher in teacher_ids:
+                    disciplines |= teacher.discipline_ids
+                record.discipline_ids = disciplines
+            else:
+                record.discipline_ids = self.env['employee.discipline'].browse([
+                ])
+
     @api.onchange('product_pack_id')
     def _onchange_product_pack_id(self):
         if self.product_pack_id:
-            self.product_hebergement_id = self.product_pack_id.pack_line_ids.filtered(lambda x: x.product_id.is_product_hebergement).product_id.id
-    
+            self.product_hebergement_id = self.product_pack_id.pack_line_ids.filtered(
+                lambda x: x.product_id.is_product_hebergement).product_id.id
+
     @api.onchange('discipline_id_1')
     def _onchange_discipline_id_1(self):
         if self.discipline_id_1:
@@ -136,27 +161,28 @@ class SaleInscription(models.Model):
         if self.discipline_id_2:
             if self.teacher_id_2:
                 self.teacher_id_2 = False
-    
+
     @api.depends('partner_id')
     def _compute_is_adult(self):
         for record in self:
             if record.partner_id.date_of_birth and record.session_id.date_begin:
                 # Calculer l'âge à la date de la session
-                age_at_session = relativedelta(record.session_id.date_begin, record.partner_id.date_of_birth).years
+                age_at_session = relativedelta(
+                    record.session_id.date_begin, record.partner_id.date_of_birth).years
                 record.is_adult = age_at_session >= 18
             else:
                 record.is_adult = False
-    
+
     @api.depends('discipline_id_1', 'discipline_id_2')
     def _compute_is_harpiste(self):
         for record in self:
             record.is_harpiste = record.discipline_id_1.is_harpe or record.discipline_id_2.is_harpe
-    
+
     @api.depends('discipline_id_1', 'discipline_id_2')
     def _compute_is_pianiste(self):
         for record in self:
             record.is_pianiste = record.discipline_id_1.is_piano or record.discipline_id_2.is_piano
-    
+
     @api.depends('discipline_id_1', 'discipline_id_2', 'is_harpiste_with_instruments')
     def _compute_product_work_room_domain_id(self):
         for rec in self:
@@ -165,11 +191,11 @@ class SaleInscription(models.Model):
 
             # # Vérification des disciplines spécifiques
             if rec.discipline_id_1.is_piano or \
-                  rec.discipline_id_2.is_piano or \
+                rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-                        rec.discipline_id_2.is_harpe:
-                            available_product_ids = rec._get_discipline_specific_products()
-        
+                rec.discipline_id_2.is_harpe:
+                available_product_ids = rec._get_discipline_specific_products()
+
             if rec.is_harpiste_with_instruments:
                 # Cas spécifique pour un harpiste avec instruments
                 available_product_ids = rec._get_one_day_room_product_ids()
@@ -211,7 +237,6 @@ class SaleInscription(models.Model):
         ])
         return product_ids.ids
 
-
     def action_open_sale_order(self):
         return {
             'name': 'Sale Order',
@@ -220,11 +245,11 @@ class SaleInscription(models.Model):
             'view_mode': 'form',
             'res_id': self.sale_order_id.id,
         }
-    
+
     def action_update_or_create(self):
         self._update_or_create({})
         return True
-    
+
     @api.constrains('session_id', 'partner_id')
     def _check_session_partner(self):
         for record in self:
@@ -234,16 +259,19 @@ class SaleInscription(models.Model):
                 ('id', '!=', record.id),
             ])
             if sale_inscription:
-                raise UserError(_('Cette personne est déjà inscrite à cette session'))
+                raise UserError(
+                    _('Cette personne est déjà inscrite à cette session'))
 
     def unlink(self):
         for record in self:
-            record.sale_order_id.order_line.filtered(lambda x: x.inscription_id.id == record.id).unlink()
+            record.sale_order_id.order_line.filtered(
+                lambda x: x.inscription_id.id == record.id).unlink()
         return super(SaleInscription, self).unlink()
-    
+
     def _update_or_create(self, vals):
         if self.sale_order_id:
-            self.sale_order_id.order_line.filtered(lambda x: x.inscription_id.id == self.id).unlink()
+            self.sale_order_id.order_line.filtered(
+                lambda x: x.inscription_id.id == self.id).unlink()
             events_registrations_ids = self.env['event.registration'].search([
                 ('inscription_id', '=', self.id),
             ])
@@ -253,7 +281,7 @@ class SaleInscription(models.Model):
             event_lunch_ids.unlink()
             events_registrations_ids.unlink()
         return self.process_registration()
-        
+
     def _find_or_create_sale(self):
         SaleOrder = self.env['sale.order']
         sale_order = SaleOrder.search([
@@ -270,7 +298,7 @@ class SaleInscription(models.Model):
         return sale_order
 
     def process_registration(self):
-        #MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
+        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
         if not self.sale_order_id:
             sale_order = self._find_or_create_sale()
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
@@ -287,7 +315,8 @@ class SaleInscription(models.Model):
                     ('discipline_id', '=', self.discipline_id_1.id),
                 ])
                 if not event_ticket_id:
-                    raise UserError(_('No ticket found for this teacher and discipline'))
+                    raise UserError(
+                        _('No ticket found for this teacher and discipline'))
                 sale_order_line.append({
                     'sequence': 0,
                     'order_id': sale_order.id,
@@ -295,8 +324,8 @@ class SaleInscription(models.Model):
                     'price_unit': self.product_pack_id.list_price,
                     'inscription_id': self.id,
                     'event_ticket_id': event_ticket_id.id,
-                    'name': self.product_pack_id.display_name + ' - ' + \
-                        self.session_id.name + ' - ' + self.teacher_id_1.name,
+                    'name': self.product_pack_id.display_name + ' - ' +
+                    self.session_id.name + ' - ' + self.teacher_id_1.name,
                 })
                 event_registration.append({
                     'teacher_id': self.teacher_id_1.id,
@@ -314,18 +343,18 @@ class SaleInscription(models.Model):
             if not product_fees:
                 raise UserError(_('No fees product found'))
             event_ticket_id = self.env['event.event.ticket'].search([
-                    ('event_id', '=', self.session_id.id),
-                    ('teacher_id', '=', self.teacher_id_2.id),
-                    ('discipline_id', '=', self.discipline_id_2.id),
-                ])
+                ('event_id', '=', self.session_id.id),
+                ('teacher_id', '=', self.teacher_id_2.id),
+                ('discipline_id', '=', self.discipline_id_2.id),
+            ])
             sale_order_line.append({
                 'sequence': 1,
                 'order_id': sale_order.id,
                 'product_id': product_fees.id,
                 'inscription_id': self.id,
                 'event_ticket_id': event_ticket_id.id,
-                'name': product_fees.display_name + ' - ' + \
-                    self.session_id.name + ' - ' + self.teacher_id_2.name,
+                'name': product_fees.display_name + ' - ' +
+                self.session_id.name + ' - ' + self.teacher_id_2.name,
             })
             event_registration.append({
                 'teacher_id': self.teacher_id_2.id,
@@ -337,16 +366,34 @@ class SaleInscription(models.Model):
                 'inscription_id': self.id,
             })
         if self.options_ids:
-            self._option_management(sale_order, sale_order_line, event_registration)
+            self._option_management(
+                sale_order, sale_order_line, event_registration)
         if self.product_hebergement_id or self.product_launch_id:
-            self._lunch_management(self.product_launch_id, self.product_hebergement_id , sale_order)
+            self._lunch_management(
+                self.product_launch_id, self.product_hebergement_id, sale_order)
         if self.product_work_rooms_id:
             self._work_room_management(self.product_work_rooms_id, sale_order)
         self.env['sale.order.line'].create(sale_order_line)
         self.env['event.registration'].create(event_registration)
         self._discount_process()
+        if self.musical_level_id or self.usual_teacher or self.partition or self.tessiture_id:
+            self._update_contact_informations()
         return True
-    
+
+    def _update_contact_informations(self):
+        self.ensure_one()
+        to_update = {}
+        if self.partner_id:
+            if self.musical_level_id:
+                to_update['musical_level_id'] = self.musical_level_id.id
+            if self.usual_teacher:
+                to_update['usual_teacher'] = self.usual_teacher
+            if self.partition:
+                to_update['partition'] = self.partition
+            if self.tessiture_id:
+                to_update['tessiture_id'] = self.tessiture_id.id
+            self.partner_id.update(to_update)
+
     def _option_management(self, sale_order, sale_order_line, event_registration):
         """
             Create sale order line and event registration for options
@@ -368,7 +415,8 @@ class SaleInscription(models.Model):
                 ('is_option', '=', True),
             ])
             if not event_ticket_id:
-                raise UserError(_('No ticket found for this teacher and discipline'))
+                raise UserError(
+                    _('No ticket found for this teacher and discipline'))
             sale_order_line.append({
                 'name': option.product_id.display_name + ' - ' + option.teacher_id.name + ' - ' + option.option_id.name,
                 'order_id': sale_order.id,
@@ -401,9 +449,10 @@ class SaleInscription(models.Model):
             kwargs.update({
                 'discipline_id': self.discipline_id_2.id,
             })
-        price  = self.pricelist_id._get_product_price(product_work_rooms_id, 1, **kwargs)
+        price = self.pricelist_id._get_product_price(
+            product_work_rooms_id, 1, **kwargs)
         self.env['sale.order.line'].create({
-            'sequence': 2, # TODO: check if this is the right sequence
+            'sequence': 2,  # TODO: check if this is the right sequence
             'order_id': sale_order.id,
             'price_unit': price,
             'inscription_id': self.id,
@@ -446,7 +495,8 @@ class SaleInscription(models.Model):
             sale_inscription = self.env['sale.inscription'].search([
                 ('partner_id', '!=', self.partner_id.id),
                 ('partner_id.family_id', '=', family_id.id),
-                ('session_id.event_type_id', '=', self.session_id.event_type_id.id),
+                ('session_id.event_type_id', '=',
+                 self.session_id.event_type_id.id),
                 ('id', '!=', self.id),
             ])
             if sale_inscription:
@@ -477,10 +527,10 @@ class SaleInscription(models.Model):
         if self.sale_order_id:
             for line in self.sale_order_id.order_line:
                 if line.product_id.product_tmpl_id == self.session_id.event_type_id.product_familiy_affiliation_id or \
-                    line.product_id.product_tmpl_id == self.session_id.event_type_id.product_remise_multi_session_id:
+                        line.product_id.product_tmpl_id == self.session_id.event_type_id.product_remise_multi_session_id:
                     return True
         return False
-    
+
     def _discount_process(self):
         if not self._check_exist_discount_line():
             if self.session_id.event_type_id.product_familiy_affiliation_id:
@@ -488,7 +538,8 @@ class SaleInscription(models.Model):
             if self.session_id.event_type_id.product_remise_multi_session_id:
                 if self.env['sale.inscription'].search([
                     ('partner_id', '=', self.partner_id.id),
-                    ('session_id.event_type_id', '=', self.session_id.event_type_id.id),
+                    ('session_id.event_type_id', '=',
+                     self.session_id.event_type_id.id),
                     ('id', '!=', self.id),
                 ]):
                     self.env['sale.order.line'].create({
@@ -497,4 +548,3 @@ class SaleInscription(models.Model):
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
-    
