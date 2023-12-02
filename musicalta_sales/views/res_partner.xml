@@ -8,6 +8,15 @@
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="family_id" />
             </xpath>
+            <xpath expr="//field[@name='preferal_professor_id']" position="after">
+                <field name="usual_teacher"/>
+                <field name="partition"/>
+            </xpath> 
+            <xpath expr="//field[@name='school']" position="after">
+                <field name="musical_level_id"/>
+                <field name="tessiture_id"/>
+            </xpath> 
+            
         </field>
     </record>
 </odoo>
