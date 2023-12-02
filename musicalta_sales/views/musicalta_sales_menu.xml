@@ -21,10 +21,19 @@
                 sequence="20"/>
 
         </menuitem>
+
         <menuitem id="menu_lunch"
                 name="Repas"
                 action="action_lunch_order"
                 sequence="30"/>
+        <menuitem id="musicalta_configuration_menu"
+                  name="Configuration"
+                  sequence="40">
+
+            <menuitem id="sale_inscription_configuration_menu" name="Inscription"/>
+        
+        </menuitem>
+
     </menuitem>
 
 </odoo>

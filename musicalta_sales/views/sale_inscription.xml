@@ -41,6 +41,7 @@
                         <field name="partner_id"/>
                         <field name="date_of_birth"/>
                         <field name="pricelist_id"/>
+                        <field name="folder_state"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
@@ -87,6 +88,23 @@
                                     <field name="partition" />
                                     <field name="tessiture_id" />
                                 </group>
+                            </group>
+                        </page>
+                        <page name="documents" string="Documents">
+                            <group>
+                                <field name="is_autorisation_exit" />
+                                <field name="is_autorisation_bar" />
+                                <field name="sale_origin_id" />
+                                <field name="sale_origin_display_description" invisible="1"/>
+                                <field name="sale_origin_description" attrs="{'invisible': [('sale_origin_display_description', '!=', True)]}"/>
+                                <field name="is_train_going" />
+                                <field name="is_train_return" />
+                                <field name="is_bus_going" />
+                                <field name="is_bus_return" />
+                                <field name="departure_location_outbound_id" />
+                                <field name="arrival_location_outbound_id" />
+                                <field name="departure_location_return_id" />
+                                <field name="arrival_location_return_id" />
                             </group>
                         </page>
                     </notebook>
