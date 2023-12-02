@@ -37,5 +37,106 @@
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
+
+        <record id="mail_template_sale_inscription_confirm" model="mail.template">
+            <field name="name">Sales: Mail inscription confirmation</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Confirmation for {{ (object.event_inscription_ids[0].session_id.display_name) or ''}} Registration - {{ object.partner_id.display_name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Mail de pré inscription</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-out="object.partner_id.name or ''"></t><br/><br/>
+                        We have received your registration confirmation for <t t-out="object.event_inscription_ids[0].session_id.display_name or ''"></t> Musical Master Classes.<br/>
+                        You will find in attachment :<br/>
+                        <ul>
+                            <li>an information document</li>
+                            <li>an updated invoice</li>
+                        </ul>
+                        <br/>
+                        In order to complete and validate your registration, please send us before April 1st :<br/>
+                        <br/>
+                        <ul>
+                            <li>the information sheet : <a href='https://link.musicalta.com/P23-ANG-Information'>Click Here</a></li>
+                            <li>the terms and conditions : <a href='https://link.musicalta.com/CGV-EN'>Click Here</a><br/>
+                            <i>A good resolution photo is requested during the signing proces. In case of difficulty, do not hesitate to send it to us by email or by post according to your preference.</i></li>
+                            <li>the balance payment</li>
+                        </ul>
+
+                        <t t-if="confirmation_par_cb">
+                        <br/>If you wish to pay the balance by credit card, you can follow the secured link below : <br/>
+                        https://admin.musicalta.com/tools/mk_url.php (if you want to spread out your payment, please contact us)
+                        </t>
+
+                        If you have any futher questions, please do not hesitate to get in touch.<br/>
+                        <br/>
+                        Kind regards,
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_sale_inscription_complete" model="mail.template">
+            <field name="name">Sales: Mail inscription completed</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Completed registration Master Classes {{ (object.event_inscription_ids[0].session_id.display_name) or ''}} - {{ object.partner_id.display_name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Registration confirmation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-out="object.partner_id.name or ''"></t><br/><br/>
+                        
+                        I am pleased to inform you that we have received all the required documents for your registration. Your registration at Master Classes <t t-out="object.event_inscription_ids[0].session_id.display_name or ''"></t> is now completed.<br/>
+                        <br/>
+                        Please find attached your final invoice.<br/>
+                        In order to proceed to the payment by credit card, please follow this link. If you prefer to make a bank transfer*, our IBAN at the bottom of the quote attached.<br/>
+                        <a href='https://admin.musicalta.com/tools/mk_url.php'>Click Here</a><br/>
+                        <br/>
+                        If you have any other questions, don't hesitate to get in touch.<br/>
+                        <br/>
+                        Kind regards,
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_sale_inscription_missing" model="mail.template">
+            <field name="name">Sales: Mail inscription missing elements</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Missing elements {{ (object.event_inscription_ids[0].session_id.display_name) or ''}} - {{ object.partner_id.display_name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Registration confirmation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-out="object.partner_id.name or ''"></t><br/>
+                        <br/>
+                        I come back to you since we did not receive your confirmation of registration for the Musicalta Academy.<br/>
+                        <br/>
+                        Can you come back to us to confirm your presence ?<br/>
+                        You will find the email sent previously below.<br/>
+                        <br/>
+                        Feel free to come back to us, as we remain at your disposal for further information.<br/>
+                        Thank you for your trust.<br/>
+                        <br/>
+                        Best regards,
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
     </data>
 </odoo>
