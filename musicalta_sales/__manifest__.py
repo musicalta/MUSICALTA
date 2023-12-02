@@ -19,6 +19,7 @@
     ],
     "data": [
         # #DATA
+        "data/mail_data.xml",
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",

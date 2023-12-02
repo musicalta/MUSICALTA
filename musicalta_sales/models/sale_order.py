@@ -44,3 +44,17 @@ class SaleOrder(models.Model):
         }
         for registration in self:
             registration.registration_count = registration_count_data.get(registration.id, 0)
+    
+    def _find_mail_template(self):
+        """ Get the appropriate mail template for the current sales order based on its state.
+
+        If the SO is confirmed, we return the mail template for the sale confirmation.
+        Otherwise, we return the quotation email template.
+
+        :return: The correct mail template based on the current status
+        :rtype: record of `mail.template` or `None` if not found
+        """
+        res = super(SaleOrder, self)._find_mail_template()
+        if self.env.context.get('proforma') or self.state not in ('sale', 'done'):
+            return self.env.ref('musicalta_sales.mail_template_sale_inscription', raise_if_not_found=False)
+        return res
