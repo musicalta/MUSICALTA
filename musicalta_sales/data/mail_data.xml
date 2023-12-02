@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_sale_inscription" model="mail.template">
+            <field name="name">Sales: Mail Pré inscription</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Pré inscription</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Mail de pré inscription</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-out="object.partner_id.name or ''"></t><br/><br/>
+                        Thank you very much for your application 
+                        for the <t t-out='object.event_type_id.name'/> with :
+                            <ul>
+                                <t t-foreach="object.order_line.filtered(lambda order_line: order_line.teacher_id)" t-as="line">
+                                    <li><t t-out="line.teacher_id.name"/></li>
+                                </t>
+                            </ul>
+                        You will find enclosed a document with the review of your application.
+                        In order to confirm your participation, we thank you to send us these following elements as soon as possible by email or by post (Musicalta - 7 quai Saint Vincent 69001 Lyon - France):
+                        <br/><br/>
+                        <ul>
+                            <li>A first payment of minimum 290€</li>
+                            <li>The terms and condition signed digitally by following this link: <a href='https://link.musicalta.com/CGV-EN'>here</a></li>
+                            A good resolution photo is requested during the signing process. In case of difficulty, do not hesitate to send it to us by email or by post according to your preference.
+                        </ul>
+                        Please don’t hesitate to reach out if you have any questions regarding the electronic signatures. 
+                        In order to proceed to the payment by credit card, please follow this link.
+                            https://admin.musicalta.com/tools/mk_url.php
+
+                    </p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>
