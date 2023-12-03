@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_sale_inscription_origin_form" model="ir.ui.view">
+        <field name="name">sale.inscription.origin.form</field>
+        <field name="model">sale.inscription.origin</field>
+        <field name="arch" type="xml">
+            <form string="origins">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_ask_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sale_inscription_origin_tree" model="ir.ui.view">
+        <field name="name">sale.inscription.origin.tree</field>
+        <field name="model">sale.inscription.origin</field>
+        <field name="arch" type="xml">
+            <tree string="origins">
+                <field name="name"/>
+                <field name="is_ask_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sale_inscription_origin" model="ir.actions.act_window">
+        <field name="name">Provenance</field>
+        <field name="res_model">sale.inscription.origin</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Provenance"
+        id="menu_sale_inscription_origin"
+        sequence="2"
+        action="action_sale_inscription_origin"
+        parent="sale_inscription_configuration_menu"/>
+
+</odoo>

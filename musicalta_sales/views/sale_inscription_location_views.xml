@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_sale_inscription_location_form" model="ir.ui.view">
+        <field name="name">sale.inscription.location.form</field>
+        <field name="model">sale.inscription.location</field>
+        <field name="arch" type="xml">
+            <form string="Locations">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sale_inscription_location_tree" model="ir.ui.view">
+        <field name="name">sale.inscription.location.tree</field>
+        <field name="model">sale.inscription.location</field>
+        <field name="arch" type="xml">
+            <tree string="Locations">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sale_inscription_location" model="ir.actions.act_window">
+        <field name="name">Lieux</field>
+        <field name="res_model">sale.inscription.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Lieux"
+        id="menu_sale_inscription_location"
+        sequence="2"
+        action="action_sale_inscription_location"
+        parent="sale_inscription_configuration_menu"/>
+
+</odoo>

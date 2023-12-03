@@ -127,6 +127,29 @@ class SaleInscription(models.Model):
     )
     is_harpiste_with_instruments = fields.Boolean("J'ai mon instrument")
 
+    folder_state = fields.Selection(string='Dossier', selection=[(
+        'to_complete', 'A compléter'), ('completed', 'Complété'),])
+    is_autorisation_exit = fields.Boolean("Autorisation sortie")
+    is_autorisation_bar = fields.Boolean("Autorisation bar")
+    sale_origin_id = fields.Many2one(
+        'sale.inscription.origin', string='Provenance')
+    sale_origin_display_description = fields.Boolean(
+        "Is display origin description", related='sale_origin_id.is_ask_description')
+    sale_origin_description = fields.Text(
+        string="Description provenance")
+    is_train_going = fields.Boolean("Train aller")
+    is_train_return = fields.Boolean("Train retour")
+    is_bus_going = fields.Boolean("Bus aller")
+    is_bus_return = fields.Boolean("Bus retour")
+    departure_location_outbound_id = fields.Many2one(
+        'sale.inscription.location', string="Lieu de départ (aller)")
+    arrival_location_outbound_id = fields.Many2one(
+        'sale.inscription.location', string="Lieu d'arrivée (aller)")
+    departure_location_return_id = fields.Many2one(
+        'sale.inscription.location', string="Lieu de départ (retour)")
+    arrival_location_return_id = fields.Many2one(
+        'sale.inscription.location', string="Lieu d'arrivée (retour)")
+
     @api.onchange('session_id')
     def _onchange_session_id(self):
         return {'domain': {'discipline_id': [('id', 'in', self.discipline_ids.ids)]}}
