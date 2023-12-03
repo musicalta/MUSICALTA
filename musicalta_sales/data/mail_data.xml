@@ -30,11 +30,23 @@
                         Please don’t hesitate to reach out if you have any questions regarding the electronic signatures. 
                         In order to proceed to the payment by credit card, please follow this link.
                             https://admin.musicalta.com/tools/mk_url.php
+                        
+                        <br></br>
+                        <br></br>
+                        If you prefer to make a bank transfer*, our IBAN at the bottom of the quote attached.
+                        *For your convenience, we inform you that any bank transfer will not be accepted without the mention of names, 
+                        course and session of the student. 
+                        If extra bank charges are made to the Musicalta, the concerned students will have to refund charges.
+                        <br></br>
+                        <br></br>
+                        Waiting for your confirmation response with all the elements, we stay at your entire disposal for any further inquiries you may have.
 
                     </p>
                 </div>
             </field>
             <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="report_template" ref="sale.action_report_saleorder"/>
+            <field name="report_name">{{ (object.name or '').replace('/','_') }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
 
