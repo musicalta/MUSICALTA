@@ -7,8 +7,8 @@ import os
 _logger = logging.getLogger(__name__)
 
 
-class PaymentAcquirer(models.Model):
-    _inherit = 'payment.acquirer'
+class PaymentProvider(models.Model):
+    _inherit = 'payment.provider'
 
     # Payment acquirer views parameters
     providers = [('monetico_standard', "Monetico - Standard payment"), ('monetico_multi', "Monetico - Multi payment")]
