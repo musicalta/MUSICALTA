@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="monetico_checkout" inherit_id="payment.checkout">
+        <xpath expr="." position="inside">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+            <script type="text/javascript" src="/payment_acquirer_monetico/static/src/js/script_monetico.js"/>
+        </xpath>
+    </template>
+
+    <template id="monetico_payment_checkout" inherit_id="payment.checkout">
+        <xpath expr="//form[hasclass('o_payment_form')]//div[hasclass('card')]" position="before">
+           <t t-set ="monetico_minimum_amount"
+              t-value ="request.env['payment.acquirer'].sudo().search([('provider', '=', 'monetico_multi')]).monetico_minimum_amount" />
+            <input type="hidden" id="monetico_minimum_amount" name="monetico_minimum_amount" t-att-value="monetico_minimum_amount"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_acquirer_monetico
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-24 13:16+0000\n"
+"PO-Revision-Date: 2021-11-24 13:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_acquirer_monetico
+#: model_terms:ir.ui.view,arch_db:payment_acquirer_monetico.monetico_multi_payment_acquirer_form
+#: model_terms:ir.ui.view,arch_db:payment_acquirer_monetico.monetico_standard_payment_acquirer_form
+msgid "ACCESS PARAMETERS"
+msgstr "PARAMÈTRES D'ACCÈS"
+
+#. module: payment_acquirer_monetico
+#: model_terms:ir.ui.view,arch_db:payment_acquirer_monetico.monetico_multi_payment_acquirer_form
+#: model_terms:ir.ui.view,arch_db:payment_acquirer_monetico.monetico_standard_payment_acquirer_form
+msgid "ACCESS URLS"
+msgstr "URL D'ACCÈS"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_cgi2_url
+msgid "CGI2 URL"
+msgstr "CGI2"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_company_code
+msgid "Company code"
+msgstr "Code société"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_company_code
+msgid "Company code issued by Monetico"
+msgstr "Code société transmis par Monetico"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_ept
+msgid "EPT Number"
+msgstr "Numéro TPE"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_url
+msgid "Gateway url for synchronization with Monetico"
+msgstr "URL de la passerelle pour la synchronisation avec Monetico"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_return_error_url
+msgid "Invalid payment URL"
+msgstr "Échec de paiement"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_key
+msgid "Key"
+msgstr "Clé"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_minimum_amount
+msgid "Minimum amount"
+msgstr "Montant minimum"
+
+#. module: payment_acquirer_monetico
+#: model:payment.acquirer,name:payment_acquirer_monetico.payment_acquirer_monetico_multi
+msgid "Monetico - Multi Payment"
+msgstr "Monetico - Paiement en plusieurs fois"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields.selection,name:payment_acquirer_monetico.selection__payment_acquirer__provider__monetico_multi
+msgid "Monetico - Multi payment"
+msgstr "Monetico - Paiement en plusieurs fois"
+
+#. module: payment_acquirer_monetico
+#: model:payment.acquirer,name:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "Monetico - Standard Payment"
+msgstr "Monetico - Paiement standard"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields.selection,name:payment_acquirer_monetico.selection__payment_acquirer__provider__monetico_standard
+msgid "Monetico - Standard payment"
+msgstr "Monetico - Paiement standard"
+
+#. module: payment_acquirer_monetico
+#: model:account.payment.method,name:payment_acquirer_monetico.payment_method_monetico_multi
+msgid "Monetico Multi Payment"
+msgstr "Monetico - Paiement en plusieurs fois"
+
+#. module: payment_acquirer_monetico
+#: model:account.payment.method,name:payment_acquirer_monetico.payment_method_monetico_standard
+msgid "Monetico Standard Payment"
+msgstr "Monetico - Paiement standard"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_number_of_splits
+msgid "Number of payments"
+msgstr "Nombre de paiement"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_number_of_splits
+msgid "Number of payments for orders"
+msgstr "Nombre de paiement à proposer pour les commandes"
+
+#. module: payment_acquirer_monetico
+#: model_terms:ir.ui.view,arch_db:payment_acquirer_monetico.monetico_multi_payment_acquirer_form
+msgid "PAYMENT IN INSTALLMENTS"
+msgstr "PAIEMENT EN PLUSIEURS FOIS"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model,name:payment_acquirer_monetico.model_payment_acquirer
+msgid "Payment Acquirer"
+msgstr "Intermédiaire de Paiement"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model,name:payment_acquirer_monetico.model_account_payment_method
+msgid "Payment Methods"
+msgstr "Méthodes de paiements"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model,name:payment_acquirer_monetico.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transaction"
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,pending_msg:payment_acquirer_monetico.payment_acquirer_monetico_multi
+#: model_terms:payment.acquirer,pending_msg:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "Please proceed to payment of the amount indicated to complete your order."
+msgstr "Veuillez procéder au paiement du montant indiqué pour finaliser votre commande."
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__provider
+msgid "Provider"
+msgstr "Fournisseur"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_return_error_url
+msgid "Return URL in case of Monetico processing error"
+msgstr "URL de retour en cas d'erreur de traitement Monetico ou abandon de panier"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_return_url
+msgid "Return URL in case of successful payment"
+msgstr "URL de retour en cas de paiement réussi"
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,done_msg:payment_acquirer_monetico.payment_acquirer_monetico_multi
+#: model_terms:payment.acquirer,done_msg:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "Thanks for using Monetico for your payment !"
+msgstr "Merci d'avoir utilisé Monetico pour votre paiement !"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__provider
+msgid "The Payment Service Provider to use with this acquirer"
+msgstr "Le fournisseur de paiement à utiliser avec cet acquéreur"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_key
+msgid "The security key for synchronization with Monetico (40 hexadecimal characters)"
+msgstr "La clé de sécurité pour la synchronisation avec Monetico (40 caractères hexadécimaux)"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_url
+msgid "Gateway URL"
+msgstr "Passerelle"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_cgi2_url
+msgid "URL to send to Monetico"
+msgstr "URL à transmettre à Monetico"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,field_description:payment_acquirer_monetico.field_payment_acquirer__monetico_return_url
+msgid "Valid payment URL"
+msgstr "Succès de paiement"
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_ept
+msgid "Virtual EPT number for synchronization with Monetico (7 digit number)"
+msgstr "Numéro TPE virtuel pour la synchronisation avec Monetico (numéro à 7 chiffres)"
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,auth_msg:payment_acquirer_monetico.payment_acquirer_monetico_multi
+#: model_terms:payment.acquirer,auth_msg:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "Votre paiement a été autorisé."
+msgstr "Votre paiement a été autorisé."
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,pre_msg:payment_acquirer_monetico.payment_acquirer_monetico_multi
+msgid "You can pay in 3 installments with Monetico after clicking on the payment button"
+msgstr "Vous pouvez payer en 3 fois avec Monetico après avoir cliqué sur le bouton de paiement"
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,pre_msg:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "You will be redirected to the Monetico website after clicking on the payment button."
+msgstr "Vous serez redirigé vers le site Monetico après avoir cliqué sur le bouton de paiement."
+
+#. module: payment_acquirer_monetico
+#: model_terms:payment.acquirer,cancel_msg:payment_acquirer_monetico.payment_acquirer_monetico_multi
+#: model_terms:payment.acquirer,cancel_msg:payment_acquirer_monetico.payment_acquirer_monetico_standard
+msgid "Your payment has been canceled."
+msgstr "Votre paiement a été annulé."
+
+#. module: payment_acquirer_monetico
+#: model:ir.model.fields,help:payment_acquirer_monetico.field_payment_acquirer__monetico_minimum_amount
+msgid "Minimum amount when paying in installments"
+msgstr "Montant minimum pour proposer le paiement en plusieurs fois"
