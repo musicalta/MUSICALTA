@@ -11,10 +11,10 @@ class PaymentProvider(models.Model):
     _inherit = 'payment.provider'
 
     # Payment acquirer views parameters
-    providers = [('monetico_standard', "Monetico - Standard payment"), ('monetico_multi', "Monetico - Multi payment")]
+    code = [('monetico_standard', "Monetico - Standard payment"), ('monetico_multi', "Monetico - Multi payment")]
     on_delete = {'monetico_standard': 'set default', 'monetico_multi': 'set default'}
 
-    provider = fields.Selection(selection_add=providers, ondelete=on_delete)
+    code = fields.Selection(selection_add=code, ondelete=on_delete)
     monetico_key = fields.Char(string="Key",
                                help="The security key for synchronization with Monetico (40 hexadecimal characters)")
     monetico_ept = fields.Char(string="EPT Number",
