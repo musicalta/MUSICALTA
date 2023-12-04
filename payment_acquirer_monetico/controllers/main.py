@@ -44,7 +44,7 @@ class PaymentAcquirerMonetico(http.Controller):
         :return: acknowledgment of receipt to send to Monetico
         """
         result_confirm = "0"
-        payment_acquirer_obj = http.request.env['payment.acquirer']
+        payment_acquirer_obj = http.request.env['payment.provider']
 
         tx_sudo = request.env['payment.transaction'].sudo()._get_tx_from_feedback_data(provider, kw)
 
