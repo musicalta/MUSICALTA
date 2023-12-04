@@ -1,0 +1,874 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* musicalta_sales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-03 16:39+0000\n"
+"PO-Revision-Date: 2023-12-03 16:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: musicalta_sales
+#: model:mail.template,body_html:musicalta_sales.mail_template_sale_inscription_missing
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear <t t-out=\"object.partner_id.name or ''\"></t><br>\n"
+"                        <br>\n"
+"                        I come back to you since we did not receive your confirmation of registration for the Musicalta Academy.<br>\n"
+"                        <br>\n"
+"                        Can you come back to us to confirm your presence ?<br>\n"
+"                        You will find the email sent previously below.<br>\n"
+"                        <br>\n"
+"                        Feel free to come back to us, as we remain at your disposal for further information.<br>\n"
+"                        Thank you for your trust.<br>\n"
+"                        <br>\n"
+"                        Best regards,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Cher / Chère <t t-out=\"object.partner_id.name or ''\"></t><br>\n"
+"                        <br>\n"
+"                        J’espère que cet email vous trouvera en bonne forme.<br>\n"
+"                        <br>\n"
+"                        Je reviens vers vous car nous n’avons pas reçu votre confirmation d'inscription pour l'académie Musicalta.<br>\n"
+"                        <br>\n"
+"                        Pouvez-vous revenir vers nous pour confirmer votre participation ?<br>\n"
+"                        Vous trouverez ci-dessous l'email récapitulatif envoyé précédemment.<br>\n"
+"                        <br>\n"
+"                        Je reste à votre entière disposition pour de plus amples informations et vous remercie de votre confiance.<br>\n"
+"                        <br>\n"
+"                        Bien à vous,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+
+#. module: musicalta_sales
+#: model:mail.template,body_html:musicalta_sales.mail_template_sale_inscription_complete
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear <t t-out=\"object.partner_id.name or ''\"></t><br><br>\n"
+"                        \n"
+"                        I am pleased to inform you that we have received all the required documents for your registration. Your registration at Master Classes <t t-out=\"object.event_inscription_ids[0].session_id.display_name or ''\"></t> is now completed.<br>\n"
+"                        <br>\n"
+"                        Please find attached your final invoice.<br>\n"
+"                        In order to proceed to the payment by credit card, please follow this link. If you prefer to make a bank transfer*, our IBAN at the bottom of the quote attached.<br>\n"
+"                        <a href=\"https://admin.musicalta.com/tools/mk_url.php\">Click Here</a><br>\n"
+"                        <br>\n"
+"                        If you have any other questions, don't hesitate to get in touch.<br>\n"
+"                        <br>\n"
+"                        Kind regards,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Cher / Chère <t t-out=\"object.partner_id.name or ''\"></t><br><br>\n"
+"                        \n"
+"                        J'ai le plaisir de vous annoncer que nous avons bien reçu l'ensemble des documents pour votre inscription au Master Classes <t t-out=\"object.event_inscription_ids[0].session_id.display_name or ''\"></t>. Votre inscription est désormais finalisée.<br>\n"
+"                        <br>\n"
+"                        Veuillez trouver ci-joint la facture récapitulative.<br>\n"
+"                        Vous avez souhaité régler par carte bleue. Voici le lien vers une plateforme de paiement sécurisée :<br>\n"
+"                        <a href=\"https://admin.musicalta.com/tools/mk_url.php\">Cliquez ici</a><br>\n"
+"                        Si vous avez demandé à régler la totalité mais souhaitez en définitive échelonner votre paiement, nous vous remercions de nous contacter.\n"
+"                        <br>\n"
+"                        Je me tiens à votre disposition pour d'éventuels renseignements supplémentaires.<br>\n"
+"                        <br>\n"
+"                        Bien à vous,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+
+#. module: musicalta_sales
+#: model:mail.template,body_html:musicalta_sales.mail_template_sale_inscription
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear <t t-out=\"object.partner_id.name or ''\"></t><br><br>\n"
+"                        Thank you very much for your application \n"
+"                        for the <t t-out=\"object.event_type_id.name\"></t> with :\n"
+"                            <ul>\n"
+"                                <t t-foreach=\"object.order_line.filtered(lambda order_line: order_line.teacher_id)\" t-as=\"line\">\n"
+"                                    <li><t t-out=\"line.teacher_id.name\"></t></li>\n"
+"                                </t>\n"
+"                            </ul>\n"
+"                        You will find enclosed a document with the review of your application.\n"
+"                        In order to confirm your participation, we thank you to send us these following elements as soon as possible by email or by post (Musicalta - 7 quai Saint Vincent 69001 Lyon - France):\n"
+"                        <br><br>\n"
+"                        <ul>\n"
+"                            <li>A first payment of minimum 290€</li>\n"
+"                            <li>The terms and condition signed digitally by following this link: <a href=\"https://link.musicalta.com/CGV-EN\">here</a></li>\n"
+"                            A good resolution photo is requested during the signing process. In case of difficulty, do not hesitate to send it to us by email or by post according to your preference.\n"
+"                        </ul>\n"
+"                        Please don’t hesitate to reach out if you have any questions regarding the electronic signatures. \n"
+"                        In order to proceed to the payment by credit card, please follow this link.\n"
+"                            https://admin.musicalta.com/tools/mk_url.php\n"
+"                        \n"
+"                        <br>\n"
+"                        <br>\n"
+"                        If you prefer to make a bank transfer*, our IBAN at the bottom of the quote attached.\n"
+"                        *For your convenience, we inform you that any bank transfer will not be accepted without the mention of names, \n"
+"                        course and session of the student. \n"
+"                        If extra bank charges are made to the Musicalta, the concerned students will have to refund charges.\n"
+"                        <br>\n"
+"                        <br>\n"
+"                        Waiting for your confirmation response with all the elements, we stay at your entire disposal for any further inquiries you may have.\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,body_html:musicalta_sales.mail_template_sale_inscription_confirm
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear <t t-out=\"object.partner_id.name or ''\"></t><br><br>\n"
+"                        We have received your registration confirmation for <t t-out=\"object.event_inscription_ids[0].session_id.display_name or ''\"></t> Musical Master Classes.<br>\n"
+"                        You will find in attachment :<br>\n"
+"                        <ul>\n"
+"                            <li>an information document</li>\n"
+"                            <li>an updated invoice</li>\n"
+"                        </ul>\n"
+"                        <br>\n"
+"                        In order to complete and validate your registration, please send us before April 1st :<br>\n"
+"                        <br>\n"
+"                        <ul>\n"
+"                            <li>the information sheet : <a href=\"https://link.musicalta.com/P23-ANG-Information\">Click Here</a></li>\n"
+"                            <li>the terms and conditions : <a href=\"https://link.musicalta.com/CGV-EN\">Click Here</a><br>\n"
+"                            <i>A good resolution photo is requested during the signing proces. In case of difficulty, do not hesitate to send it to us by email or by post according to your preference.</i></li>\n"
+"                            <li>the balance payment</li>\n"
+"                        </ul>\n"
+"\n"
+"                        <t t-if=\"confirmation_par_cb\">\n"
+"                        <br>If you wish to pay the balance by credit card, you can follow the secured link below : <br>\n"
+"                        https://admin.musicalta.com/tools/mk_url.php (if you want to spread out your payment, please contact us)\n"
+"                        </t>\n"
+"\n"
+"                        If you have any futher questions, please do not hesitate to get in touch.<br>\n"
+"                        <br>\n"
+"                        Kind regards,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Cher / Chère <t t-out=\"object.partner_id.name or ''\"></t><br><br>\n"
+"                        Nous avons bien reçu votre confirmation d’inscription à la Master Classes <t t-out=\"object.event_inscription_ids[0].session_id.display_name or ''\"></t> et nous vous en remercions.<br>\n"
+"                        <br>\n"
+"                        Vous trouverez ci-joint les documents faisant suite à votre confirmation d'inscription :<br>\n"
+"                        <ul>\n"
+"                            <li>votre facture à jour</li>\n"
+"                            <li>une fiche d'information</li>\n"
+"                        </ul>\n"
+"                        <br>\n"
+"                        Je vous laisse le soin d'en prendre connaissance et de nous renvoyer complété et signé avant le 01 avril :<br>\n"
+"                        <br>\n"
+"                        <ul>\n"
+"                            <li>La fiche de renseignement à compléter et signer électroniquement en suivant ce lien : <a href=\"https://link.musicalta.com/P23-FR-Renseignements\">Cliquez ici</a></li>\n"
+"                            <li>Les conditions générales : <a href=\"https://link.musicalta.com/CGV-FR\">Cliquez ici</a><br>\n"
+"                            <i>Une photo en bonne définition est demandée au cours du processus de signature. En cas de difficulté, n’hésitez pas à nous la faire parvenir par email ou par courrier selon votre préférence</i></li>\n"
+"                            <li>Le solde de votre inscription</li>\n"
+"                            <li>la décharge de responsabilité signée par le(s) tuteur(s) de l’enfant</li>\n"
+"                        </ul>\n"
+"\n"
+"                        <br>Si vous souhaitez régler le solde par carte bleue, vous pouvez suivre le lien ci-dessous : <br>\n"
+"                        <a href=\"https://admin.musicalta.com/tools/mk_url.php">https://admin.musicalta.com/tools/mk_url.php</a> (si vous souhaitez échelonner votre paiement, merci de nous contacter)\n"
+"\n"
+"                        Je reste à votre entière disposition pour toute information complémentaire.<br>\n"
+"                        <br>\n"
+"                        Nous vous remercions de votre confiance.<br>\n"
+"                        <br>\n"
+"                        Bien cordialement,\n"
+"\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                                    Devis\n"
+"                                </span>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_adult
+msgid "Adulte"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_auditor
+msgid "Auditeur"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Autres informations"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__available_product_ids
+msgid "Available Products"
+msgstr ""
+
+#. module: musicalta_sales
+#. odoo-python
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#, python-format
+msgid "Cette personne est déjà inscrite à cette session"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__partner_id
+msgid "Client"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,subject:musicalta_sales.mail_template_sale_inscription_complete
+msgid ""
+"Completed registration Master Classes {{ "
+"(object.event_inscription_ids[0].session_id.display_name) or ''}} - {{ "
+"object.partner_id.display_name }}"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,subject:musicalta_sales.mail_template_sale_inscription_confirm
+msgid ""
+"Confirmation for {{ "
+"(object.event_inscription_ids[0].session_id.display_name) or ''}} "
+"Registration - {{ object.partner_id.display_name }}"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.actions.act_window,help:musicalta_sales.action_sale_inscription
+msgid "Create a new quotation, the first step of a new sale!"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Créer/Mettre à jour le devis"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__date_of_birth
+msgid "Date de naissance"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.ui.menu,name:musicalta_sales.musicalta_inscription_menu
+msgid "Demande d'Inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.ui.menu,name:musicalta_sales.menu_sale_inscription
+msgid "Demande d'inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_product_pricelist_item__discipline_id
+msgid "Discipline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__discipline_id_1
+msgid "Discipline 1"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__discipline_id_2
+msgid "Discipline 2"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.ui.menu,name:musicalta_sales.menu_registration
+msgid "Enregistrement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_order__event_inscription_ids
+msgid "Event Inscriptions"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.actions.act_window,name:musicalta_sales.action_open_event_inscription_wizard
+#: model:ir.model,name:musicalta_sales.model_event_registration
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Event Registration"
+msgstr "Inscription à l'événement"
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_event_type
+msgid "Event Template"
+msgstr "Modèle d'événement"
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_res_family
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__family_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__family_id
+msgid "Family"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__member_ids
+msgid "Family Members"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__name
+msgid "Family Name"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_harpiste
+msgid "Harpe"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_hebergement_id
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Hébergement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__id
+msgid "ID"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__message_has_error
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Informations"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.actions.act_window,name:musicalta_sales.action_sale_inscription
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__inscription_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_registration__inscription_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_order__registration_count
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_order_line__inscription_id
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_order_form_inherit
+msgid "Inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_harpiste_with_instruments
+msgid "J'ai mon instrument"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_family__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_lunch_order_form
+msgid "Lunch Order"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_event_lunch_order
+msgid "Lunch Order for Students"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.actions.act_window,name:musicalta_sales.action_lunch_order
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_lunch_order_tree
+msgid "Lunch Orders"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,description:musicalta_sales.mail_template_sale_inscription
+#: model:mail.template,description:musicalta_sales.mail_template_sale_inscription_confirm
+msgid "Mail de pré inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__meal_product_id
+msgid "Meal Type"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,subject:musicalta_sales.mail_template_sale_inscription_missing
+msgid ""
+"Missing elements {{ "
+"(object.event_inscription_ids[0].session_id.display_name) or ''}} - {{ "
+"object.partner_id.display_name }}"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_musical_level
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__name
+msgid "Musical Level"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_musical_tessiture
+msgid "Musical Tessiture"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.ui.menu,name:musicalta_sales.musicalta_menu_root
+msgid "Musicalta"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__name
+msgid "Name"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__musical_level_id
+msgid "Niveau musical"
+msgstr ""
+
+#. module: musicalta_sales
+#. odoo-python
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#, python-format
+msgid "No fees product found"
+msgstr ""
+
+#. module: musicalta_sales
+#. odoo-python
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#, python-format
+msgid "No ticket found for this teacher and discipline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__meal_quantity
+msgid "Number of Meals"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.actions.act_window,help:musicalta_sales.action_sale_inscription
+msgid ""
+"Once the quotation is confirmed by the customer, it becomes a sales "
+"order.<br> You will be able to create an invoice and collect the payment."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__options_ids
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Options"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__sale_order_id
+msgid "Order"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_pack_id
+msgid "Pack"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Pack/Discipline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__partition
+msgid "Partition"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_pianiste
+msgid "Piano"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_product_pricelist
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__pricelist_id
+msgid "Pricelist"
+msgstr "Liste de prix"
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr "Règle des listes des prix"
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_work_room_domain_id
+msgid "Product Work Room Domain"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__teacher_id_1
+msgid "Professeur 1"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__teacher_id_2
+msgid "Professeur 2"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__usual_teacher
+msgid "Professeur habituel"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__teacher_ids
+msgid "Professeurs"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,subject:musicalta_sales.mail_template_sale_inscription
+msgid "Pré inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,description:musicalta_sales.mail_template_sale_inscription_complete
+#: model:mail.template,description:musicalta_sales.mail_template_sale_inscription_missing
+msgid "Registration confirmation"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_type__product_familiy_affiliation_id
+msgid "Remise famille"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_type__product_remise_multi_session_id
+msgid "Remise multi-session"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_launch_id
+#: model:ir.ui.menu,name:musicalta_sales.menu_lunch
+#: model:ir.ui.menu,name:musicalta_sales.menu_lunch_order
+msgid "Repas"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_sale_inscription
+msgid "Sale Inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__sale_order_id
+msgid "Sale Order"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de commande"
+
+#. module: musicalta_sales
+#: model:mail.template,name:musicalta_sales.mail_template_sale_inscription
+msgid "Sales: Mail Pré inscription"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,name:musicalta_sales.mail_template_sale_inscription_complete
+msgid "Sales: Mail inscription completed"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,name:musicalta_sales.mail_template_sale_inscription_confirm
+msgid "Sales: Mail inscription confirmation"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,name:musicalta_sales.mail_template_sale_inscription_missing
+msgid "Sales: Mail inscription missing elements"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Salle de travail"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_work_rooms_id
+msgid "Salles de travail"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__session_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__session_id
+msgid "Session"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__student_id
+msgid "Student"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__name
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__tessiture_id
+msgid "Tessiture"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_order__event_type_id
+msgid "Type d'événement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "est majeur(e)."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "est mineur(e)."
+msgstr ""
+
+#. module: musicalta_sales
+#: model:mail.template,report_name:musicalta_sales.mail_template_sale_inscription
+msgid "{{ (object.name or '').replace('/','_') }}"
+msgstr ""
