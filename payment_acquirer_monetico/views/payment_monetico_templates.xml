@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- inherits the "pay now" button and adds the necessary fields for monetico -->
+    <template id="monetico_acquirer_form">
+        <form t-att-action="api_url" method="POST">
+            <input type="hidden" name="version" t-att-value="version" />
+            <input type="hidden" name="TPE" t-att-value="TPE" />
+            <input type="hidden" name="date" t-att-value="date" />
+            <input type="hidden" name="montant" t-att-value="amount" />
+            <input type="hidden" name="reference" t-att-value="reference" />
+            <input type="hidden" name="MAC" t-att-value="MAC" />
+            <input type="hidden" name="url_retour_ok" t-att-value="return_url" />
+            <input type="hidden" name="url_retour_err" t-att-value="return_error_url" />
+            <input type="hidden" name="lgue" t-att-value="lang" />
+            <input type="hidden" name="societe" t-att-value="company_code" />
+            <input type="hidden" name="contexte_commande" t-att-value="command_context" />
+            <input type="hidden" name="texte-libre" t-att-value="comment" />
+            <input type="hidden" name="mail" t-att-value="mail" />
+
+            <!-- For split payment -->
+            <input type="hidden" name="nbrech" t-att-value="number_of_splits" />
+            <input type="hidden" name="dateech1" t-att-value="first_payment_date" />
+            <input type="hidden" name="montantech1" t-att-value="first_amount_split" />
+            <input type="hidden" name="dateech2" t-att-value="second_payment_date" />
+            <input type="hidden" name="montantech2" t-att-value="second_amount_split" />
+            <input type="hidden" name="dateech3" t-att-value="third_payment_date" />
+            <input type="hidden" name="montantech3" t-att-value="third_amount_split" />
+            <input type="hidden" name="dateech4" t-att-value="fourth_payment_date" />
+            <input type="hidden" name="montantech4" t-att-value="fourth_amount_split" />
+        </form>
+    </template>
+</odoo>

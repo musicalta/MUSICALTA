@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_acquirer_monetico_standard" model="payment.acquirer">
+        <field name="name">Monetico - Standard Payment</field>
+        <field name="sequence">50</field>
+        <field name="provider">monetico_standard</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="image_128" type="base64" file="payment_acquirer_monetico/static/src/img/monetico_icon.png"/>
+        <field name="redirect_form_view_id" ref="monetico_acquirer_form"/>
+        <field name="pre_msg"><![CDATA[<p>You will be redirected to the Monetico website after clicking on the payment button.</p>]]></field>
+        <field name="pending_msg"><![CDATA[<p>Please proceed to payment of the amount indicated to complete your order.</p>]]></field>
+        <field name="done_msg"><![CDATA[<p>Thanks for using Monetico for your payment !</p>]]></field>
+        <field name="cancel_msg"><![CDATA[<p>Your payment has been canceled.</p>]]></field>
+        <field name="monetico_key">12345678901234567890123456789012345678P0</field>
+        <field name="monetico_ept">0000001</field>
+        <field name="monetico_company_code">b61845cafa66582eb9ae</field>
+        <field name="monetico_cgi2_url">https://{domain}/payment/monetico/return</field>
+        <field name="monetico_url">https://p.monetico-services.com/test/paiement.cgi</field>
+        <field name="monetico_return_url">/payment/monetico/successful</field>
+        <field name="monetico_return_error_url">/payment/monetico/canceled</field>
+        <field name="module_id" ref="base.module_payment_acquirer_monetico"/>
+        <field name="description" type="html">
+            <p><![CDATA[Une passerelle de paiement vers Monetico qui accepte les paiements en ligne par carte de crédit.]]></p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><i class="fa fa-check"/>Paiement en ligne</li>
+                <li class="list-inline-item"><i class="fa fa-check" />Suivi de l'état des paiements</li>
+            </ul>
+        </field>
+        <field name="payment_icon_ids"
+               eval="[(6, 0, [
+                   ref('payment.payment_icon_cc_mastercard'),
+                   ref('payment.payment_icon_cc_visa'),
+                   ref('payment.payment_icon_cc_american_express')])
+               ]"
+        />
+        <field name="support_authorization">False</field>
+        <field name="support_fees_computation">False</field>
+        <field name="support_refund"></field>
+        <field name="support_tokenization">False</field>
+    </record>
+
+    <record id="payment_acquirer_monetico_multi" model="payment.acquirer">
+        <field name="name">Monetico - Multi Payment</field>
+        <field name="sequence">60</field>
+        <field name="provider">monetico_multi</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="image_128" type="base64" file="payment_acquirer_monetico/static/src/img/monetico_icon.png"/>
+        <field name="redirect_form_view_id" ref="monetico_acquirer_form"/>
+        <field name="pre_msg"><![CDATA[<p>Vous pouvez payer en 3 fois avec Monetico après avoir cliqué sur le bouton de paiement.</p>]]></field>
+        <field name="pending_msg"><![CDATA[<p>Please proceed to payment of the amount indicated to complete your order.</p>]]></field>
+        <field name="done_msg"><![CDATA[<p>Thanks for using Monetico for your payment !</p>]]></field>
+        <field name="cancel_msg"><![CDATA[<p>Your payment has been canceled.</p>]]></field>
+        <field name="monetico_key">12345678901234567890123456789012345678P0</field>
+        <field name="monetico_ept">0000001</field>
+        <field name="monetico_company_code">b61845cafa66582eb9ae</field>
+        <field name="monetico_cgi2_url">https://{domain}/payment/moneticomulti/return</field>
+        <field name="monetico_url">https://p.monetico-services.com/test/paiement.cgi</field>
+        <field name="monetico_return_url">/payment/monetico/successful</field>
+        <field name="monetico_return_error_url">/payment/monetico/canceled</field>
+        <field name="monetico_number_of_splits">3</field>
+        <field name="monetico_minimum_amount">300</field>
+        <field name="module_id" ref="base.module_payment_acquirer_monetico"/>
+        <field name="description" type="html">
+            <p><![CDATA[Une passerelle de paiement vers Monetico qui accepte les paiements en ligne par carte de crédit.]]></p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><i class="fa fa-check"/>Paiement en ligne</li>
+                <li class="list-inline-item"><i class="fa fa-check" />Paiement en plusieurs fois</li>
+                <li class="list-inline-item"><i class="fa fa-check" />Suivi de l'état des paiements</li>
+            </ul>
+        </field>
+        <field name="payment_icon_ids"
+               eval="[(6, 0, [
+                   ref('payment.payment_icon_cc_mastercard'),
+                   ref('payment.payment_icon_cc_visa'),
+                   ref('payment.payment_icon_cc_american_express')])
+               ]"
+        />
+        <field name="support_authorization">False</field>
+        <field name="support_fees_computation">False</field>
+        <field name="support_refund"></field>
+        <field name="support_tokenization">False</field>
+    </record>
+
+    <record id="payment_method_monetico_standard" model="account.payment.method">
+        <field name="name">Monetico Standard Payment</field>
+        <field name="code">monetico_standard</field>
+        <field name="payment_type">inbound</field>
+    </record>
+
+    <record id="payment_method_monetico_multi" model="account.payment.method">
+        <field name="name">Monetico Multi Payment</field>
+        <field name="code">monetico_multi</field>
+        <field name="payment_type">inbound</field>
+    </record>
+</odoo>

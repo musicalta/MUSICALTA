@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="monetico_standard_payment_acquirer_form" model="ir.ui.view">
+            <field name="name">Monetico Acquirer Standard Payment Form</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.payment_acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='acquirer']" position="inside">
+                    <group name="monetico_access_parameters" string="ACCESS PARAMETERS" attrs="{'invisible': [('provider', '!=', 'monetico_standard')]}">
+                        <field name="monetico_key" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_ept" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_company_code" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                    </group>
+                    <group name="monetico_access_urls" string="ACCESS URLS" attrs="{'invisible': [('provider', '!=', 'monetico_standard')]}">
+                        <field name="monetico_cgi2_url" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_url" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_return_url" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_return_error_url" attrs="{'required':[('provider', '=', 'monetico_standard'), ('state', '!=', 'disabled')]}" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="monetico_multi_payment_acquirer_form" model="ir.ui.view">
+            <field name="name">Monetico Acquirer Multi Payment Form</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.payment_acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='acquirer']" position="inside">
+                    <group name="monetico_access_parameters" string="ACCESS PARAMETERS" attrs="{'invisible': [('provider', '!=', 'monetico_multi')]}">
+                        <field name="monetico_key" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_ept" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_company_code" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                    </group>
+                    <group name="monetico_access_urls" string="ACCESS URLS" attrs="{'invisible': [('provider', '!=', 'monetico_multi')]}">
+                        <field name="monetico_cgi2_url" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_url" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_return_url" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_return_error_url" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                    </group>
+                    <group col="4" name="monetico_other_parameters" string="PAYMENT IN INSTALLMENTS" attrs="{'invisible': [('provider', '!=', 'monetico_multi')]}">
+                        <field name="monetico_number_of_splits" attrs="{'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                        <field name="monetico_minimum_amount" attrs="{'invisible': [('provider', '!=', 'monetico_multi')], 'required':[('provider', '=', 'monetico_multi'), ('state', '!=', 'disabled')]}" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
