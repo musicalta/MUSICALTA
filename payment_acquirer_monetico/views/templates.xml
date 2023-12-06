@@ -10,7 +10,7 @@
     <template id="monetico_payment_checkout" inherit_id="payment.checkout">
         <xpath expr="//form[hasclass('o_payment_form')]//div[hasclass('card')]" position="before">
            <t t-set ="monetico_minimum_amount"
-              t-value ="request.env['payment.provider'].sudo().search([('provider', '=', 'monetico_multi')]).monetico_minimum_amount" />
+              t-value ="request.env['payment.provider'].sudo().search([('code', '=', 'monetico_multi')]).monetico_minimum_amount" />
             <input type="hidden" id="monetico_minimum_amount" name="monetico_minimum_amount" t-att-value="monetico_minimum_amount"/>
         </xpath>
     </template>
