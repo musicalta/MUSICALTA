@@ -12,6 +12,7 @@
     'depends': [
         'base',
         'hr',
+        ''
     ],
     'data': [
         'security/ir.model.access.csv',
