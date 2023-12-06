@@ -303,7 +303,7 @@ class PaymentTransaction(models.Model):
     def _get_specific_rendering_values(self, processing_values):
         try:
             res = super()._get_specific_rendering_values(processing_values)
-            if self.provider not in ('monetico_standard', 'monetico_multi'):
+            if self.code not in ('monetico_standard', 'monetico_multi'):
                 return res
 
             base_url = self.env['ir.config_parameter'].get_param('web.base.url')
@@ -342,7 +342,7 @@ class PaymentTransaction(models.Model):
                 'mail': partner_email,
             }
 
-            if self.provider == "monetico_multi":
+            if self.code == "monetico_multi":
                 # processing of the split payment part
                 monetico_multi_data = self._generate_data_for_split_payment(amount_order, date_of_sale)
                 data.update(monetico_multi_data)
@@ -372,11 +372,11 @@ class PaymentTransaction(models.Model):
     # Vérifier que le montant et la référence correspondent au règlement d'une
     # commande enregistrée en attente de paiement
     @api.model
-    def _get_tx_from_feedback_data(self, provider, data):
+    def _get_tx_from_feedback_data(self, code, data):
 
-        tx = super()._get_tx_from_feedback_data(provider, data)
+        tx = super()._get_tx_from_feedback_data(code, data)
         providers_monetico = ['monetico_standard', 'monetico_multi']
-        if provider not in ['monetico_standard', 'monetico_multi']:
+        if code not in ['monetico_standard', 'monetico_multi']:
             return tx
 
         # Get transaction
@@ -384,7 +384,7 @@ class PaymentTransaction(models.Model):
             raise ValidationError("Monetico: " + _("No reference found in the return data"))
 
         reference = data['reference']
-        tx = self.search([('reference', '=', reference), ('provider', 'in', providers_monetico)],
+        tx = self.search([('reference', '=', reference), ('code', 'in', providers_monetico)],
                          limit=1, order="id desc")
         if not tx:
             raise ValidationError("Monetico: " + _("No transaction found matching reference %s.", reference))
@@ -395,7 +395,7 @@ class PaymentTransaction(models.Model):
     def _process_feedback_data(self, data):
 
         super()._process_feedback_data(data)
-        if self.provider not in ('monetico_standard', 'monetico_multi'):
+        if self.code not in ('monetico_standard', 'monetico_multi'):
             return
 
         # Get return code
