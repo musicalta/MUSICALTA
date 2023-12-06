@@ -11,6 +11,7 @@
     "depends": [
         "base",
         "hr",
+        "musicalta_discipline",
         "event",
         "event_sale",
     ],
