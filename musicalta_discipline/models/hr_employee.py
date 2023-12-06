@@ -11,3 +11,8 @@ class HrEmployeeInherit(models.Model):
         comodel_name='employee.discipline',
         required=True,
     )
+    options_ids = fields.Many2many(
+        string='Options',
+        comodel_name='employee.option',
+    )
+    

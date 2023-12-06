@@ -21,19 +21,21 @@
                         <field name="email_3"/>
                         <field name="phone_2"/>
                         <field name="phone_3"/>
-                        <field name="nationality"/>
                     </group>
                     <group name="praticals_informations" string="Praticals Informations">
                         <field name="lang_spoken_ids" widget="many2many_tags" groups="base.group_no_one"/>
                         <field name="speakings"/>
                         <field name="preferal_professor_id" groups="base.group_no_one"/>
-                        <field name="regular_teacher"/>
-                        <field name="piece_played"/>
+                        <!-- <field name="regular_teacher"/> -->
+                        <!-- <field name="piece_played"/> -->
                         <field name="school"/>
-                        <field name="level"/>
-                        <field name="range"/>
+                        <!-- <field name="level"/> -->
+                        <!-- <field name="range"/> -->
                     </group>
                 </page>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="before">
+                <field name="nationality"/>
             </xpath>
         </field>
     </record>

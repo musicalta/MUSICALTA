@@ -2,7 +2,7 @@
 
 {
     "name": "Sales For musicalta",
-    "version": "16.0.1.0.0",
+    "version": "16.0.3.0.0",
     "summary": """Add Sales customization.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -13,11 +13,13 @@
         "product",
         "sale_management",
         "musicalta_event",
+        "musicalta_contact",
         "product_pack",
         "sale_product_pack",
     ],
     "data": [
         # #DATA
+        "data/mail_data.xml",
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",
@@ -26,8 +28,11 @@
         "views/sale_order_views.xml",
         "views/lunch_order_views.xml",
         "views/musicalta_sales_menu.xml",
+        "views/sale_inscription_location_views.xml",
+        "views/sale_inscription_origin_views.xml",
         "views/event_type.xml",
         "views/res_partner.xml",
+        "views/product_pricelist_item_views.xml",
     ],
     "installable": True,
     "license": "LGPL-3",

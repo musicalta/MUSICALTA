@@ -28,6 +28,33 @@ class Event(models.Model):
         string='Available Products',
     )
 
+    def action_view_tickets(self):
+        self.ensure_one()
+        view_id = self.env.ref('musicalta_event.event_event_ticket_tree_view').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Tickets',
+            'res_model': 'event.event.ticket',
+            'views': [(view_id, 'tree')],
+            'domain': [('event_id', '=', self.id), ('is_option', '=', False)],
+            'context': {'default_event_id': self.id},
+        }
+    
+    def action_view_event_options(self):
+        self.ensure_one()
+        view_id = self.env.ref('musicalta_event.event_event_ticket_tree_view_options').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Options',
+            'res_model': 'event.event.ticket',
+            'views': [(view_id, 'tree')],
+            'domain': [
+                ('event_id', '=', self.id),
+                ('is_option', '=', True)
+            ],
+            'context': {'default_event_id': self.id},
+        }
+    
 
     @api.model_create_multi
     def create(self, vals_list):

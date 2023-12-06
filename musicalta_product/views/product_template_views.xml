@@ -16,6 +16,7 @@
                 <field name="is_fees"/>
                 <field name="is_product_for_adults"/>
                 <field name="is_product_for_adults_and_minors"/>
+                <field name="is_option"/>
             </xpath>
         </field>
     </record>

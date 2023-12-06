@@ -1,4 +1,6 @@
 from . import sale_inscription
+from . import sale_inscription_origin
+from . import sale_inscription_location
 from . import sale_order
 from . import sale_order_line
 from . import event_launch_order
@@ -8,3 +10,5 @@ from . import musical_tessiture
 from . import event_type
 from . import res_family
 from . import res_partner
+from . import product_pricelist
+from . import product_pricelist_item

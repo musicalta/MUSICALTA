@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="softcare_inherited_payment_link_wizard" model="ir.ui.view">
+            <field name="name">Softcare inherited payment link wizard</field>
+            <field name="model">payment.link.wizard</field>
+            <field name="inherit_id" ref="payment.payment_link_wizard_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="before">
+                    <field name="monetico_access_payment" invisible="1" />
+                </xpath>
+                <xpath expr="//footer" position="before">
+                    <group attrs="{'invisible':[('monetico_access_payment', '=', True)]}">
+                        <p class="alert alert-warning font-weight-bold" role="alert">L'adresse de facturation ou de livraison est incomplète. Merci de renseigner ces informations pour utiliser l'intermédiaire de paiement Monetico</p>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

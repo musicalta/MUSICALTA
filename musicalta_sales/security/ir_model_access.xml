@@ -45,4 +45,22 @@
         <field name="perm_unlink">1</field>
     </record>
 
+    <record id="sale_inscription_location" model="ir.model.access">
+        <field name="name">sale.inscription.location</field>
+        <field name="model_id" ref="model_sale_inscription_location"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="sale_inscription_origin" model="ir.model.access">
+        <field name="name">sale.inscription.origin</field>
+        <field name="model_id" ref="model_sale_inscription_origin"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
 </odoo>

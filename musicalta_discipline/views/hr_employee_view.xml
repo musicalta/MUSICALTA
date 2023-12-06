@@ -8,6 +8,7 @@
 
                 <xpath expr="//field[@name='coach_id']" position="after">
                     <field name="discipline_ids" widget="many2many_tags"/>
+                    <field name="options_ids" widget="many2many_tags"/>
                 </xpath>
 
             </field>

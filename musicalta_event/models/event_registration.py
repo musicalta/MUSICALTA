@@ -18,6 +18,10 @@ class EventRegistration(models.Model):
         'employee.discipline',
         string='Discipline',
     )
+    option_id = fields.Many2one(
+        'employee.option',
+        string='Option',
+    )
     number_of_repas = fields.Integer(
         string='Nombre de repas',
         default=0,
