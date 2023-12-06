@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from . import employee_option
 from . import event_option
 from . import event_event
 from . import event_event_training
