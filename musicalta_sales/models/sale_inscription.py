@@ -479,7 +479,7 @@ class SaleInscription(models.Model):
             'order_id': sale_order.id,
             'price_unit': price,
             'inscription_id': self.id,
-            'product_template_id': product_work_rooms_id.id,
+            'product_id': product_work_rooms_id.product_variant_id.id,
         })
 
     def _lunch_management(self, product_launch_id, product_hebergement_id, sale_order):
