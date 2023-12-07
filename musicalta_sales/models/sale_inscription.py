@@ -105,7 +105,7 @@ class SaleInscription(models.Model):
         domain="[('event_id', '=', session_id),('is_option', '=', True)]",
     )
     product_work_rooms_id = fields.Many2one(
-        'product.product',
+        'product.template',
         string='Salles de travail',
     )
     product_work_room_domain_id = fields.Char(
