@@ -234,7 +234,7 @@ class PaymentTransaction(models.Model):
                 f"version={data['version']}"
             ])
 
-            return self._compute_hmac_sha1(self.acquirer_id.monetico_key, data_for_mac)
+            return self._compute_hmac_sha1(self.provider_id.monetico_key, data_for_mac)
 
         except Exception as e:
             _logger.info(f"_generate_mac_seal : {e}")
@@ -250,7 +250,7 @@ class PaymentTransaction(models.Model):
         try:
             payment_dates, amounts_split = [], []
             max_number_of_splits = 4
-            number_of_splits = self.acquirer_id.monetico_number_of_splits
+            number_of_splits = self.provider_id.monetico_number_of_splits
 
             # Calculation of date splits
             first_payment_date = date_of_sale.split(':')[0]
@@ -303,25 +303,25 @@ class PaymentTransaction(models.Model):
     def _get_specific_rendering_values(self, processing_values):
         try:
             res = super()._get_specific_rendering_values(processing_values)
-            if self.code not in ('monetico_standard', 'monetico_multi'):
+            if self.provider_code not in ('monetico_standard', 'monetico_multi'):
                 return res
 
             base_url = self.env['ir.config_parameter'].get_param('web.base.url')
-            params = self.acquirer_id.get_params_in_file()
+            params = self.provider_id.get_params_in_file()
 
             amount_order = Decimal(self.amount)
             amount_order = amount_order.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
 
-            api_url = self.acquirer_id.monetico_url
+            api_url = self.provider_id.monetico_url
             version = params['version']
-            monetico_ept = self.acquirer_id.monetico_ept
+            monetico_ept = self.provider_id.monetico_ept
             date_of_sale = datetime.datetime.now(pytz.timezone('Europe/Paris')).strftime("%d/%m/%Y:%H:%M:%S")
             amount = f"{amount_order}{self.currency_id.name}"
             reference = self.reference
-            return_url = f"{base_url}{self.acquirer_id.monetico_return_url}"
-            return_error_url = f"{base_url}{self.acquirer_id.monetico_return_error_url}"
+            return_url = f"{base_url}{self.provider_id.monetico_return_url}"
+            return_error_url = f"{base_url}{self.provider_id.monetico_return_error_url}"
             lang = self._language_monetico_payment_page(self.partner_lang)
-            company_code = self.acquirer_id.monetico_company_code
+            company_code = self.provider_id.monetico_company_code
             command_context = self._generate_command_context()
             partner_email = self.partner_email
             comment = "Paiement depuis Odoo"
@@ -342,7 +342,7 @@ class PaymentTransaction(models.Model):
                 'mail': partner_email,
             }
 
-            if self.code == "monetico_multi":
+            if self.provider_code == "monetico_multi":
                 # processing of the split payment part
                 monetico_multi_data = self._generate_data_for_split_payment(amount_order, date_of_sale)
                 data.update(monetico_multi_data)
@@ -384,7 +384,7 @@ class PaymentTransaction(models.Model):
             raise ValidationError("Monetico: " + _("No reference found in the return data"))
 
         reference = data['reference']
-        tx = self.search([('reference', '=', reference), ('code', 'in', providers_monetico)],
+        tx = self.search([('reference', '=', reference), ('provider_code', 'in', providers_monetico)],
                          limit=1, order="id desc")
         if not tx:
             raise ValidationError("Monetico: " + _("No transaction found matching reference %s.", reference))
@@ -395,7 +395,7 @@ class PaymentTransaction(models.Model):
     def _process_feedback_data(self, data):
 
         super()._process_feedback_data(data)
-        if self.code not in ('monetico_standard', 'monetico_multi'):
+        if self.provider_code not in ('monetico_standard', 'monetico_multi'):
             return
 
         # Get return code
