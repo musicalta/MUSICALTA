@@ -24,6 +24,7 @@
         # # SECURITY
         "security/ir_model_access.xml",
         # # VIEWS
+        "views/external_layout_template.xml",
         "views/sale_inscription.xml",
         "views/sale_order_views.xml",
         "views/lunch_order_views.xml",
