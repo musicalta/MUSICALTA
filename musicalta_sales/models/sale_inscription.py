@@ -1,5 +1,6 @@
 import json
 import datetime
+from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
@@ -105,7 +106,7 @@ class SaleInscription(models.Model):
         domain="[('event_id', '=', session_id),('is_option', '=', True)]",
     )
     product_work_rooms_id = fields.Many2one(
-        'product.template',
+        'product.product',
         string='Salles de travail',
     )
     product_work_room_domain_id = fields.Char(
@@ -149,6 +150,7 @@ class SaleInscription(models.Model):
         'sale.inscription.location', string="Lieu de départ (retour)")
     arrival_location_return_id = fields.Many2one(
         'sale.inscription.location', string="Lieu d'arrivée (retour)")
+    note = fields.Html('Notes')
 
     @api.onchange('session_id')
     def _onchange_session_id(self):
@@ -195,6 +197,8 @@ class SaleInscription(models.Model):
                 record.is_adult = age_at_session >= 18
             else:
                 record.is_adult = False
+            if record.partner_id.comment:
+                record.note = record.partner_id.comment
 
     @api.depends('discipline_id_1', 'discipline_id_2')
     def _compute_is_harpiste(self):
@@ -211,7 +215,7 @@ class SaleInscription(models.Model):
         for rec in self:
             # Cas de base : utiliser tous les produits disponibles
             available_product_ids = self.available_product_ids.ids
-
+            
             # # Vérification des disciplines spécifiques
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
@@ -232,7 +236,7 @@ class SaleInscription(models.Model):
         """
         Récupère les ID de produits associés aux disciplines spécifiques (harpe, piano).
         """
-        ProductTmpl = self.env['product.template']
+        ProductProduct = self.env['product.product']
         discipline_ids = []
         if self.discipline_id_1.is_piano:
             discipline_ids.append(self.discipline_id_1.id)
@@ -242,7 +246,7 @@ class SaleInscription(models.Model):
             discipline_ids.append(self.discipline_id_1.id)
         if self.discipline_id_2.is_harpe:
             discipline_ids.append(self.discipline_id_2.id)
-        product_ids = ProductTmpl.search([
+        product_ids = ProductProduct.search([
             ('is_work_rooms', '=', True),
             ('discipline_id', 'in', discipline_ids),
         ])
@@ -328,6 +332,10 @@ class SaleInscription(models.Model):
         sale_order = self.sale_order_id
         if self.pricelist_id:
             sale_order.pricelist_id = self.pricelist_id.id
+        update_context_pricelist = {
+            'pricelist': self.pricelist_id.id,
+        }
+        self = self.with_context(**update_context_pricelist)
         sale_order_line = []
         event_registration = []
         if self.discipline_id_1 and self.teacher_id_1:
@@ -340,11 +348,13 @@ class SaleInscription(models.Model):
                 if not event_ticket_id:
                     raise UserError(
                         _('No ticket found for this teacher and discipline'))
+                price = self.pricelist_id._get_product_price(
+                    self.product_pack_id, 1)
                 sale_order_line.append({
                     'sequence': 0,
                     'order_id': sale_order.id,
                     'product_id': self.product_pack_id.id,
-                    'price_unit': self.product_pack_id.list_price,
+                    'price_unit': price,
                     'inscription_id': self.id,
                     'event_ticket_id': event_ticket_id.id,
                     'name': self.product_pack_id.display_name + ' - ' +
@@ -571,3 +581,4 @@ class SaleInscription(models.Model):
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
+    
