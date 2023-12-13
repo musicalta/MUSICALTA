@@ -107,6 +107,11 @@
                                 <field name="arrival_location_return_id" />
                             </group>
                         </page>
+                        <page name="note" string="Notes">
+                            <group>
+                                <field name="note" />
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
