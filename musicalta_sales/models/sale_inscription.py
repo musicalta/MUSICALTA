@@ -63,7 +63,6 @@ class SaleInscription(models.Model):
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
-        required=True,
         domain="['|',('is_product_for_adults_and_minors', '=', True),('is_product_for_adults', '=', is_adult),('pack_ok', '=', True), ('id', 'in', available_product_ids)]",
     )
     is_auditor = fields.Boolean(
@@ -289,12 +288,6 @@ class SaleInscription(models.Model):
                 raise UserError(
                     _('Cette personne est déjà inscrite à cette session'))
 
-    def unlink(self):
-        for record in self:
-            record.sale_order_id.order_line.filtered(
-                lambda x: x.inscription_id.id == record.id).unlink()
-        return super(SaleInscription, self).unlink()
-
     def _update_or_create(self, vals):
         if self.sale_order_id:
             self.sale_order_id.order_line.filtered(
@@ -338,6 +331,8 @@ class SaleInscription(models.Model):
         self = self.with_context(**update_context_pricelist)
         sale_order_line = []
         event_registration = []
+        if not self.discipline_id_1 and not self.teacher_id_1 and not self.discipline_id_2 and not self.teacher_id_2:
+            self._auditor_management(sale_order, sale_order_line)
         if self.discipline_id_1 and self.teacher_id_1:
             if self.product_pack_id:
                 event_ticket_id = self.env['event.event.ticket'].search([
@@ -413,6 +408,29 @@ class SaleInscription(models.Model):
             self._update_contact_informations()
         return True
 
+    def _auditor_management(self, sale_order, sale_order_line):
+        if self.product_pack_id:
+            event_ticket_id = self.env['event.event.ticket'].search([
+                ('event_id', '=', self.session_id.id),
+                ('teacher_id', '=', False),
+                ('discipline_id', '=', False),
+            ])
+            if not event_ticket_id:
+                raise UserError(
+                    _('No ticket found for this teacher and discipline'))
+            price = self.pricelist_id._get_product_price(
+                self.product_pack_id, 1)
+            sale_order_line.append({
+                'sequence': 0,
+                'order_id': sale_order.id,
+                'product_id': self.product_pack_id.id,
+                'price_unit': price,
+                'inscription_id': self.id,
+                'event_ticket_id': event_ticket_id.id,
+                'name': self.product_pack_id.display_name + ' - ' +
+                self.session_id.name,
+            })
+
     def _update_contact_informations(self):
         self.ensure_one()
         to_update = {}
@@ -470,8 +488,8 @@ class SaleInscription(models.Model):
         """_summary_
 
         Args:
-            product_work_rooms_id (_type_): _description_
-            sale_order (_type_): _description_
+            product_work_rooms_id (recordset): Product work room
+            sale_order (recordset): Sale order
         """
         kwargs = {}
         if self.discipline_id_1.is_piano or self.discipline_id_1.is_harpe:
@@ -582,3 +600,8 @@ class SaleInscription(models.Model):
                     })
             return True
     
+    def unlink(self):
+        for record in self:
+            record.sale_order_id.order_line.filtered(
+                lambda x: x.inscription_id.id == record.id).unlink()
+        return super(SaleInscription, self).unlink()
