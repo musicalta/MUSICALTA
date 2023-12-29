@@ -38,3 +38,20 @@ class SaleInscription(models.Model):
                         {'name': directory_name, 'parent_folder_id': parent_folder.id})
 
                 rec.files_directory_id = partner_directory.id
+
+    def action_open_download_wizard(self):
+        active_ids = self._context.get('active_ids', [])
+        wizard = self.env['download.attachments.wizard'].create({
+            'sale_inscription_ids': [(6, 0, active_ids)]
+        })
+
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': _('Download Attachments'),
+            'res_model': 'download.attachments.wizard',
+            'res_id': wizard.id,
+            'view_mode': 'form',
+            'target': 'new',
+            'context': self.env.context,
+        }
+        return action

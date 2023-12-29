@@ -2,7 +2,7 @@
 
 {
     "name": "Sales Inscriptions Documents management for Musicalta",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "summary": """Add documents management in sales inscriptions for Musicalta.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -15,8 +15,10 @@
     ],
     "data": [
         # VIEWS
+        "security/ir_model_access.xml",
         "views/sale_inscription_views.xml",
         "views/documents_folder_views.xml",
+        "wizards/download_attachments_wizard_views.xml",
     ],
     "installable": True,
 }
