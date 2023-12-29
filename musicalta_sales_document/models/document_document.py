@@ -14,7 +14,7 @@ class DocumentsDocument(models.Model):
             if record.tag_ids and object:
                 naming_pattern = record.tag_ids.filtered(
                     lambda r: r.naming_pattern)[0].naming_pattern if record.tag_ids.filtered(
-                    lambda r: r.naming_pattern)[0] else False
+                    lambda r: r.naming_pattern) else False
                 if naming_pattern:
                     attachment_extension = record.name.rsplit('.', 1)
                     new_name = naming_pattern.replace(
