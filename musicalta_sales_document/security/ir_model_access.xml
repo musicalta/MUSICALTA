@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="sale_inscription_attachments_download_wizard_access" model="ir.model.access">
+        <field name="name">sale.inscription.attachments.download.wizard.access</field>
+        <field name="model_id" ref="model_download_attachments_wizard"/>
+        <field name="group_id" ref="sales_team.group_sale_salesman"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+</odoo>
