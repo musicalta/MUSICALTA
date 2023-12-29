@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* musicalta_sales_document
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-29 20:01+0000\n"
+"PO-Revision-Date: 2023-12-29 20:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: musicalta_sales_document
+#: model_terms:ir.ui.view,arch_db:musicalta_sales_document.view_sale_inscription_form_inherit
+msgid "<span class=\"o_stat_text\">Documents</span>"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model_terms:ir.ui.view,arch_db:musicalta_sales_document.view_sale_inscription_form_inherit
+msgid "CREATE DIRECTORY"
+msgstr "Créer un répertoire"
+
+#. module: musicalta_sales_document
+#: model_terms:ir.ui.view,arch_db:musicalta_sales_document.view_download_attachments_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_sale_inscription__files_directory_id
+msgid "Directory for files"
+msgstr "Répertoire pour les fichiers"
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: musicalta_sales_document
+#. odoo-python
+#: code:addons/musicalta_sales_document/models/sale_inscription.py:0
+#, python-format
+msgid "Documents"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model,name:musicalta_sales_document.model_documents_folder
+msgid "Documents Workspace"
+msgstr "Répertoires"
+
+#. module: musicalta_sales_document
+#: model_terms:ir.ui.view,arch_db:musicalta_sales_document.view_download_attachments_wizard_form
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: musicalta_sales_document
+#. odoo-python
+#: code:addons/musicalta_sales_document/models/sale_inscription.py:0
+#, python-format
+msgid "Download Attachments"
+msgstr "Téléchargers les pièces jointes"
+
+#. module: musicalta_sales_document
+#: model:ir.actions.server,name:musicalta_sales_document.download_attachments_wizard_action
+msgid "Download attachments"
+msgstr "Téléchargers les pièces jointes"
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__sale_inscription_ids
+msgid "Inscription_ids"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_documents_folder__is_for_inscriptions_categories
+msgid "Is for inscription categories ?"
+msgstr "Est pour la catégorie des inscriptions ?"
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model,name:musicalta_sales_document.model_sale_inscription
+msgid "Sale Inscription"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model.fields,field_description:musicalta_sales_document.field_download_attachments_wizard__tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: musicalta_sales_document
+#: model:ir.model,name:musicalta_sales_document.model_download_attachments_wizard
+msgid "Wizard to download attachments of sale inscriptions"
+msgstr "Wizard pour permettre le téléchargement des fichiers dans les inscriptions"
