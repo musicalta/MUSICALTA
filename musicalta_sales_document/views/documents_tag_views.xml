@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="document_tag_view_form_inherited" model="ir.ui.view">
+        <field name="name">documents.tag.view.form.inherited</field>
+        <field name="model">documents.facet</field>
+        <field name="inherit_id" ref="documents.facet_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']/tree" position="inside">
+                <field name="naming_pattern"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
