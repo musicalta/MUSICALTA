@@ -11,11 +11,14 @@ from odoo.exceptions import UserError
 class SaleInscription(models.Model):
     _name = 'sale.inscription'
     _description = 'Sale Inscription'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'avatar.mixin']
 
     name = fields.Char(
         string='Name',
     )
+
+    image_1920 = fields.Image(related='partner_id.image_1920')
+
     session_id = fields.Many2one(
         string='Session',
         comodel_name='event.event',
@@ -223,7 +226,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-                rec.discipline_id_2.is_harpe:
+            rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -344,6 +347,8 @@ class SaleInscription(models.Model):
         event_registration = []
         if self.discipline_id_1 and self.teacher_id_1:
             if self.product_pack_id:
+                product_pack = self.product_pack_id.with_context(
+                    {'lang': self.partner_id.lang, 'partner_id': self.partner_id.id})
                 event_ticket_id = self.env['event.event.ticket'].search([
                     ('event_id', '=', self.session_id.id),
                     ('teacher_id', '=', self.teacher_id_1.id),
@@ -361,7 +366,7 @@ class SaleInscription(models.Model):
                     'price_unit': price,
                     'inscription_id': self.id,
                     'event_ticket_id': event_ticket_id.id,
-                    'name': self.product_pack_id.display_name + ' - ' +
+                    'name': product_pack.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_1.name,
                 })
                 event_registration.append({
@@ -374,7 +379,7 @@ class SaleInscription(models.Model):
                     'inscription_id': self.id,
                 })
         if self.discipline_id_2 and self.teacher_id_2:
-            product_fees = self.env['product.product'].search([
+            product_fees = self.env['product.product'].with_context({'lang': self.partner_id.lang, 'partner_id': self.partner_id.id}).search([
                 ('is_fees', '=', True),
             ])
             if not product_fees:
