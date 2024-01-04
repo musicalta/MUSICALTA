@@ -187,6 +187,11 @@ class SaleInscription(models.Model):
             if self.teacher_id_2:
                 self.teacher_id_2 = False
 
+    @api.onchange('partner_id')
+    def _onchange_parnter_id(self):
+        if self.partner_id and self.partner_id.comment:
+            self.note = self.partner_id.comment
+
     @api.depends('partner_id')
     def _compute_is_adult(self):
         for record in self:
@@ -197,8 +202,6 @@ class SaleInscription(models.Model):
                 record.is_adult = age_at_session >= 18
             else:
                 record.is_adult = False
-            if record.partner_id.comment:
-                record.note = record.partner_id.comment
 
     @api.depends('discipline_id_1', 'discipline_id_2')
     def _compute_is_harpiste(self):
@@ -215,7 +218,7 @@ class SaleInscription(models.Model):
         for rec in self:
             # Cas de base : utiliser tous les produits disponibles
             available_product_ids = self.available_product_ids.ids
-            
+
             # # Vérification des disciplines spécifiques
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
@@ -319,6 +322,7 @@ class SaleInscription(models.Model):
         if not sale_order:
             sale_order = SaleOrder.create({
                 'partner_id': self.partner_id.id,
+                'inscription_note': self.note,
                 'event_type_id': self.session_id.event_type_id.id,
             })
         self.sale_order_id = sale_order.id
@@ -581,4 +585,3 @@ class SaleInscription(models.Model):
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
-    
