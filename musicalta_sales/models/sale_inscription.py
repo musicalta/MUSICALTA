@@ -332,6 +332,8 @@ class SaleInscription(models.Model):
         event_registration = []
         if self.discipline_id_1 and self.teacher_id_1:
             if self.product_pack_id:
+                product_pack = self.product_pack_id.with_context(
+                    {'lang': self.partner_id.lang, 'partner_id': self.partner_id.id})
                 event_ticket_id = self.env['event.event.ticket'].search([
                     ('event_id', '=', self.session_id.id),
                     ('teacher_id', '=', self.teacher_id_1.id),
@@ -343,11 +345,11 @@ class SaleInscription(models.Model):
                 sale_order_line.append({
                     'sequence': 0,
                     'order_id': sale_order.id,
-                    'product_id': self.product_pack_id.id,
-                    'price_unit': self.product_pack_id.list_price,
+                    'product_id': product_pack.id,
+                    'price_unit': product_pack.list_price,
                     'inscription_id': self.id,
                     'event_ticket_id': event_ticket_id.id,
-                    'name': self.product_pack_id.display_name + ' - ' +
+                    'name': product_pack.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_1.name,
                 })
                 event_registration.append({
@@ -360,7 +362,7 @@ class SaleInscription(models.Model):
                     'inscription_id': self.id,
                 })
         if self.discipline_id_2 and self.teacher_id_2:
-            product_fees = self.env['product.product'].search([
+            product_fees = self.env['product.product'].with_context({'lang': self.partner_id.lang, 'partner_id': self.partner_id.id}).search([
                 ('is_fees', '=', True),
             ])
             if not product_fees:
