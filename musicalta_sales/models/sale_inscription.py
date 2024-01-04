@@ -11,11 +11,14 @@ from odoo.exceptions import UserError
 class SaleInscription(models.Model):
     _name = 'sale.inscription'
     _description = 'Sale Inscription'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'avatar.mixin']
 
     name = fields.Char(
         string='Name',
     )
+
+    image_1920 = fields.Image(related='partner_id.image_1920')
+
     session_id = fields.Many2one(
         string='Session',
         comodel_name='event.event',
