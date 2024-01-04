@@ -21,6 +21,14 @@
             <xpath expr="//page[@name='contact_addresses']" position="attributes">
                 <attribute name="autofocus">0</attribute>
             </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="phone_2"/>
+                <field name="phone_3"/>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="email_2"/>
+                <field name="email_3"/>
+            </xpath>
             <xpath expr="//page[@name='contact_addresses']" position="before">
                 <page string="Informations personnelles" autofocus="autofocus">
                     <group string="Old Informations">
@@ -28,12 +36,6 @@
                         <field name="old"/>
                         <field name="is_adult"/>
                         <field name="gender"/>
-                    </group>
-                    <group name="contacts" string="Contacts Informations">
-                        <field name="email_2"/>
-                        <field name="email_3"/>
-                        <field name="phone_2"/>
-                        <field name="phone_3"/>
                     </group>
                     <group name="praticals_informations" string="Praticals Informations">
                         <field name="lang_spoken_ids" widget="many2many_tags" groups="base.group_no_one"/>

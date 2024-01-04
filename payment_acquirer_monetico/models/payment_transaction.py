@@ -41,16 +41,16 @@ class PaymentTransaction(models.Model):
                     match_billing_address = "true"
 
             # Get billing information
-            billing_firstname = sale_order_id.partner_invoice_id.name.split()[-1]
-            billing_lastname = sale_order_id.partner_invoice_id.name.split()[0]
+            billing_firstname = sale_order_id.partner_invoice_id.firstname
+            billing_lastname = sale_order_id.partner_invoice_id.lastname
             billing_address = sale_order_id.partner_invoice_id.street
             billing_city = sale_order_id.partner_invoice_id.city
             billing_zip = sale_order_id.partner_invoice_id.zip
             billing_country = sale_order_id.partner_invoice_id.country_id.code
 
             # Get shipping information
-            shipping_firstname = sale_order_id.partner_shipping_id.name.split()[-1]
-            shipping_lastname = sale_order_id.partner_shipping_id.name.split()[0]
+            shipping_firstname = sale_order_id.partner_shipping_id.firstname
+            shipping_lastname = sale_order_id.partner_shipping_id.lastname
             shipping_address = sale_order_id.partner_shipping_id.street
             shipping_city = sale_order_id.partner_shipping_id.city
             shipping_zip = sale_order_id.partner_shipping_id.zip
@@ -81,7 +81,7 @@ class PaymentTransaction(models.Model):
                    "email" : """ + shipping_email + """
                 }
             }"""
-
+            import pdb; pdb.set_trace()
             utf8_command_context = raw_command_context.encode('utf8')
             command_context = base64.b64encode(utf8_command_context).decode()
 

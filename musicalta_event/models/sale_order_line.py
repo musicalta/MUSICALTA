@@ -14,9 +14,3 @@ class SaleOrderLineInherit(models.Model):
         related='event_id.teacher_ids'
     )
 
-    @api.constrains('teacher_id')
-    def _check_model(self):
-        for record in self:
-            if record.product_id.detailed_type == 'event' and not record.teacher_id:
-                raise ValidationError(_('You have chosen an "event" type product. You must provide a teacher for this '
-                                        'event.'))
