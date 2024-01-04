@@ -1,5 +1,6 @@
 from odoo import models, fields
 
+
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -12,7 +13,9 @@ class SaleOrder(models.Model):
         'event.type',
         string='Type d\'événement'
     )
-    registration_count = fields.Integer('Inscription', compute='_compute_inscription_count')
+    registration_count = fields.Integer(
+        'Inscription', compute='_compute_inscription_count')
+    inscription_note = fields.Html(string="Inscription Note")
 
     def action_open_event_inscription(self):
         return {
@@ -43,8 +46,9 @@ class SaleOrder(models.Model):
             for registration_data in registration_data
         }
         for registration in self:
-            registration.registration_count = registration_count_data.get(registration.id, 0)
-    
+            registration.registration_count = registration_count_data.get(
+                registration.id, 0)
+
     def _find_mail_template(self):
         """ Get the appropriate mail template for the current sales order based on its state.
 

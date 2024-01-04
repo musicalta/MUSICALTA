@@ -24,6 +24,13 @@
             <xpath expr="//header" position="inside">
                 <button string="Inscription" type="object" name="action_open_event_inscription"/>
             </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Notes" name="notes">
+                    <group>
+                        <field name="inscription_note"/>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>
