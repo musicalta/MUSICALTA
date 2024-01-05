@@ -153,7 +153,7 @@ class SaleInscription(models.Model):
         'sale.inscription.location', string="Lieu de départ (retour)")
     arrival_location_return_id = fields.Many2one(
         'sale.inscription.location', string="Lieu d'arrivée (retour)")
-    note = fields.Html('Notes')
+    note = fields.Html('Notes', related='partner_id.comment', readonly=False)
 
     @api.onchange('session_id')
     def _onchange_session_id(self):

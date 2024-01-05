@@ -15,7 +15,8 @@ class SaleOrder(models.Model):
     )
     registration_count = fields.Integer(
         'Inscription', compute='_compute_inscription_count')
-    inscription_note = fields.Html(string="Inscription Note")
+    inscription_note = fields.Html(
+        string="Inscription Note", related='partner_id.comment', readonly=False)
 
     def action_open_event_inscription(self):
         return {
