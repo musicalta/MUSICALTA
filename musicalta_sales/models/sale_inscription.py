@@ -325,7 +325,6 @@ class SaleInscription(models.Model):
         if not sale_order:
             sale_order = SaleOrder.create({
                 'partner_id': self.partner_id.id,
-                'inscription_note': self.note,
                 'event_type_id': self.session_id.event_type_id.id,
             })
         self.sale_order_id = sale_order.id
