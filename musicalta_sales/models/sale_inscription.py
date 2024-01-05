@@ -523,11 +523,11 @@ class SaleInscription(models.Model):
                 'session_id': self.session_id.id,
                 'inscription_id': self.id,
             })
-            self.env['sale.order.line'].create({
-                'order_id': sale_order.id,
-                'inscription_id': self.id,
-                'product_id': self.product_hebergement_id.id,
-            })
+            # self.env['sale.order.line'].create({
+            #     'order_id': sale_order.id,
+            #     'inscription_id': self.id,
+            #     'product_id': self.product_hebergement_id.id,
+            # })
         self.env['event.lunch.order'].create(lunch_order)
 
     def _family_discount_process(self):
