@@ -12,3 +12,4 @@ from . import res_family
 from . import res_partner
 from . import product_pricelist
 from . import product_pricelist_item
+from . import mail_activity_team

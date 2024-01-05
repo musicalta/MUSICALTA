@@ -16,6 +16,7 @@
         "musicalta_contact",
         "product_pack",
         "sale_product_pack",
+        "mail_activity_team",
     ],
     "data": [
         # #DATA
@@ -35,6 +36,7 @@
         "views/event_type.xml",
         "views/res_partner.xml",
         "views/product_pricelist_item_views.xml",
+        "views/mail_activity_team_views.xml",
     ],
     "installable": True,
     "license": "LGPL-3",
