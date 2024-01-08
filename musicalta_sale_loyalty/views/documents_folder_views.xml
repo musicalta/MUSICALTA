@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="folder_view_form_inherited" model="ir.ui.view">
+        <field name="name">folder.view.form.inherited</field>
+        <field name="model">documents.folder</field>
+        <field name="inherit_id" ref="documents.folder_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_folder_id']" position="after">
+                <field name="is_for_inscriptions_categories"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

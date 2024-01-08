@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_inscription_form_inherit" model="ir.ui.view">
+        <field name="name">sale.inscription.form.inherit</field>
+        <field name="model">sale.inscription</field>
+        <field name="inherit_id" ref="musicalta_sales.view_sale_inscription_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="files_directory_id" invisible="1"/>
+                <button name="action_see_documents" type="object" class="oe_stat_button" icon="fa-file-text-o" groups="documents.group_documents_user"
+                        attrs="{'invisible': ['|', ('files_directory_id', '=', False), ('id', '=', False)]}">
+                        <span class="o_stat_text">Documents</span>
+                    </button> 
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button type="object" name="action_create_directory" string='CREATE DIRECTORY' class='btn btn-primary' attrs="{'invisible': [('files_directory_id', '!=', False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
