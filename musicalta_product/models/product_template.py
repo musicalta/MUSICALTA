@@ -23,6 +23,7 @@ class ProductTemplate(models.Model):
     is_product_for_adults = fields.Boolean('Produit pour majeurs')
     is_product_for_adults_and_minors = fields.Boolean('Produit pour majeurs et mineurs')
     is_option = fields.Boolean('Options')
+    is_extra_night = fields.Boolean('Nuitée supplémentaire')
 
     @api.onchange('professor_id')
     def _onchange_professor_id(self):
