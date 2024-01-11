@@ -3,6 +3,10 @@ import datetime
 from datetime import date
 
 from dateutil.relativedelta import relativedelta
+from pytz import timezone, UTC
+
+
+from odoo.tools import format_datetime, format_time
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
@@ -59,6 +63,10 @@ class SaleInscription(models.Model):
         'Date de naissance',
         related='partner_id.date_of_birth',
     )
+    date_of_arrival = fields.Datetime(
+        'Date d\'arrivée',)
+    date_of_departure = fields.Datetime(
+        'Date de départ')
     is_adult = fields.Boolean(
         'Adulte',
         compute='_compute_is_adult',
@@ -157,6 +165,15 @@ class SaleInscription(models.Model):
 
     @api.onchange('session_id')
     def _onchange_session_id(self):
+        if self.session_id and not self.date_of_arrival and not self.date_of_departure:
+            self.date_of_arrival = self.session_id.date_begin
+            self.date_of_departure = self.session_id.date_end
+        elif self.session_id and self.date_of_arrival and self.date_of_departure:
+            self.date_of_arrival = self.session_id.date_begin
+            self.date_of_departure = self.session_id.date_end
+        else:
+            self.date_of_arrival = False
+            self.date_of_departure = False
         return {'domain': {'discipline_id': [('id', 'in', self.discipline_ids.ids)]}}
 
     @api.depends('session_id')
@@ -269,6 +286,15 @@ class SaleInscription(models.Model):
             ('id', 'in', self.available_product_ids.ids)
         ])
         return product_ids.ids
+
+    def _get_tz(self):
+        # Finds the first valid timezone in his tz, his work hours tz,
+        #  the company calendar tz or UTC and returns it as a string
+        self.ensure_one()
+        if self.partner_id.lang == 'fr_FR':
+            return 'Europe/Paris'
+        else:
+            return 'UTC'
 
     def action_open_sale_order(self):
         return {
@@ -419,7 +445,68 @@ class SaleInscription(models.Model):
         self._discount_process()
         if self.musical_level_id or self.usual_teacher or self.partition or self.tessiture_id:
             self._update_contact_informations()
+        self._extra_night_management()
         return True
+
+    def _get_extra_night_line_name(self, arrival=False, departure=False):
+        """
+            Get extra night line name
+
+        Args:
+            arrival (bool, optional): determine if before session. Defaults to False.
+            departure (bool, optional): determine if after session. Defaults to False.
+
+        Returns:
+            _type_: _description_
+        """ 
+        date_of_arrival = format_datetime(self.env, self.date_of_arrival, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_departure = format_datetime(self.env, self.date_of_departure, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_begin = format_datetime(self.env, self.session_id.date_begin, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_end = format_datetime(self.env, self.session_id.date_end, dt_format="short", lang_code=self.partner_id.lang)
+        if arrival:
+            return "\n%s %s %s" % (
+                date_of_arrival.split(' ')[0],
+                "-",
+                date_of_begin.split(' ')[0],
+            )
+        if departure:
+            return "\n%s %s %s" % (
+                date_of_end.split(' ')[0],
+                "-",
+                date_of_departure.split(' ')[0],
+            )
+    
+    def _extra_night_management(self):
+        """
+            Manage extra night
+        """ 
+        data = []
+        product_id = self.env['product.product'].search([
+            ('is_extra_night', '=', True),
+        ])
+        if self.date_of_arrival < self.session_id.date_begin:
+            days_timedelta = self.session_id.date_begin - self.date_of_arrival
+            price = self.pricelist_id._get_product_price(
+                    product_id, days_timedelta.days)
+            data.append({
+                'product_id': product_id.id,
+                'name': product_id.display_name + self._get_extra_night_line_name(arrival=True),
+                'product_uom_qty': days_timedelta.days,
+                'order_id': self.sale_order_id.id,
+                'price_unit': price,
+            })
+        if self.date_of_departure > self.session_id.date_end:
+            days_timedelta = self.date_of_departure - self.session_id.date_end
+            price = self.pricelist_id._get_product_price(
+                    product_id, days_timedelta.days)
+            data.append({
+                'product_id': product_id.id,
+                'name': product_id.display_name + self._get_extra_night_line_name(departure=True),
+                'product_uom_qty': days_timedelta.days,
+                'price_unit': price,
+                'order_id': self.sale_order_id.id,
+            })
+        self.env['sale.order.line'].create(data)
 
     def _update_contact_informations(self):
         self.ensure_one()
