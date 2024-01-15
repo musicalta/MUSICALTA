@@ -163,6 +163,48 @@ class SaleInscription(models.Model):
         'sale.inscription.location', string="Lieu d'arrivée (retour)")
     note = fields.Html('Notes', related='partner_id.comment', readonly=False)
 
+    currency_id = fields.Many2one(
+        'res.currency',
+        string='Currency',
+        related='sale_order_id.currency_id',
+    )
+
+    invoice_ids = fields.Many2many(
+        comodel_name='account.move',
+        string="Invoices",
+        related='sale_order_id.invoice_ids')
+
+    invoices_amount_residual = fields.Monetary(
+        string='Reste à payer',
+        compute='_compute_invoice_amount', store=True,
+    )
+
+    invoices_amount_total = fields.Monetary(
+        string='Montant Total factures',
+        compute='_compute_invoice_amount', store=True,
+    )
+
+    state = fields.Selection([
+        ('unconfirmed', 'Non confirmé'),
+        ('confirmed', 'Confirmé')
+    ], string='Etat', compute='_compute_state', store=True)
+
+    @api.depends('invoice_ids', 'invoice_ids.payment_state')
+    def _compute_state(self):
+        for record in self:
+            if not record.invoice_ids or not any(invoice.payment_state in ['paid', 'partial'] for invoice in record.invoice_ids):
+                record.state = 'unconfirmed'
+            else:
+                record.state = 'confirmed'
+
+    @api.depends('invoice_ids')
+    def _compute_invoice_amount(self):
+        for record in self:
+            record.invoices_amount_residual = sum(
+                invoice.amount_residual for invoice in record.invoice_ids)
+            record.invoices_amount_total = sum(
+                invoice.amount_total for invoice in record.invoice_ids)
+
     @api.onchange('session_id')
     def _onchange_session_id(self):
         if self.session_id and not self.date_of_arrival and not self.date_of_departure:
@@ -304,6 +346,37 @@ class SaleInscription(models.Model):
             'view_mode': 'form',
             'res_id': self.sale_order_id.id,
         }
+
+    def action_view_invoice(self):
+        invoices = self.mapped('invoice_ids')
+        action = self.env['ir.actions.actions']._for_xml_id(
+            'account.action_move_out_invoice_type')
+        if len(invoices) > 1:
+            action['domain'] = [('id', 'in', invoices.ids)]
+        elif len(invoices) == 1:
+            form_view = [(self.env.ref('account.view_move_form').id, 'form')]
+            if 'views' in action:
+                action['views'] = form_view + \
+                    [(state, view)
+                     for state, view in action['views'] if view != 'form']
+            else:
+                action['views'] = form_view
+            action['res_id'] = invoices.id
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+
+        context = {
+            'default_move_type': 'out_invoice',
+        }
+        if len(self) == 1:
+            context.update({
+                'default_partner_id': self.sale_order_id.partner_id.id,
+                'default_partner_shipping_id': self.sale_order_id.partner_shipping_id.id,
+                'default_invoice_payment_term_id': self.sale_order_id.payment_term_id.id or self.sale_order_id.partner_id.property_payment_term_id.id or self.env['account.move'].default_get(['invoice_payment_term_id']).get('invoice_payment_term_id'),
+                'default_invoice_origin': self.sale_order_id.name,
+            })
+        action['context'] = context
+        return action
 
     def action_update_or_create(self):
         self._update_or_create({})
@@ -458,11 +531,15 @@ class SaleInscription(models.Model):
 
         Returns:
             _type_: _description_
-        """ 
-        date_of_arrival = format_datetime(self.env, self.date_of_arrival, dt_format="short", lang_code=self.partner_id.lang)
-        date_of_departure = format_datetime(self.env, self.date_of_departure, dt_format="short", lang_code=self.partner_id.lang)
-        date_of_begin = format_datetime(self.env, self.session_id.date_begin, dt_format="short", lang_code=self.partner_id.lang)
-        date_of_end = format_datetime(self.env, self.session_id.date_end, dt_format="short", lang_code=self.partner_id.lang)
+        """
+        date_of_arrival = format_datetime(
+            self.env, self.date_of_arrival, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_departure = format_datetime(
+            self.env, self.date_of_departure, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_begin = format_datetime(
+            self.env, self.session_id.date_begin, dt_format="short", lang_code=self.partner_id.lang)
+        date_of_end = format_datetime(
+            self.env, self.session_id.date_end, dt_format="short", lang_code=self.partner_id.lang)
         if arrival:
             return "\n%s %s %s" % (
                 date_of_arrival.split(' ')[0],
@@ -475,11 +552,11 @@ class SaleInscription(models.Model):
                 "-",
                 date_of_departure.split(' ')[0],
             )
-    
+
     def _extra_night_management(self):
         """
             Manage extra night
-        """ 
+        """
         data = []
         product_id = self.env['product.product'].search([
             ('is_extra_night', '=', True),
@@ -487,7 +564,7 @@ class SaleInscription(models.Model):
         if self.date_of_arrival < self.session_id.date_begin:
             days_timedelta = self.session_id.date_begin - self.date_of_arrival
             price = self.pricelist_id._get_product_price(
-                    product_id, days_timedelta.days)
+                product_id, days_timedelta.days)
             data.append({
                 'product_id': product_id.id,
                 'name': product_id.display_name + self._get_extra_night_line_name(arrival=True),
@@ -498,7 +575,7 @@ class SaleInscription(models.Model):
         if self.date_of_departure > self.session_id.date_end:
             days_timedelta = self.date_of_departure - self.session_id.date_end
             price = self.pricelist_id._get_product_price(
-                    product_id, days_timedelta.days)
+                product_id, days_timedelta.days)
             data.append({
                 'product_id': product_id.id,
                 'name': product_id.display_name + self._get_extra_night_line_name(departure=True),
