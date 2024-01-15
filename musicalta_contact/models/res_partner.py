@@ -32,6 +32,7 @@ class Partner(models.Model):
     # range = fields.Char(string='Tessiture')
     nationality = fields.Char(string='Nationalité')
     school = fields.Char(string='Ecole')
+    accommodation_comment = fields.Text(string='Commentaire hébergement')
 
     @api.depends('date_of_birth')
     def _compute_old(self):
