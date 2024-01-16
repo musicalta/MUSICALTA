@@ -450,6 +450,9 @@ class SaleInscription(models.Model):
         self = self.with_context(**update_context_pricelist)
         sale_order_line = []
         event_registration = []
+        additional_cost_product = self.env['product.product'].search([
+            ('is_additional_cost', '=', True),
+        ])
         if self.discipline_id_1 and self.teacher_id_1:
             if self.product_pack_id:
                 product_pack = self.product_pack_id.with_context(
@@ -474,6 +477,26 @@ class SaleInscription(models.Model):
                     'name': product_pack.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_1.name,
                 })
+                if self.teacher_id_1.additional_cost > 0:
+                    sale_order_line.append({
+                        'sequence': 1,
+                        'order_id': sale_order.id,
+                        'product_id': additional_cost_product.id,
+                        'price_unit': self.teacher_id_1.additional_cost,
+                        'inscription_id': self.id,
+                        'name': additional_cost_product.display_name + ' - ' +
+                        self.session_id.name + ' - ' + self.teacher_id_1.name,
+                    })
+                if self.teacher_id_2.additional_cost > 0:
+                    sale_order_line.append({
+                        'sequence': 1,
+                        'order_id': sale_order.id,
+                        'product_id': additional_cost_product.id,
+                        'price_unit': self.teacher_id_2.additional_cost,
+                        'inscription_id': self.id,
+                        'name': additional_cost_product.display_name + ' - ' +
+                        self.session_id.name + ' - ' + self.teacher_id_2.name,
+                    })
                 event_registration.append({
                     'teacher_id': self.teacher_id_1.id,
                     'discipline_id': self.discipline_id_1.id,
