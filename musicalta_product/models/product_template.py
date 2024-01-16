@@ -26,6 +26,7 @@ class ProductTemplate(models.Model):
         'Produit pour majeurs et mineurs')
     is_option = fields.Boolean('Options')
     is_extra_night = fields.Boolean('Nuitée supplémentaire')
+    is_additional_cost = fields.Boolean('Coût supplémentaire')
     is_product_bedroom = fields.Boolean('Chambres')
 
     @api.onchange('professor_id')
