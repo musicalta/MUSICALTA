@@ -487,16 +487,7 @@ class SaleInscription(models.Model):
                         'name': additional_cost_product.display_name + ' - ' +
                         self.session_id.name + ' - ' + self.teacher_id_1.name,
                     })
-                if self.teacher_id_2.additional_cost > 0:
-                    sale_order_line.append({
-                        'sequence': 1,
-                        'order_id': sale_order.id,
-                        'product_id': additional_cost_product.id,
-                        'price_unit': self.teacher_id_2.additional_cost,
-                        'inscription_id': self.id,
-                        'name': additional_cost_product.display_name + ' - ' +
-                        self.session_id.name + ' - ' + self.teacher_id_2.name,
-                    })
+
                 event_registration.append({
                     'teacher_id': self.teacher_id_1.id,
                     'discipline_id': self.discipline_id_1.id,
@@ -526,6 +517,16 @@ class SaleInscription(models.Model):
                 'name': product_fees.display_name + ' - ' +
                 self.session_id.name + ' - ' + self.teacher_id_2.name,
             })
+            if self.teacher_id_2.additional_cost > 0:
+                sale_order_line.append({
+                    'sequence': 1,
+                    'order_id': sale_order.id,
+                    'product_id': additional_cost_product.id,
+                    'price_unit': self.teacher_id_2.additional_cost,
+                    'inscription_id': self.id,
+                    'name': additional_cost_product.display_name + ' - ' +
+                    self.session_id.name + ' - ' + self.teacher_id_2.name,
+                })
             event_registration.append({
                 'teacher_id': self.teacher_id_2.id,
                 'discipline_id': self.discipline_id_2.id,
