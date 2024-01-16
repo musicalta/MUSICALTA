@@ -171,6 +171,8 @@
         <field name="model">sale.inscription</field>
         <field name="arch" type="xml">
             <search>
+                <fied name="name"/>
+                <fied name="session_id"/>
                 <group string="Group By">
                     <filter string="Session" name="group_by_session" context="{'group_by': 'session_id'}"/>
                     <filter string="Etat" name="group_by_state" context="{'group_by': 'state'}"/>
