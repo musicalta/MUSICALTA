@@ -199,7 +199,7 @@ class SaleInscription(models.Model):
     @api.depends('invoice_ids', 'invoice_ids.payment_state')
     def _compute_state(self):
         for record in self:
-            if not record.invoice_ids or not any(invoice.payment_state in ['paid', 'partial'] for invoice in record.invoice_ids):
+            if not record.invoice_ids or not any(invoice.payment_state in ['paid', 'partial', 'in_payment'] for invoice in record.invoice_ids):
                 record.state = 'unconfirmed'
             else:
                 record.state = 'confirmed'
