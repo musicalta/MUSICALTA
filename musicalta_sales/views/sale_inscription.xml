@@ -24,8 +24,19 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <field name="sale_order_id" invisible="1"/>
+                        <field name="currency_id" invisible="1" />
+                        <field name="invoice_ids" invisible="1"/>
                         <field name="discipline_ids" invisible="1"/>
                         
+                        <button class="oe_stat_button" name="action_view_invoice"
+                                type="object" icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('invoice_ids', '=', [])]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Factures
+                                </span>
+                            </div>
+                        </button>
                         <button class="oe_stat_button" name="action_open_sale_order"
                                 type="object" icon="fa-bars"
                                 attrs="{'invisible': [('sale_order_id', '=', False)]}">
@@ -76,6 +87,7 @@
                                 </group>
                                 <group string="Hébergement">
                                     <field name="product_hebergement_id" />
+                                    <field name="product_bedroom_id"/>
                                     <field name="product_launch_id" />
                                 </group>
                                 <group string="Salle de travail">
@@ -132,7 +144,8 @@
         <field name="name">sale.inscription.tree</field>
         <field name="model">sale.inscription</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state == 'confirmed' and folder_state == 'completed' and invoices_amount_residual == 0">
+                <field name="currency_id" invisible="1"/>
                 <field name="session_id"/>
                 <field name="partner_id"/>
                 <field name="product_pack_id"/>
@@ -142,9 +155,30 @@
                 <field name="discipline_id_2" />
                 <field name="teacher_id_2" />
                 <field name="product_hebergement_id" />
+                <field name="product_bedroom_id" optional="hide"/>
                 <field name="product_launch_id" />
                 <field name="product_work_rooms_id" />
+                <field name="invoices_amount_residual" optional="hide" />
+                <field name="invoices_amount_total" optional="hide" />
+                <field name="state" optional="hide" />
+                <field name="folder_state" optional="hide" />
             </tree>
+        </field>
+    </record>
+
+    <record id="view_sale_inscription_search" model="ir.ui.view">
+        <field name="name">sale.inscription.search</field>
+        <field name="model">sale.inscription</field>
+        <field name="arch" type="xml">
+            <search>
+                <fied name="name"/>
+                <fied name="session_id"/>
+                <group string="Group By">
+                    <filter string="Session" name="group_by_session" context="{'group_by': 'session_id'}"/>
+                    <filter string="Etat" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Dossier" name="group_by_folder_state" context="{'group_by': 'folder_state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
