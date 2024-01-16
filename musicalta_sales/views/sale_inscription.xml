@@ -144,7 +144,7 @@
         <field name="name">sale.inscription.tree</field>
         <field name="model">sale.inscription</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'confirmed' and folder_state == 'completed'">
+            <tree decoration-success="state == 'confirmed' and folder_state == 'completed' and invoices_amount_residual == 0">
                 <field name="currency_id" invisible="1"/>
                 <field name="session_id"/>
                 <field name="partner_id"/>
