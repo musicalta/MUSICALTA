@@ -86,6 +86,13 @@ class SaleInscription(models.Model):
         string='Hébergement',
         domain="[('is_product_hebergement', '=', True), ('id', 'in', available_product_ids)]",
     )
+
+    product_bedroom_id = fields.Many2one(
+        'product.product',
+        string='Chambres',
+        domain="[('is_product_bedroom', '=', True), ('id', 'in', available_product_ids)]",
+    )
+
     product_launch_id = fields.Many2one(
         'product.product',
         string='Repas',
@@ -480,6 +487,7 @@ class SaleInscription(models.Model):
                         'name': additional_cost_product.display_name + ' - ' +
                         self.session_id.name + ' - ' + self.teacher_id_1.name,
                     })
+
                 event_registration.append({
                     'teacher_id': self.teacher_id_1.id,
                     'discipline_id': self.discipline_id_1.id,
@@ -536,6 +544,12 @@ class SaleInscription(models.Model):
                 self.product_launch_id, self.product_hebergement_id, sale_order)
         if self.product_work_rooms_id:
             self._work_room_management(self.product_work_rooms_id, sale_order)
+        if self.product_bedroom_id:
+            sale_order_line.append({
+                'order_id': sale_order.id,
+                'product_id': self.product_bedroom_id.id,
+                'inscription_id': self.id,
+            })
         self.env['sale.order.line'].create(sale_order_line)
         self.env['event.registration'].create(event_registration)
         self._discount_process()
