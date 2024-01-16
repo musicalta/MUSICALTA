@@ -204,7 +204,7 @@ class SaleInscription(models.Model):
             else:
                 record.state = 'confirmed'
 
-    @api.depends('invoice_ids', 'invoice_ids.amount_residual', 'invoice.amount_total')
+    @api.depends('invoice_ids', 'invoice_ids.amount_residual', 'invoice_ids.amount_total')
     def _compute_invoice_amount(self):
         for record in self:
             record.invoices_amount_residual = sum(
