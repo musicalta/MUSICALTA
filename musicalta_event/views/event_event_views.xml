@@ -16,6 +16,16 @@
                             </tree>
                         </field>
                     </page>
+                    <page name="event_mail_teachers" string="Teachers mails">
+                        <field name="event_mail_teacher_ids">
+                            <tree create="1" editable="top">
+                                <field name="template_ref" options="{'no_quick_create': True}"  context="{'default_model': 'event.mail.teacher.registration'}"/>
+                                <field name="interval_nbr"/>
+                                <field name="interval_unit"/>
+                                <field name="scheduled_date"/>
+                            </tree>
+                        </field>
+                    </page>
                 </xpath>
 
                 <xpath expr="//label[@for='seats_limited']/following-sibling::div" position="replace"/>
