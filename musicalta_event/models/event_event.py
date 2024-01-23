@@ -35,7 +35,7 @@ class Event(models.Model):
 
     def get_teacher_participants(self, teacher_id):
         event_registration = self.registration_ids.filtered(
-            lambda registration: registration.teacher_id.id == teacher_id)
+            lambda registration: registration.teacher_id.id == teacher_id and registration.discipline_id.id in teacher_id.discipline_ids.ids)
         return event_registration.mapped('partner_id')
 
     def get_teacher_options(self, teacher_id):
@@ -45,7 +45,7 @@ class Event(models.Model):
 
     def get_teacher_options_participants(self, teacher_id, option_id):
         options = self.registration_ids.filtered(
-            lambda registration: registration.teacher_id.id == teacher_id and registration.option_id.id == option_id)
+            lambda registration: registration.teacher_id.id == teacher_id and registration.option_id.id == option_id and option_id in registration.inscription_id.option_ids.mapped('option_id').ids)
         return options.mapped('partner_id')
 
     def action_view_tickets(self):
