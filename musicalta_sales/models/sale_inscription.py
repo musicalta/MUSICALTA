@@ -438,6 +438,7 @@ class SaleInscription(models.Model):
 
     def process_registration(self):
         # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
+        import pdb;pdb.set_trace()
         if not self.sale_order_id:
             sale_order = self._find_or_create_sale()
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
@@ -727,7 +728,7 @@ class SaleInscription(models.Model):
             self.env['sale.order.line'].create({
                 'order_id': sale_order.id,
                 'inscription_id': self.id,
-                'product_id': self.product_hebergement_id.id,
+                'product_id': self.product_hebergement_id.product_variant_id.id,
             })
         self.env['event.lunch.order'].create(lunch_order)
 
@@ -751,14 +752,14 @@ class SaleInscription(models.Model):
                 if account_payment:
                     self.env['sale.order.line'].create({
                         'order_id': self.sale_order_id.id,
-                        'product_id': self.session_id.event_type_id.product_familiy_affiliation_id.id,
+                        'product_id': self.session_id.event_type_id.product_familiy_affiliation_id.product_variant_id.id,
                         'price_unit': -self.session_id.event_type_id.product_familiy_affiliation_id.list_price,
                     })
                 # LA RÉDUCTION DOIT S'APPLIQUER SUR LES X INSCRIPTIONS DE LA MÊME FAMILLE
                 for sale in sale_inscription:
                     sale.env['sale.order.line'].create({
                         'order_id': sale.sale_order_id.id,
-                        'product_id': self.session_id.event_type_id.product_familiy_affiliation_id.id,
+                        'product_id': self.session_id.event_type_id.product_familiy_affiliation_id.product_variant_id.id,
                         'price_unit': -self.session_id.event_type_id.product_familiy_affiliation_id.list_price,
                     })
 
