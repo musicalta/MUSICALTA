@@ -8,4 +8,25 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    
+    <record id="event_mail_teacher" model="ir.model.access">
+        <field name="name">event.mail.teacher</field>
+        <field name="group_id" ref="event.group_event_user"/>
+        <field name="model_id" ref="model_event_mail_teacher"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <record id="event_mail_teacher_registration" model="ir.model.access">
+        <field name="name">event.mail.teacher.registration</field>
+        <field name="group_id" ref="event.group_event_user"/>
+        <field name="model_id" ref="model_event_mail_teacher_registration"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
 </odoo>

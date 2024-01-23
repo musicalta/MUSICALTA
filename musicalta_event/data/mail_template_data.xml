@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="weekly_student_musicalta_follow_up_email_template" model="mail.template">
+            <field name="name">Relance professeurs Musicalta Académie Musicalta</field>
+            <field name="model_id" ref="model_event_mail_teacher_registration"/>
+            <field name="subject">Suivi étudiant hebdomadaire - Académie Musicalta - {{ (object.teacher_id.name) }}</field>
+            <field name="email_from">{{ (object.scheduler_id.event_id.organizer_id.email_formatted or object.scheduler_id.event_id.user_id.email_formatted or '') }}</field>
+            <field name="partner_to">{{ (object.teacher_id.work_contact_id.id) }}</field>
+            <field name="description">Email template for weekly student follow-up</field>
+            <field name="body_html" type="html">
+                <div>
+                <p>Cher/Chère <span t-esc="object.teacher_id.name" /></p>
+                <p>Voici quelques nouvelles de votre classe de <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> en discipline principale pour l’Académie Musicalta 2024.</p>
+                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id))"/>
+                <t t-if="nb_students == 0">
+                    <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
+                    <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence à l’académie au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
+                </t>
+                <t t-elif="nb_students &gt; 0 ">
+                    <p>Il y a <span t-esc="nb_students" /> étudiant(s) en cours d’inscription. Voici les détails :</p>
+                    <div style="margin: 0px; padding: 0px;">
+                        <table border="1" cellspacing="0" width="100%" class="table table-bordered table-striped">
+                            <thead>
+                            <tr style="border-bottom: 2px solid #dee2e6 !important;">
+                                    <th width="20%">Nom</th>
+                                    <th width="20%">Prénom</th>
+                                    <th width="20%">École</th>
+                                    <th width="10%">Niveau</th>
+                                    <th width="10%">Âge</th>
+                                    <th width="20%">Partition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id)" t-as="student">
+                                    <tr >
+                                        <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.lastname or '/'"/></div></td>
+                                        <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.firstname or '/'"/></div></td>
+                                        <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.school or '/'"/></div></td>
+                                        <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.musical_level_id or '/'"/></div></td>
+                                        <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.old"/></div></td>
+                                        <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.partition or '/'"/></div></td>
+                                    </tr>
+                            </t>
+                            </tbody>
+                            </table>
+                    </div>
+                    <t t-if="nb_students &lt;= 5">
+                        <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence à l’académie au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
+                    </t>
+                </t>
+                
+                <t t-set="options" t-value="object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)"/>
+                <t t-foreach="options" t-as="option">
+                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id)"/>
+                    <t t-set="nb_option_students" t-value="len(option_students)"/>
+                    <p>Pour l'option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
+                    <t t-if="nb_option_students == 0">
+                        <p>À ce stade, nous n'avons encore reçu aucune inscription pour cette option.</p>
+                    </t>
+                    <t t-elif="nb_option_students &gt; 0 ">
+                        
+                        <p>Il y a <span t-esc="nb_option_students" /> étudiant(s) en cours d’inscription. Voici les détails :</p>
+                        <div style="margin: 0px; padding: 0px;">
+                            <table border="1" cellspacing="0" width="100%" class="table table-bordered table-striped">
+                                <thead>
+                                <tr style="border-bottom: 2px solid #dee2e6 !important;">
+                                        <th width="20%">Nom</th>
+                                        <th width="20%">Prénom</th>
+                                        <th width="20%">École</th>
+                                        <th width="10%">Niveau</th>
+                                        <th width="10%">Âge</th>
+                                        <th width="20%">Partition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="option_students" t-as="option_student">
+                                        <tr >
+                                            <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.lastname or '/'"/></div></td>
+                                            <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.firstname or '/'"/></div></td>
+                                            <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.school or '/'"/></div></td>
+                                            <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.musical_level_id or '/'"/></div></td>
+                                            <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.old"/></div></td>
+                                            <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.partition or '/'"/></div></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+
+                <p>La brochure pdf est pratique pour communiquer, la voici en attaché. Les étudiants peuvent s’inscrire directement sur www.musicalta.com</p>
+                <p>Nous restons à votre disposition pour toute information du lundi au vendredi de 9h à 18h à :<br/>
+                academie@musicalta.com<br/>
+                +33 (0) 9 72 32 87 84</p>
+                <p>Au plaisir de vous retrouver cet été !</p>
+            </div>
+            </field>
+            <field name="lang">{{ (object.teacher_id.work_contact_id.lang) }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="weekly_student_follow_up_email_template" model="mail.template">
+            <field name="name">Relance professeurs Musicalta Printemps Musical</field>
+            <field name="model_id" ref="model_event_mail_teacher_registration"/>
+            <field name="subject">Suivi étudiant hebdomadaire - Printemps Musical - {{ (object.teacher_id.name) }}</field>
+            <field name="email_from">{{ (object.scheduler_id.event_id.organizer_id.email_formatted or object.scheduler_id.event_id.user_id.email_formatted or '') }}</field>
+            <field name="partner_to">{{ (object.teacher_id.work_contact_id.id) }}</field>
+            <field name="description">Email template for weekly student follow-up</field>
+            <field name="body_html" type="html">
+                <div>
+                <p>Cher/Chère <span t-esc="object.teacher_id.name" /></p>
+                <p>Voici quelques nouvelles de votre classe de <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> en discipline principale pour les master classes du Printemps Musical 2024.</p>
+                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id))"/>
+                <t t-if="nb_students == 0">
+                    <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
+                    <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
+                </t>
+                <t t-elif="nb_students &gt; 0 ">
+                    <p>Il y a <span t-esc="nb_students" /> étudiant(s) en cours d’inscription. Voici les détails :</p>
+                    <div style="margin: 0px; padding: 0px;">
+                        <table border="1" cellspacing="0" width="100%" class="table table-bordered table-striped">
+                            <thead>
+                            <tr style="border-bottom: 2px solid #dee2e6 !important;">
+                                    <th width="20%">Nom</th>
+                                    <th width="20%">Prénom</th>
+                                    <th width="20%">École</th>
+                                    <th width="10%">Niveau</th>
+                                    <th width="10%">Âge</th>
+                                    <th width="20%">Partition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id)" t-as="student">
+                                    <tr >
+                                        <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.lastname or '/'"/></div></td>
+                                        <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.firstname or '/'"/></div></td>
+                                        <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.school or '/'"/></div></td>
+                                        <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.musical_level_id or '/'"/></div></td>
+                                        <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.old"/></div></td>
+                                        <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.partition or '/'"/></div></td>
+                                    </tr>
+                            </t>
+                            </tbody>
+                            </table>
+                    </div>
+                    <t t-if="nb_students &lt;= 5">
+                        <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
+                    </t>
+                </t>
+                
+                <t t-set="options" t-value="object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)"/>
+                <t t-foreach="options" t-as="option">
+                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id)"/>
+                    <t t-set="nb_option_students" t-value="len(option_students)"/>
+                    <p>Pour l'option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
+                    <t t-if="nb_option_students == 0">
+                        <p>À ce stade, nous n'avons encore reçu aucune inscription pour cette option.</p>
+                    </t>
+                    <t t-elif="nb_option_students &gt; 0 ">
+                        
+                        <p>Il y a <span t-esc="nb_option_students" /> étudiant(s) en cours d’inscription. Voici les détails :</p>
+                        <div style="margin: 0px; padding: 0px;">
+                            <table border="1" cellspacing="0" width="100%" class="table table-bordered table-striped">
+                                <thead>
+                                <tr style="border-bottom: 2px solid #dee2e6 !important;">
+                                        <th width="20%">Nom</th>
+                                        <th width="20%">Prénom</th>
+                                        <th width="20%">École</th>
+                                        <th width="10%">Niveau</th>
+                                        <th width="10%">Âge</th>
+                                        <th width="20%">Partition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="option_students" t-as="option_student">
+                                        <tr >
+                                            <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.lastname or '/'"/></div></td>
+                                            <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.firstname or '/'"/></div></td>
+                                            <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.school or '/'"/></div></td>
+                                            <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.musical_level_id or '/'"/></div></td>
+                                            <td width="10%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.old"/></div></td>
+                                            <td width="20%"><div style="border-color: #dee2e6;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="option_student.partition or '/'"/></div></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+
+                <p>La brochure pdf est pratique pour communiquer, la voici en attaché. Les étudiants peuvent s’inscrire directement sur www.musicalta.com</p>
+                <p>Nous restons à votre disposition pour toute information du lundi au vendredi de 9h à 18h à :<br/>
+                academie@musicalta.com<br/>
+                +33 (0) 9 72 32 87 84</p>
+                <p>Au plaisir de vous retrouver ce printemps !</p>
+            </div>
+            </field>
+            <field name="lang">{{ (object.teacher_id.work_contact_id.lang) }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
