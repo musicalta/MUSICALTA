@@ -11,9 +11,12 @@
             <field name="description">Email template for weekly student follow-up</field>
             <field name="body_html" type="html">
                 <div>
-                <p>Cher/Chère <span t-esc="object.teacher_id.name" /></p>
+                <p><span t-if="object.teacher_id.work_contact_id.gender =='man'">Cher </span>
+                    <span t-if="object.teacher_id.work_contact_id.gender =='female'">Chère </span>
+                    <span t-if="object.teacher_id.work_contact_id.gender =='nc'">Cher/Chère </span>
+                     <span t-esc="object.teacher_id.firstname" /></p>
                 <p>Voici quelques nouvelles de votre classe de <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> en discipline principale pour l’Académie Musicalta 2024.</p>
-                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id))"/>
+                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))"/>
                 <t t-if="nb_students == 0">
                     <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
                     <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence à l’académie au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
@@ -33,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id)" t-as="student">
+                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id)" t-as="student">
                                     <tr >
                                         <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.lastname or '/'"/></div></td>
                                         <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.firstname or '/'"/></div></td>
@@ -111,9 +114,14 @@
             <field name="description">Email template for weekly student follow-up</field>
             <field name="body_html" type="html">
                 <div>
-                <p>Cher/Chère <span t-esc="object.teacher_id.name" /></p>
+                <p>
+                    <span t-if="object.teacher_id.work_contact_id.gender =='man'">Cher </span>
+                    <span t-if="object.teacher_id.work_contact_id.gender =='female'">Chère </span>
+                    <span t-if="object.teacher_id.work_contact_id.gender =='nc'">Cher/Chère </span>
+                    <span t-esc="object.teacher_id.firstname" />
+                </p>
                 <p>Voici quelques nouvelles de votre classe de <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> en discipline principale pour les master classes du Printemps Musical 2024.</p>
-                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id))"/>
+                <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))"/>
                 <t t-if="nb_students == 0">
                     <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
                     <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
@@ -133,7 +141,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id.id)" t-as="student">
+                        <t t-foreach="object.scheduler_id.event_id.get_teacher_participants(object.teacher_id)" t-as="student">
                                     <tr >
                                         <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.lastname or '/'"/></div></td>
                                         <td width="20%"><div style="border-color: red;border-width: 2px;background-color:#f9f9f9;" width="100%"><span t-esc="student.firstname or '/'"/></div></td>
