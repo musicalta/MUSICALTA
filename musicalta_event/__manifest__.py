@@ -2,7 +2,7 @@
 
 {
     "name": "Event Specifics for Musicalta",
-    "version": "16.1.3.0.0",
+    "version": "16.1.3.0.1",
     "summary": """Add Event specifics for Musicalta.""",
     "category": "customization",
     "website": "https://irokoo.fr",

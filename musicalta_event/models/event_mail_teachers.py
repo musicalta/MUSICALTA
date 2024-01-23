@@ -106,7 +106,6 @@ class EventMailTeacherScheduler(models.Model):
 
     def execute(self):
         for scheduler in self:
-            print("Dans execute")
             now = fields.Datetime.now()
 
             # before or after event -> one shot email
@@ -135,10 +134,8 @@ class EventMailTeacherScheduler(models.Model):
                     continue
                 # do not send emails if the mailing was scheduled before the event but the event is over
                 if scheduler.scheduled_date <= now and scheduler.event_id.date_end > now:
-                    print("avant le mail_attendees")
                     scheduler.event_id.mail_attendees(
                         scheduler.template_ref.id)
-                    print("après le mail_attendees")
                     scheduler.update({
                         'mail_done': True,
                         'mail_count_done': len(scheduler.event_id.teacher_ids),
@@ -146,7 +143,6 @@ class EventMailTeacherScheduler(models.Model):
         return True
 
     def _create_missing_mail_registrations(self, registrations):
-        print("create missing mail registrations")
         new = []
 
         for scheduler in self:
@@ -223,20 +219,17 @@ You receive this email because you are:
             ('event_id.active', '=', True),
             ('scheduled_date', '<=', fields.Datetime.now())
         ])
-        print("schedulers", schedulers)
         for scheduler in schedulers:
             try:
                 # Prevent a mega prefetch of the registration ids of all the events of all the schedulers
                 self.browse(scheduler.id).execute()
             except Exception as e:
-                print("Dans le exception : ", e)
                 _logger.exception(e)
                 self.env.invalidate_all()
                 self._warn_template_error(scheduler, e)
             else:
                 if autocommit and not getattr(threading.current_thread(), 'testing', False):
                     self.env.cr.commit()
-        print("return true")
         return True
 
 
@@ -257,7 +250,6 @@ class EventMailTeacherRegistration(models.Model):
     mail_sent = fields.Boolean('Mail Sent')
 
     def execute(self):
-        print("Dans execute 2")
         now = fields.Datetime.now()
         todo = self.filtered(lambda reg_mail:
                              reg_mail.registration_id.active and
@@ -266,8 +258,6 @@ class EventMailTeacherRegistration(models.Model):
                              )
         todo.write({'mail_sent': False})
         done = self.browse()
-        print("todo", todo)
-        print("done", done)
         for reg_mail in todo:
             if reg_mail.teacher_id not in done.mapped('teacher_id'):
                 organizer = reg_mail.scheduler_id.event_id.organizer_id
@@ -297,10 +287,6 @@ class EventMailTeacherRegistration(models.Model):
                 if not template.email_from:
                     email_values['email_from'] = author.email_formatted
 
-                print("template", template)
-                print("email_values", email_values)
-                print("reg_mail.registration_id.id",
-                      reg_mail.registration_id.id)
                 template.send_mail(reg_mail.id,
                                    email_values=email_values)
                 done |= reg_mail
