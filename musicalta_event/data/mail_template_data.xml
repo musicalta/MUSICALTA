@@ -5,7 +5,7 @@
         <record id="weekly_student_musicalta_follow_up_email_template" model="mail.template">
             <field name="name">Relance professeurs Musicalta Académie Musicalta</field>
             <field name="model_id" ref="model_event_mail_teacher_registration"/>
-            <field name="subject">Suivi étudiant hebdomadaire - Académie Musicalta - {{ (object.teacher_id.name) }} -  {{ (object.scheduler_id.event_id) }}</field>
+            <field name="subject">Suivi étudiant hebdomadaire - Académie Musicalta - {{ (object.teacher_id.name) }} -  {{ (object.scheduler_id.event_id.name) }}</field>
             <field name="email_from">{{ (object.scheduler_id.event_id.organizer_id.email_formatted or object.scheduler_id.event_id.user_id.email_formatted or '') }}</field>
             <field name="partner_to">{{ (object.teacher_id.work_contact_id.id) }}</field>
             <field name="description">Email template for weekly student follow-up</field>
