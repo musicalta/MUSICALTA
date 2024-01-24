@@ -147,12 +147,20 @@ class EventMailTeacherScheduler(models.Model):
 
         for scheduler in self:
             teachers = scheduler.event_id.teacher_ids
+            list_registation_teacher_ids = registrations.mapped(
+                'teacher_id').ids
             for teacher in teachers:
                 new += [{
                     'registration_id': registration.id,
                     'scheduler_id': scheduler.id,
                     'teacher_id': teacher.id,
                 } for registration in registrations if registration.teacher_id.id == teacher.id]
+                if not teacher.id in list_registation_teacher_ids:
+                    new += [{
+                        'registration_id': False,
+                        'scheduler_id': scheduler.id,
+                        'teacher_id': teacher.id,
+                    }]
         if new:
             return self.env['event.mail.teacher.registration'].create(new)
         return self.env['event.mail.teacher.registration']
@@ -235,6 +243,7 @@ You receive this email because you are:
 
 class EventMailTeacherRegistration(models.Model):
     _name = 'event.mail.teacher.registration'
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = 'Registration Mail Scheduler for teachers'
     _rec_name = 'scheduler_id'
     _order = 'scheduled_date DESC'
@@ -244,7 +253,7 @@ class EventMailTeacherRegistration(models.Model):
     teacher_id = fields.Many2one(
         'hr.employee', 'Teacher', required=True, ondelete='cascade')
     registration_id = fields.Many2one(
-        'event.registration', 'Attendee', required=True, ondelete='cascade')
+        'event.registration', 'Attendee', required=False, ondelete='cascade')
     scheduled_date = fields.Datetime(
         'Scheduled Time', compute='_compute_scheduled_date', store=True)
     mail_sent = fields.Boolean('Mail Sent')
@@ -252,7 +261,6 @@ class EventMailTeacherRegistration(models.Model):
     def execute(self):
         now = fields.Datetime.now()
         todo = self.filtered(lambda reg_mail:
-                             reg_mail.registration_id.active and
                              (reg_mail.scheduled_date and reg_mail.scheduled_date <= now) and
                              reg_mail.scheduler_id.notification_type == 'mail'
                              )
@@ -287,8 +295,10 @@ class EventMailTeacherRegistration(models.Model):
                 if not template.email_from:
                     email_values['email_from'] = author.email_formatted
 
-                template.send_mail(reg_mail.id,
-                                   email_values=email_values)
+                reg_mail.with_context(force_send=True).message_post_with_template(
+                    template.id, email_layout_xmlid='mail.mail_notification_layout')
+                # template.send_mail(reg_mail.id,
+                #                    email_values=email_values)
                 done |= reg_mail
         done.write({'mail_sent': True})
 
