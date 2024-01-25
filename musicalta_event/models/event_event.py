@@ -38,6 +38,15 @@ class Event(models.Model):
             lambda registration: registration.teacher_id.id == teacher_id.id and registration.discipline_id.id in teacher_id.discipline_ids.ids)
         return event_registration.mapped('partner_id')
 
+    def get_teacher_disciplines(self, teacher_id):
+        teacher_discipline_ids = teacher_id.discipline_ids
+        return teacher_discipline_ids
+
+    def get_teacher_discipline_participants(self, teacher_id, discipline_id):
+        participants = self.registration_ids.filtered(
+            lambda registration: registration.teacher_id.id == teacher_id and registration.discipline_id.id == discipline_id.id)
+        return participants.mapped('partner_id')
+
     def get_teacher_options(self, teacher_id):
         teacher_option_ids = self.options_event_ticket_id.filtered(
             lambda option: option.teacher_id.id == teacher_id)
