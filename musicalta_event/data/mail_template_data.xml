@@ -33,14 +33,14 @@
                         <div style="margin: 0px; padding: 0px;">
                             <table border="1" cellspacing="0" width="100%" class="table table-bordered table-striped">
                                 <thead>
-                                <tr style="border-bottom: 2px solid #dee2e6 !important;">
-                                        <th width="20%">Nom</th>
-                                        <th width="20%">Prénom</th>
-                                        <th width="10%">École</th>
-                                        <th width="10%">Professeur Habituel</th>                                    
-                                        <th width="10%">Niveau</th>
-                                        <th width="10%">Âge</th>
-                                        <th width="20%">Partition</th>
+                                    <tr style="border-bottom: 2px solid #dee2e6 !important;">
+                                        <th width="20%">Last Name</th>
+                                        <th width="20%">First Name</th>
+                                        <th width="10%">School</th>
+                                        <th width="10%">Usual Teacher</th>
+                                        <th width="10%">Level</th>
+                                        <th width="10%">Age</th>
+                                        <th width="20%">Sheet Music</th>
                                     </tr>
                                 </thead>
                                 <tbody>
