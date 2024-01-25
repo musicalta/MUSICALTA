@@ -52,9 +52,9 @@ class Event(models.Model):
             lambda option: option.teacher_id.id == teacher_id)
         return teacher_option_ids
 
-    def get_teacher_options_participants(self, teacher_id, option_id):
+    def get_teacher_options_participants(self, teacher_id, option_id, product_id):
         options = self.registration_ids.filtered(
-            lambda registration: registration.teacher_id.id == teacher_id and registration.option_id.id == option_id and option_id in registration.inscription_id.options_ids.mapped('option_id').ids)
+            lambda registration: registration.teacher_id.id == teacher_id and registration.option_id.id == option_id and option_id in registration.inscription_id.options_ids.mapped('option_id').ids and product_id in registration.inscription_id.options_ids.mapped('product_id').ids)
         return options.mapped('partner_id')
 
     def action_view_tickets(self):

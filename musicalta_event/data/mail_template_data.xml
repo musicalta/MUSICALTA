@@ -182,7 +182,7 @@
                 
                 <t t-set="options" t-value="object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)"/>
                 <t t-foreach="options" t-as="option">
-                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id)"/>
+                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)"/>
                     <t t-set="nb_option_students" t-value="len(option_students)"/>
                     <br/>
                     <p>Pour l'option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
