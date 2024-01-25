@@ -65,11 +65,11 @@
                 </t>
                 <t t-set="options" t-value="object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)"/>
                 <t t-if="object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids">
-                    <p t-if="len(options) &lt; 2">Here are some updates from your <t t-esc="', '.join([option.name for option in options])" /> class in options for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
-                    <p t-if="len(options) &gt; 1">Here are some updates from your <t t-esc="', '.join([option.name for option in options])" /> classes in options for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
+                    <p t-if="len(options) &lt; 2">Here are some updates from your class for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
+                    <p t-if="len(options) &gt; 1">Here are some updates from your classes for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
                 </t>
                 <t t-foreach="options" t-as="option">
-                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id)"/>
+                    <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)"/>
                     <t t-set="nb_option_students" t-value="len(option_students)"/>
                     <br/>
                     <p>For the option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
@@ -190,8 +190,8 @@
                 <t t-set="options" t-value="object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)"/>
 
                 <t t-if="object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids">
-                    <p t-if="len(options) &lt; 2">Here are some updates from your <t t-esc="', '.join([option.name for option in options])" /> class in options for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
-                    <p t-if="len(options) &gt; 1">Here are some updates from your <t t-esc="', '.join([option.name for option in options])" /> classes in options for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
+                    <p t-if="len(options) &lt; 2">Here are some updates from your class for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
+                    <p t-if="len(options) &gt; 1">Here are some updates from your classes for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
                 </t>
                 
                 <t t-foreach="options" t-as="option">
