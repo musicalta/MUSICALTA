@@ -20,7 +20,7 @@
                 
                 <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
                     <p>Pour la discipline : <span t-esc="discipline.name" /></p>
-                    <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id, discipline.id))"/>
+                    <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))"/>
                     
                     <t t-if="nb_students_discipline == 0">
                         <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <t t-foreach="object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id, discipline.id)" t-as="student">
+                            <t t-foreach="object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)" t-as="student">
                                         <tr >
                                             <td width="20%"><div  width="100%"><span t-esc="student.lastname or '/'"/></div></td>
                                             <td width="20%"><div  width="100%"><span t-esc="student.firstname or '/'"/></div></td>
@@ -134,7 +134,7 @@
                 <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))"/>
                 <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
                     <p>Pour la discipline : <span t-esc="discipline.name" /></p>
-                    <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id, discipline.id))"/>
+                    <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))"/>
                     
                     <t t-if="nb_students_discipline == 0">
                         <p>À ce stade, nous n'avons encore reçu aucune inscription.</p>
@@ -155,7 +155,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <t t-foreach="object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id, discipline.id)" t-as="student">
+                            <t t-foreach="object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)" t-as="student">
                                         <tr >
                                             <td width="20%"><div  width="100%"><span t-esc="student.lastname or '/'"/></div></td>
                                             <td width="20%"><div  width="100%"><span t-esc="student.firstname or '/'"/></div></td>
