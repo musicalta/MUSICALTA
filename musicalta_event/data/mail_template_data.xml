@@ -105,6 +105,7 @@
                         </div>
                     </t>
                 </t>
+                <br/>
                 <t t-if="nb_students &lt;= 5">
                     <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
                 </t>
@@ -222,7 +223,7 @@
                         </div>
                     </t>
                 </t>
-
+                <br/>
                 <t t-if="nb_students &lt;= 5">
                     <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>
                 </t>
