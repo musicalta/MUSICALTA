@@ -146,7 +146,8 @@ class EventMailTeacherScheduler(models.Model):
         new = []
 
         for scheduler in self:
-            teachers = scheduler.event_id.teacher_ids
+            teachers = scheduler.event_id.teacher_ids | scheduler.event_id.options_event_ticket_id.mapped(
+                'teacher_id')
             list_registation_teacher_ids = registrations.mapped(
                 'teacher_id').ids
             for teacher in teachers:
