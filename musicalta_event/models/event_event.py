@@ -44,7 +44,7 @@ class Event(models.Model):
 
     def get_teacher_discipline_participants(self, teacher_id, discipline_id):
         participants = self.registration_ids.filtered(
-            lambda registration: registration.teacher_id.id == teacher_id and registration.discipline_id.id == discipline_id.id)
+            lambda registration: registration.teacher_id.id == teacher_id and registration.discipline_id.id == discipline_id)
         return participants.mapped('partner_id')
 
     def get_teacher_options(self, teacher_id):
