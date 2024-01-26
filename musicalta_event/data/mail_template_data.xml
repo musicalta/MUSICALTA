@@ -14,7 +14,7 @@
                 <p><span t-if="object.teacher_id.work_contact_id.gender =='man'">Dear </span>
                     <span t-if="object.teacher_id.work_contact_id.gender =='female'">Dear </span>
                     <span t-if="object.teacher_id.work_contact_id.gender =='nc'">Dear </span>
-                     <span t-esc="object.teacher_id.firstname" /></p>
+                     <span t-esc="object.teacher_id.firstname" />,</p>
                 
                 <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))"/>
                 <t t-if="object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids">
@@ -137,7 +137,7 @@
                     <span t-if="object.teacher_id.work_contact_id.gender =='man'">Dear </span>
                     <span t-if="object.teacher_id.work_contact_id.gender =='female'">Dear </span>
                     <span t-if="object.teacher_id.work_contact_id.gender =='nc'">Dear </span>
-                    <span t-esc="object.teacher_id.firstname" />
+                    <span t-esc="object.teacher_id.firstname" />,
                 </p>
 
                 <t t-set="nb_students" t-value="len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))"/>
