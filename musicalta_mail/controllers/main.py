@@ -9,8 +9,8 @@ class SocialMediaImageController(http.Controller):
     @http.route([
         '/social_media_image/fb',
         '/social_media_image/instagram',
-        '/social_media_image/linkedin'
-        '/social_media_image/logo'
+        '/social_media_image/linkedin',
+        '/social_media_image/logo',
         '/social_media_image/phone_logo'
     ], type='http', auth="public")
     def social_media_image(self, **kwargs):
