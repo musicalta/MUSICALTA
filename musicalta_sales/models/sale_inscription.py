@@ -74,7 +74,6 @@ class SaleInscription(models.Model):
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
-        required=True,
         domain="['|',('is_product_for_adults_and_minors', '=', True),('is_product_for_adults', '=', is_adult),('pack_ok', '=', True), ('id', 'in', available_product_ids)]",
     )
     is_auditor = fields.Boolean(
@@ -452,6 +451,8 @@ class SaleInscription(models.Model):
 
     def process_registration(self):
         # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
+        if not self.product_pack_id:
+            raise UserError(_('You must select a pack'))
         if not self.sale_order_id:
             sale_order = self._find_or_create_sale()
             self.name = 'Inscription' + '-' + self.partner_id.name + '-' + sale_order.name
