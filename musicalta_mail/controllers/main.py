@@ -1,5 +1,7 @@
 from odoo import http
 from odoo.http import request
+import base64
+import os
 
 
 class SocialMediaImageController(http.Controller):
@@ -22,11 +24,20 @@ class SocialMediaImageController(http.Controller):
         if not filename:
             return request.not_found()
 
-        path = f'musicalta_mail/static/src/img/{filename}'
-        # The full path to the file is needed
-        full_path = request.module_boot(path)
-        if not full_path:
+        # Determine the full path to the file
+        module_path = os.path.join(os.path.dirname(
+            __file__), '..', 'static', 'src', 'img')
+        file_path = os.path.join(module_path, filename)
+
+        # Check if the file exists
+        if not os.path.isfile(file_path):
             return request.not_found()
 
-        # Stream the file
-        return http.send_file(full_path)
+        with open(file_path, 'rb') as f:
+            image_data = f.read()
+
+        return request.make_response(
+            image_data,
+            [('Content-Type', 'image/png'),  # Assuming all are PNGs, change if not
+             ('Content-Disposition', 'inline; filename="{}"'.format(filename))]
+        )
