@@ -5,9 +5,8 @@
             <field name="inherit_id" ref="mail.mail_notification_layout"/>
             <field name="arch" type="xml">
                 <xpath expr="//img[1]" position="attributes">
-                    <attribute name="style">padding: 0px; margin: 0px;max-width: 700px; max-height: 200px;</attribute>
-                    <attribute name="src">musicalta_mail/static/images/logo.jpg</attribute>
-                    <attribute name="t-att-src"/>
+                    <attribute name="style">padding: 0px; margin: 0px;max-width: 500px; max-height: 150px;</attribute>
+                    <attribute name="t-att-src">/social_media_image/logo</attribute>
                 </xpath>
                 <xpath expr="//div[@style='margin-top:32px;']" position="replace">
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
@@ -21,7 +20,7 @@
                         <tr>
                         <td valign="left" width="50%">
                             <div width="100%">
-                                <div><i class="fa fa-phone"/>+33(0)9 72 32 87 84</div>
+                                <div><img t-att-src="'/social_media_image/phone_logo'" style="padding: 0px; margin: 0px; max-width: 30px; max-height: 30px;"/>+33(0)9 72 32 87 84</div>
                                 <br/>
                             <a href="https://www.facebook.com/yourpage">
                                 <img t-att-src="'/social_media_image/fb'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>

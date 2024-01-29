@@ -10,12 +10,16 @@ class SocialMediaImageController(http.Controller):
         '/social_media_image/fb',
         '/social_media_image/instagram',
         '/social_media_image/linkedin'
+        '/social_media_image/logo'
+        '/social_media_image/phone_logo'
     ], type='http', auth="public")
     def social_media_image(self, **kwargs):
         image_map = {
             'fb': 'fb.jpg',
             'instagram': 'instagram.png',
             'linkedin': 'linkedin.png',
+            'logo': 'logo.jpg',
+            'phone_logo': 'phone_logo.jpg',
         }
         # Get the key from the end of the URL
         key = request.httprequest.path.split('/')[-1]
