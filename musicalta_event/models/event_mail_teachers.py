@@ -297,7 +297,7 @@ class EventMailTeacherRegistration(models.Model):
                     email_values['email_from'] = author.email_formatted
 
                 reg_mail.with_context(force_send=True).message_post_with_template(
-                    template.id, email_layout_xmlid='mail.mail_notification_layout')
+                    template.id, email_layout_xmlid='mail.mail_notification_light')
                 # template.send_mail(reg_mail.id,
                 #                    email_values=email_values)
                 done |= reg_mail

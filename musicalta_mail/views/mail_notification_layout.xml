@@ -2,13 +2,14 @@
     <data>
         <record id="mail_notification_layout_musicalta" model="ir.ui.view">
             <field name="name">Mail notification layout template Musicalta</field>
-            <field name="inherit_id" ref="mail.mail_notification_layout"/>
+            <field name="inherit_id" ref="mail.mail_notification_light"/>
             <field name="arch" type="xml">
                 <xpath expr="//img[1]" position="attributes">
                     <attribute name="style">padding: 0px; margin: 0px;max-width: 500px; max-height: 150px;</attribute>
                     <attribute name="t-att-src">'/social_media_image/logo'</attribute>
                 </xpath>
-                <xpath expr="//div[@style='margin-top:32px;']" position="replace">
+                <xpath expr="//td[@style='min-width: 590px; padding: 0 8px 0 8px; font-size:11px;']" position="replace">
+                    <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
                   <br/>
                     <div>
@@ -20,7 +21,7 @@
                     <br/>
                     <table width="100%">
                         <tr>
-                        <td valign="left" width="50%">
+                        <td style="min-width: 295px;" align="left" width="50%">
                             <div width="100%">
                                 <br></br>
                                 <div><img t-att-src="'/social_media_image/phone_logo'" style="padding: 0px; margin: 0px; max-width: 15px; max-height: 15px;"/>+33(0)9 72 32 87 84</div>
@@ -36,14 +37,8 @@
                             </a>
                             </div>
                         </td>
-                        <td><p/>&amp;nbsp;&amp;nbsp;</td>
-                        <td><div/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</td>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/><td/><td/><td/><td/><td/>
-                        <td valign="right" width="50%">
+
+                        <td style="min-width: 295px;" align="right" width="50%">
                             <div><p>7 Quai Saint Vincent<br/>69001 Lyon - France</p></div>
                             
                             <br/>
@@ -54,6 +49,7 @@
                         </td>
                     </tr>
                     </table>
+                </td>
                 </xpath>
 
             </field>
