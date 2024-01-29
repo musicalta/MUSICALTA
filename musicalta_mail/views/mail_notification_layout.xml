@@ -6,30 +6,33 @@
             <field name="arch" type="xml">
                 <xpath expr="//img[1]" position="attributes">
                     <attribute name="style">padding: 0px; margin: 0px;max-width: 500px; max-height: 150px;</attribute>
-                    <attribute name="t-att-src">/social_media_image/logo</attribute>
+                    <attribute name="t-att-src">'/social_media_image/logo'</attribute>
                 </xpath>
                 <xpath expr="//div[@style='margin-top:32px;']" position="replace">
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+                  <br/>
                     <div>
                         <div>
                             <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
                         </div>
-                        
+                    
                     </div>
+                    <br/>
                     <table width="100%">
                         <tr>
                         <td valign="left" width="50%">
                             <div width="100%">
-                                <div><img t-att-src="'/social_media_image/phone_logo'" style="padding: 0px; margin: 0px; max-width: 30px; max-height: 30px;"/>+33(0)9 72 32 87 84</div>
+                                <br></br>
+                                <div><img t-att-src="'/social_media_image/phone_logo'" style="padding: 0px; margin: 0px; max-width: 15px; max-height: 15px;"/>+33(0)9 72 32 87 84</div>
                                 <br/>
-                            <a href="https://www.facebook.com/yourpage">
-                                <img t-att-src="'/social_media_image/fb'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                            <a href="https://www.facebook.com/Musicalta/?locale=fr_FR">
+                                <img t-att-src="'/social_media_image/fb'" style="max-width: 45px; max-height: 45px;"/>
                             </a>
-                            <a href="https://www.instagram.com/yourprofile">
-                                <img t-att-src="'/social_media_image/instagram'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                            <a href="https://www.instagram.com/musicalta/">
+                                <img t-att-src="'/social_media_image/instagram'" style="max-width: 60px; max-height: 60px;"/>
                             </a>
-                            <a href="https://www.linkedin.com/in/yourprofile">
-                                <img t-att-src="'/social_media_image/linkedin'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                            <a href="https://www.linkedin.com/company/musicalta/?viewAsMember=true">
+                                <img t-att-src="'/social_media_image/linkedin'" style="max-width: 50px; max-height: 50px;"/>
                             </a>
                             </div>
                         </td>
