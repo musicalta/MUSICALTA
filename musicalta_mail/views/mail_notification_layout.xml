@@ -24,13 +24,13 @@
                                 <div><i class="fa fa-phone"/>+33(0)9 72 32 87 84</div>
                                 <br/>
                             <a href="https://www.facebook.com/yourpage">
-                                <img src="musicalta_mail/static/src/img/fb.jpg" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                                <img t-att-src="'/social_media_image/fb'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
                             </a>
                             <a href="https://www.instagram.com/yourprofile">
-                                <img src="musicalta_mail/static/src/img/instagram.png" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                                <img t-att-src="'/social_media_image/instagram'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
                             </a>
                             <a href="https://www.linkedin.com/in/yourprofile">
-                                <img src="musicalta_mail/static/src/img/linkedin.png" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
+                                <img t-att-src="'/social_media_image/linkedin'" style="padding: 0px; margin: 0px; max-width: 40px; max-height: 40px;"/>
                             </a>
                             </div>
                         </td>
