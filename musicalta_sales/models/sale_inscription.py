@@ -387,6 +387,20 @@ class SaleInscription(models.Model):
 
     def action_update_or_create(self):
         self._update_or_create({})
+        # # we must find the activity teams concerned by the model
+        # team_ids = self.env['mail.activity.team'].search([('res_model_ids', 'in', self.env.ref('musicalta_sales.model_sale_inscription').id)])
+        # # for each activity team, we must create an activity
+        # for team in team_ids:
+        #     # we search for activity type
+        #     if team.activity_type_id:
+        #         self.env['mail.activity'].create({
+        #             'activity_type_id': team.activity_type_id.id,
+        #             'res_model_id': self.env.ref('musicalta_sales.model_sale_inscription').id,
+        #             'res_model': 'sale.inscription',
+        #             'res_id': self.id,
+        #             'user_id': team.user_id.id,
+        #             'team_id': team.id,
+        #         })
         return True
 
     @api.constrains('session_id', 'partner_id')
