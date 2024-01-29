@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <record id="mail_notification_layout_musicalta" model="ir.ui.view">
+            <field name="name">Mail notification layout template Musicalta</field>
+            <field name="inherit_id" ref="mail.mail_notification_layout"/>
+            <field name="arch" type="xml">
+                <xpath expr="//img[1]" position="attributes">
+                    <attribute name="style">padding: 0px; margin: 0px;</attribute>
+                    <attribute name="src">musicalta_mail/static/images/logo.png</attribute>
+                </xpath>
+                <xpath expr="//div[@style='margin-top:32px;']" position="replace">
+                    <div>
+                        <div>
+                            <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
+                        </div>
+                        <div><p>7 Quai Saint Vincent<br/>69001 Lyon - France</p></div>
+                        <div><i class="fa fa-phone"></i>+33(0)9 72 32 87 84</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <br/>
+                            <a href="https://www.facebook.com/yourpage" target="_blank">
+                                <img src="musicalta_mail/static/images/fb.jpg" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                            <a href="https://www.instagram.com/yourprofile" target="_blank">
+                                <img src="musicalta_mail/static/images/instagram.png" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                                <img src="musicalta_mail/static/images/linkedin.png" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <p><a href="mailto:academie@musicalta.com">academie@musicalta.com</a><br/>
+                            <a href="https://www.musicalta.com">www.musicalta.com</a></p>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                        <td valign="left" width="50%">
+                            <div width="100">
+                                <br/>
+                            <a href="https://www.facebook.com/yourpage" target="_blank">
+                                <img src="musicalta_mail/static/images/fb.jpg" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                            <a href="https://www.instagram.com/yourprofile" target="_blank">
+                                <img src="musicalta_mail/static/images/instagram.png" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                                <img src="musicalta_mail/static/images/linkedin.png" style="padding: 0px; margin: 0px; height: auto; max-width: 15px; max-height: 15px;"/>
+                            </a>
+                            </div>
+                        </td>
+                        <td valign="right" width="50%">
+                            <div width="100">
+                                <p><a href="mailto:academie@musicalta.com">academie@musicalta.com</a><br/>
+                                    <a href="https://www.musicalta.com">www.musicalta.com</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
