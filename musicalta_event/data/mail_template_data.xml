@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
         <record id="weekly_student_musicalta_follow_up_email_template" model="mail.template">
             <field name="name">Relance professeurs Musicalta Académie Musicalta</field>
