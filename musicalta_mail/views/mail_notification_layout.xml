@@ -8,6 +8,11 @@
                     <attribute name="style">padding: 0px; margin: 0px;max-width: 500px; max-height: 150px;</attribute>
                     <attribute name="t-att-src">'/social_media_image/logo'</attribute>
                 </xpath>
+                <xpath expr="//img[1]" position="after">
+                    <br/>
+                    <br/>
+                    <br/>
+                </xpath>
                 <xpath expr="//img[1]/parent::td" position="attributes">
                     <attribute name="align">left</attribute>
                 </xpath>
@@ -15,11 +20,9 @@
                 <xpath expr="//td[@style='min-width: 590px; padding: 0 8px 0 8px; font-size:11px;']" position="replace">
                     <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
-                  <br/>
-                    <div>
-                        
-                    
-                    </div>
+                <br/>
+                <br/>
+                <br/>
                     <br/>
                     <table width="100%">
                         <tr>

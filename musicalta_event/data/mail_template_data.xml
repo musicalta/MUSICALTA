@@ -22,7 +22,7 @@
                     <p t-if="len(object.teacher_id.discipline_ids) &gt; 1">Here's some news from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> classes in main for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
                     
                     <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
-                        <br/>
+                        
                         <p>For the discipline: <span t-esc="discipline.name" /></p>
                         <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))"/>
                         
@@ -60,6 +60,7 @@
                                     </table>
                             </div>
                         </t>
+                        <br/>
                 
                     </t>
                 </t>
@@ -71,7 +72,7 @@
                 <t t-foreach="options" t-as="option">
                     <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)"/>
                     <t t-set="nb_option_students" t-value="len(option_students)"/>
-                    <br/>
+                    
                     <p>For the option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
                     <t t-if="nb_option_students == 0">
                         <p> - At this stage, we have not yet received any registrations.</p>
@@ -108,8 +109,8 @@
                             </table>
                         </div>
                     </t>
+                    <br/>
                 </t>
-                <br/>
                 <t t-if="nb_students &lt;= 5">
                     <p>Do not hesitate to relaunch your contacts and make your presence at the Academy known to the greatest number of students and colleagues around you (social networks, emails, etc.)</p>
                 </t>
@@ -146,7 +147,7 @@
                     <p t-if="len(object.teacher_id.discipline_ids) &gt; 1">Here are some updates from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> classes in main discipline for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
 
                     <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
-                        <br/>
+                        
                         <p>For the discipline: <span t-esc="discipline.name" /></p>
                         <t t-set="nb_students_discipline" t-value="len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))"/>
                         
@@ -184,6 +185,7 @@
                                     </table>
                             </div>
                         </t>
+                        <br/>
                 
                     </t>
                 </t>
@@ -197,7 +199,7 @@
                 <t t-foreach="options" t-as="option">
                     <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)"/>
                     <t t-set="nb_option_students" t-value="len(option_students)"/>
-                    <br/>
+                    
                     <p>For the option "<span t-esc="option.option_id.name" />" (<span t-esc="option.product_id.name"/>):</p>
                     <t t-if="nb_option_students == 0">
                         <p> - At this stage, we have not yet received any registrations.</p>
@@ -234,8 +236,8 @@
                             </table>
                         </div>
                     </t>
+                    <br/>
                 </t>
-                <br/>
                 <t t-if="nb_students &lt;= 5">
                     <p>Do not hesitate to relaunch your contacts and make your presence known to as many students and colleagues around you as possible (social networks, e-mails...).</p>
                 </t>
