@@ -19,6 +19,8 @@
                 <xpath expr="//span[@style='font-size: 10px;']/parent::td" position="replace"/>
                 <xpath expr="//td[@style='min-width: 590px; padding: 0 8px 0 8px; font-size:11px;']" position="replace">
                     <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                        <br/>
+                        <br/>
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
                 <br/>
                 <br/>

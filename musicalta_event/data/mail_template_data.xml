@@ -20,7 +20,7 @@
                 <t t-if="object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids">
                     <p t-if="len(object.teacher_id.discipline_ids) &lt; 2">Here's some news from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> class in main for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
                     <p t-if="len(object.teacher_id.discipline_ids) &gt; 1">Here's some news from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> classes in main for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
-                    
+                    <br/>
                     <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
                         
                         <p>For the discipline: <span t-esc="discipline.name" /></p>
@@ -60,7 +60,8 @@
                                     </table>
                             </div>
                         </t>
-                        <br/>
+                        <p><br/></p>
+                        
                 
                     </t>
                 </t>
@@ -68,6 +69,7 @@
                 <t t-if="object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids">
                     <p t-if="len(options) &lt; 2">Here are some updates from your class for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
                     <p t-if="len(options) &gt; 1">Here are some updates from your classes for Académie Musicalta <span t-esc="object.create_date.year"/>.</p>
+                    <br/>
                 </t>
                 <t t-foreach="options" t-as="option">
                     <t t-set="option_students" t-value="object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)"/>
@@ -109,7 +111,8 @@
                             </table>
                         </div>
                     </t>
-                    <br/>
+                    <p><br/></p>
+                    
                 </t>
                 <t t-if="nb_students &lt;= 5">
                     <p>Do not hesitate to relaunch your contacts and make your presence at the Academy known to the greatest number of students and colleagues around you (social networks, emails, etc.)</p>
@@ -145,7 +148,7 @@
                 <t t-if="object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids">
                     <p t-if="len(object.teacher_id.discipline_ids) &lt; 2">Here are some updates from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> class in main discipline for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
                     <p t-if="len(object.teacher_id.discipline_ids) &gt; 1">Here are some updates from your <t t-esc="', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])" /> classes in main discipline for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
-
+                    <br/>
                     <t t-foreach="object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)" t-as="discipline">
                         
                         <p>For the discipline: <span t-esc="discipline.name" /></p>
@@ -185,7 +188,7 @@
                                     </table>
                             </div>
                         </t>
-                        <br/>
+                        <p><br/></p>
                 
                     </t>
                 </t>
@@ -194,6 +197,7 @@
                 <t t-if="object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids">
                     <p t-if="len(options) &lt; 2">Here are some updates from your class for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
                     <p t-if="len(options) &gt; 1">Here are some updates from your classes for the Printemps Musical <span t-esc="object.create_date.year"/> master classes.</p>
+                    <br/>
                 </t>
                 
                 <t t-foreach="options" t-as="option">
@@ -236,7 +240,7 @@
                             </table>
                         </div>
                     </t>
-                    <br/>
+                    <p><br/></p>
                 </t>
                 <t t-if="nb_students &lt;= 5">
                     <p>Do not hesitate to relaunch your contacts and make your presence known to as many students and colleagues around you as possible (social networks, e-mails...).</p>
