@@ -14,14 +14,17 @@
                   <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
                   <br/>
                     <div>
-                        <div>
-                            <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
-                        </div>
+                        
                     
                     </div>
                     <br/>
                     <table width="100%">
                         <tr>
+                            <td align="left" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                <div>
+                                    <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
+                                </div>
+                            </td>
                         <td style="min-width: 295px;" align="left" width="50%">
                             <div width="100%">
                                 <br></br>
