@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="payment_provider_monetico" model="payment.provider">
+        <field name="name">Monetico</field>
+        <field name="display_as">Monetico</field>
+        <field name="image_128"
+               type="base64"
+               file="payment_monetico/static/src/img/icon.png"/>
+        <field name="code">monetico</field>
+        <field name="redirect_form_view_id" ref="redirect_form"/>
+        <field name="allow_tokenization">False</field>
+        <field name="module_id" ref="base.module_payment_monetico"/>
+    </record>
+
+    <record id="payment_method_monetico" model="account.payment.method">
+        <field name="name">Monetico</field>
+        <field name="code">monetico</field>
+        <field name="payment_type">inbound</field>
+    </record>
+</odoo>
+
+
