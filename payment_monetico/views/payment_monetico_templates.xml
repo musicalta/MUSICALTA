@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="redirect_form">
+            <form t-att-action="api_url" method="post">
+            <input type="hidden" name="version" id="version" t-att-value="version"/>
+            <input type="hidden" name="TPE" id="TPE" t-att-value="TPE"/>
+            <input type="hidden" name="contexte_commande" id="contexte_commande" t-att-value="contexte_commande"/>
+            <input type="hidden" name="date" id="date" t-att-value="date"/>
+            <input type="hidden" name="montant" id="montant" t-att-value="montant"/>
+            <input type="hidden" name="reference" id="reference" t-att-value="reference"/>
+            <input type="hidden" name="MAC" id="MAC" t-att-value="MAC"/>
+            <input type="hidden" name="url_retour_ok" id="url_retour_ok" t-att-value="url_retour_ok"/>
+            <input type="hidden" name="url_retour_err" id="url_retour_err" t-att-value="url_retour_err"/>
+            <input type="hidden" name="lgue" id="lgue" t-att-value="lgue"/>
+            <input type="hidden" name="societe" id="societe" t-att-value="societe"/>
+            <input type="hidden" name="mail" id="mail" t-att-value="mail"/>
+            <input type="hidden" name="texte-libre" id="texte-libre" t-att-value="texte_libre"/>
+            <input type="hidden" name="3dsdebrayable" id="3dsdebrayable" t-att-value="ThreeDSecureDebrayable"/>
+            <input type="hidden" name="ThreeDSecureChallenge" id="ThreeDSecureChallenge" t-att-value="ThreeDSecureChallenge"/>
+            </form>
+        </template>
+
+    </data>
+</odoo>
