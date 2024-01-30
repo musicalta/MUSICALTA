@@ -6,16 +6,526 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 10:04+0000\n"
-"PO-Revision-Date: 2023-06-30 12:05+0200\n"
+"POT-Creation-Date: 2024-01-30 12:12+0000\n"
+"PO-Revision-Date: 2024-01-30 12:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 3.3.1\n"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__mail_count_done
+msgid "# Sent"
+msgstr ""
+
+#. module: musicalta_event
+#: model:mail.template,body_html:musicalta_event.weekly_student_follow_up_email_template
+msgid ""
+"<div class=\"o_mail_notification\">\n"
+"                <p>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='man'\">Dear </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='female'\">Dear </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='nc'\">Dear </span>\n"
+"                    <span t-esc=\"object.teacher_id.firstname\" />,\n"
+"                </p>\n"
+"\n"
+"                <t t-set=\"nb_students\" t-value=\"len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))\"/>\n"
+"                <t t-if=\"object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &lt; 2\">Here are some updates from your <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> class in main discipline for the Printemps Musical <span t-esc=\"object.create_date.year\"/> master classes.</p>\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &gt; 1\">Here are some updates from your <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> classes in main discipline for the Printemps Musical <span t-esc=\"object.create_date.year\"/> master classes.</p>\n"
+"                    <br/>\n"
+"                    <t t-foreach=\"object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)\" t-as=\"discipline\">\n"
+"                        \n"
+"                        <p>For the discipline: <span t-esc=\"discipline.name\" /></p>\n"
+"                        <t t-set=\"nb_students_discipline\" t-value=\"len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))\"/>\n"
+"                        \n"
+"                        <t t-if=\"nb_students_discipline == 0\">\n"
+"                            <p> - At this stage, we have not yet received any registrations.</p>\n"
+"                        </t>\n"
+"                        <t t-elif=\"nb_students_discipline &gt; 0 \">\n"
+"                            <p> - There is/are <span t-esc=\"nb_students_discipline\" /> student(s) in the process of application. Here are the details :</p>\n"
+"                            <div style=\"margin: 0px; padding: 0px;\">\n"
+"                                <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                    <thead>\n"
+"                                        <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                            <th width=\"20%\">Last Name</th>\n"
+"                                            <th width=\"20%\">First Name</th>\n"
+"                                            <th width=\"10%\">School</th>\n"
+"                                            <th width=\"10%\">Usual Teacher</th>\n"
+"                                            <th width=\"10%\">Level</th>\n"
+"                                            <th width=\"10%\">Age</th>\n"
+"                                            <th width=\"20%\">Sheet Music</th>\n"
+"                                        </tr>\n"
+"                                    </thead>\n"
+"                                    <tbody>\n"
+"                                <t t-foreach=\"object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)\" t-as=\"student\">\n"
+"                                            <tr >\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.lastname or '/'\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.firstname or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.school or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.usual_teacher or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.old\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.partition or '/'\"/></div></td>\n"
+"                                            </tr>\n"
+"                                    </t>\n"
+"                                    </tbody>\n"
+"                                    </table>\n"
+"                            </div>\n"
+"                        </t>\n"
+"                        <p><br/></p>\n"
+"                \n"
+"                    </t>\n"
+"                </t>\n"
+"                <t t-set=\"options\" t-value=\"object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)\"/>\n"
+"\n"
+"                <t t-if=\"object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(options) &lt; 2\">Here are some updates from your class for the Printemps Musical <span t-esc=\"object.create_date.year\"/> master classes.</p>\n"
+"                    <p t-if=\"len(options) &gt; 1\">Here are some updates from your classes for the Printemps Musical <span t-esc=\"object.create_date.year\"/> master classes.</p>\n"
+"                    <br/>\n"
+"                </t>\n"
+"                \n"
+"                <t t-foreach=\"options\" t-as=\"option\">\n"
+"                    <t t-set=\"option_students\" t-value=\"object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)\"/>\n"
+"                    <t t-set=\"nb_option_students\" t-value=\"len(option_students)\"/>\n"
+"                    \n"
+"                    <p>For the option \"<span t-esc=\"option.option_id.name\" />\" (<span t-esc=\"option.product_id.name\"/>):</p>\n"
+"                    <t t-if=\"nb_option_students == 0\">\n"
+"                        <p> - At this stage, we have not yet received any registrations.</p>\n"
+"                    </t>\n"
+"                    <t t-elif=\"nb_option_students &gt; 0 \">\n"
+"                        \n"
+"                        <p> - There is/are <span t-esc=\"nb_option_students\" /> student(s) in the process of application. Here are the details :</p>\n"
+"                        <div style=\"margin: 0px; padding: 0px;\">\n"
+"                            <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                <thead>\n"
+"                                    <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                        <th width=\"20%\">Last Name</th>\n"
+"                                        <th width=\"20%\">First Name</th>\n"
+"                                        <th width=\"10%\">School</th>\n"
+"                                        <th width=\"10%\">Usual Teacher</th>\n"
+"                                        <th width=\"10%\">Level</th>\n"
+"                                        <th width=\"10%\">Age</th>\n"
+"                                        <th width=\"20%\">Sheet Music</th>\n"
+"                                    </tr>\n"
+"                                </thead>\n"
+"                                <tbody>\n"
+"                                    <t t-foreach=\"option_students\" t-as=\"option_student\">\n"
+"                                        <tr >\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.lastname or '/'\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.firstname or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.school or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.usual_teacher or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.old\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.partition or '/'\"/></div></td>\n"
+"                                        </tr>\n"
+"                                    </t>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                    <p><br/></p>\n"
+"                </t>\n"
+"                <t t-if=\"nb_students &lt;= 5\">\n"
+"                    <p>Do not hesitate to relaunch your contacts and make your presence known to as many students and colleagues around you as possible (social networks, e-mails...).</p>\n"
+"                </t>\n"
+"                <p>The PDF brochure is useful for your communication, here it is attached. Students can register directly at <a href=\"https://www.musicalta.com\">www.musicalta.com</a></p>\n"
+"                <p>We remain at your disposal for any information from Monday to Friday, from 9am to 6pm at:<br/>\n"
+"                academie@musicalta.com<br/>\n"
+"                +33 (0) 9 72 32 87 84</p>\n"
+"                <p>Looking forward to seeing you this spring!</p>\n"
+"            </div>"
+msgstr ""
+"<div class=\"o_mail_notification\">\n"
+"                <p>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='man'\">Cher </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='female'\">Chère </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='nc'\">Cher/Chère </span>\n"
+"                    <span t-esc=\"object.teacher_id.firstname\" />,\n"
+"                </p>\n"
+"                <t t-set=\"nb_students\" t-value=\"len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))\"/>\n"
+"                <t t-if=\"object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &lt; 2\">Voici quelques nouvelles de votre classe de <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> en discipline principale pour les master classes du Printemps Musical <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &gt; 1\">Voici quelques nouvelles de vos classes de <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> en disciplines principales pour les master classes du Printemps Musical <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                    <t t-foreach=\"object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)\" t-as=\"discipline\">\n"
+"                        \n"
+"                        <p>Pour la discipline : <span t-esc=\"discipline.name\" /></p>\n"
+"                        <t t-set=\"nb_students_discipline\" t-value=\"len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))\"/>\n"
+"                        \n"
+"                        <t t-if=\"nb_students_discipline == 0\">\n"
+"                            <p> - À ce stade, nous n'avons encore reçu aucune inscription.</p>\n"
+"                        </t>\n"
+"                        <t t-elif=\"nb_students_discipline &gt; 0 \">\n"
+"                            <p> - Il y a <span t-esc=\"nb_students_discipline\" /> étudiant(s) en cours d’inscription. Voici les détails :</p>\n"
+"                            <div style=\"margin: 0px; padding: 0px;\">\n"
+"                                <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                    <thead>\n"
+"                                    <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                            <th width=\"20%\">Nom</th>\n"
+"                                            <th width=\"20%\">Prénom</th>\n"
+"                                            <th width=\"10%\">École</th>\n"
+"                                            <th width=\"10%\">Professeur Habituel</th>                                    \n"
+"                                            <th width=\"10%\">Niveau</th>\n"
+"                                            <th width=\"10%\">Âge</th>\n"
+"                                            <th width=\"20%\">Partition</th>\n"
+"                                        </tr>\n"
+"                                    </thead>\n"
+"                                    <tbody>\n"
+"                                <t t-foreach=\"object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)\" t-as=\"student\">\n"
+"                                            <tr >\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.lastname or '/'\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.firstname or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.school or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.usual_teacher or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.old\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.partition or '/'\"/></div></td>\n"
+"                                            </tr>\n"
+"                                    </t>\n"
+"                                    </tbody>\n"
+"                                    </table>\n"
+"                            </div>\n"
+"                        </t>\n"
+"                        <p><br/></p>\n"
+"                \n"
+"                    </t>\n"
+"                </t>\n"
+"                <t t-set=\"options\" t-value=\"object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)\"/>\n"
+"                <t t-if=\"object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(options) &lt; 2\">Voici quelques nouvelles de votre classe pour les master classes du Printemps Musical <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(options) &gt; 1\">Voici quelques nouvelles de vos classes pour les master classes du Printemps Musical <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                </t>\n"
+"                <t t-foreach=\"options\" t-as=\"option\">\n"
+"                    <t t-set=\"option_students\" t-value=\"object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)\"/>\n"
+"                    <t t-set=\"nb_option_students\" t-value=\"len(option_students)\"/>\n"
+"                    \n"
+"                    <p>Pour l'option \"<span t-esc=\"option.option_id.name\" />\" (<span t-esc=\"option.product_id.name\"/>):</p>\n"
+"                    <t t-if=\"nb_option_students == 0\">\n"
+"                        <p> - À ce stade, nous n'avons encore reçu aucune inscription pour cette option.</p>\n"
+"                    </t>\n"
+"                    <t t-elif=\"nb_option_students &gt; 0 \">\n"
+"                        \n"
+"                        <p> - Il y a <span t-esc=\"nb_option_students\" /> étudiant(s) en cours d’inscription. Voici les détails :</p>\n"
+"                        <div style=\"margin: 0px; padding: 0px;\">\n"
+"                            <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                <thead>\n"
+"                                <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                        <th width=\"20%\">Nom</th>\n"
+"                                        <th width=\"20%\">Prénom</th>\n"
+"                                        <th width=\"10%\">École</th>\n"
+"                                        <th width=\"10%\">Professeur Habituel</th>\n"
+"                                        <th width=\"10%\">Niveau</th>\n"
+"                                        <th width=\"10%\">Âge</th>\n"
+"                                        <th width=\"20%\">Partition</th>\n"
+"                                    </tr>\n"
+"                                </thead>\n"
+"                                <tbody>\n"
+"                                    <t t-foreach=\"option_students\" t-as=\"option_student\">\n"
+"                                        <tr >\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.lastname or '/'\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.firstname or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.school or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.usual_teacher or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.old\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.partition or '/'\"/></div></td>\n"
+"                                        </tr>\n"
+"                                    </t>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                    <p><br/></p>\n"
+"                </t>\n"
+"                <t t-if=\"nb_students &lt;= 5\">\n"
+"                    <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence aux master classes au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>\n"
+"                </t>\n"
+"                <p>La brochure pdf est pratique pour communiquer, la voici en attaché. Les étudiants peuvent s’inscrire directement sur <a href=\"https://www.musicalta.com\">www.musicalta.com</a></p>\n"
+"                <p>Nous restons à votre disposition pour toute information du lundi au vendredi de 9h à 18h à :<br/>\n"
+"                academie@musicalta.com<br/>\n"
+"                +33 (0) 9 72 32 87 84</p>\n"
+"                <p>Au plaisir de vous retrouver ce printemps !</p>\n"
+"            </div>"
+
+#. module: musicalta_event
+#: model:mail.template,body_html:musicalta_event.weekly_student_musicalta_follow_up_email_template
+msgid ""
+"<div class=\"o_mail_notification\">\n"
+"                <p><span t-if=\"object.teacher_id.work_contact_id.gender =='man'\">Dear </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='female'\">Dear </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='nc'\">Dear </span>\n"
+"                     <span t-esc=\"object.teacher_id.firstname\" />,</p>\n"
+"                \n"
+"                <t t-set=\"nb_students\" t-value=\"len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))\"/>\n"
+"                <t t-if=\"object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &lt; 2\">Here's some news from your <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> class in main for Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &gt; 1\">Here's some news from your <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> classes in main for Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                    <t t-foreach=\"object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)\" t-as=\"discipline\">\n"
+"                        \n"
+"                        <p>For the discipline: <span t-esc=\"discipline.name\" /></p>\n"
+"                        <t t-set=\"nb_students_discipline\" t-value=\"len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))\"/>\n"
+"                        \n"
+"                        <t t-if=\"nb_students_discipline == 0\">\n"
+"                            <p> - At this stage, we have not yet received any registrations.</p>\n"
+"                        </t>\n"
+"                        <t t-elif=\"nb_students_discipline &gt; 0 \">\n"
+"                            <p> - There is/are <span t-esc=\"nb_students_discipline\" /> student(s) in the process of application. Here are the details :</p>\n"
+"                            <div style=\"margin: 0px; padding: 0px;\">\n"
+"                                <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                    <thead>\n"
+"                                        <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                            <th width=\"20%\">Last Name</th>\n"
+"                                            <th width=\"20%\">First Name</th>\n"
+"                                            <th width=\"10%\">School</th>\n"
+"                                            <th width=\"10%\">Usual Teacher</th>\n"
+"                                            <th width=\"10%\">Level</th>\n"
+"                                            <th width=\"10%\">Age</th>\n"
+"                                            <th width=\"20%\">Sheet Music</th>\n"
+"                                        </tr>\n"
+"                                    </thead>\n"
+"                                    <tbody>\n"
+"                                <t t-foreach=\"object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)\" t-as=\"student\">\n"
+"                                            <tr >\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.lastname or '/'\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.firstname or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.school or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.usual_teacher or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.old\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.partition or '/'\"/></div></td>\n"
+"                                            </tr>\n"
+"                                    </t>\n"
+"                                    </tbody>\n"
+"                                    </table>\n"
+"                            </div>\n"
+"                        </t>\n"
+"                        <p><br/></p>\n"
+"                        \n"
+"                \n"
+"                    </t>\n"
+"                </t>\n"
+"                <t t-set=\"options\" t-value=\"object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)\"/>\n"
+"                <t t-if=\"object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(options) &lt; 2\">Here are some updates from your class for Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(options) &gt; 1\">Here are some updates from your classes for Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                </t>\n"
+"                <t t-foreach=\"options\" t-as=\"option\">\n"
+"                    <t t-set=\"option_students\" t-value=\"object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)\"/>\n"
+"                    <t t-set=\"nb_option_students\" t-value=\"len(option_students)\"/>\n"
+"                    \n"
+"                    <p>For the option \"<span t-esc=\"option.option_id.name\" />\" (<span t-esc=\"option.product_id.name\"/>):</p>\n"
+"                    <t t-if=\"nb_option_students == 0\">\n"
+"                        <p> - At this stage, we have not yet received any registrations.</p>\n"
+"                    </t>\n"
+"                    <t t-elif=\"nb_option_students &gt; 0 \">\n"
+"                        \n"
+"                        <p> - There is/are <span t-esc=\"nb_option_students\" /> student(s) in the process of application. Here are the details :</p>\n"
+"                        <div style=\"margin: 0px; padding: 0px;\">\n"
+"                            <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                <thead>\n"
+"                                <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                        <th width=\"20%\">Last Name</th>\n"
+"                                        <th width=\"20%\">First Name</th>\n"
+"                                        <th width=\"10%\">School</th>\n"
+"                                        <th width=\"10%\">Usual Teacher</th>\n"
+"                                        <th width=\"10%\">Level</th>\n"
+"                                        <th width=\"10%\">Age</th>\n"
+"                                        <th width=\"20%\">Sheet Music</th>\n"
+"                                    </tr>\n"
+"                                </thead>\n"
+"                                <tbody>\n"
+"                                    <t t-foreach=\"option_students\" t-as=\"option_student\">\n"
+"                                        <tr >\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.lastname or '/'\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.firstname or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.school or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.usual_teacher or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.old\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.partition or '/'\"/></div></td>\n"
+"                                        </tr>\n"
+"                                    </t>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                    <p><br/></p>\n"
+"                    \n"
+"                </t>\n"
+"                <t t-if=\"nb_students &lt;= 5\">\n"
+"                    <p>Do not hesitate to relaunch your contacts and make your presence at the Academy known to the greatest number of students and colleagues around you (social networks, emails, etc.)</p>\n"
+"                </t>\n"
+"                <p>The PDF brochure is useful for your communication, here it is attached. Students can register directly at <a href=\"https://www.musicalta.com\">www.musicalta.com</a></p>\n"
+"                <p>We remain at your disposal for any information from Monday to Friday, from 9am to 6pm at:<br/>\n"
+"                academie@musicalta.com<br/>\n"
+"                +33 (0) 9 72 32 87 84</p>\n"
+"                <p>Looking forward to seeing you this summer!</p>\n"
+"            </div>"
+msgstr ""
+"<div class=\"o_mail_notification\">\n"
+"                <p><span t-if=\"object.teacher_id.work_contact_id.gender =='man'\">Cher </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='female'\">Chère </span>\n"
+"                    <span t-if=\"object.teacher_id.work_contact_id.gender =='nc'\">Cher/Chère </span>\n"
+"                    <span t-esc=\"object.teacher_id.firstname\" />,</p>\n"
+"                \n"
+"                <t t-set=\"nb_students\" t-value=\"len(object.scheduler_id.event_id.get_teacher_participants(object.teacher_id))\"/>\n"
+"                <t t-if=\"object.teacher_id.id in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &lt; 2\">Voici quelques nouvelles de votre classe de <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> en discipline principale pour l’Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(object.teacher_id.discipline_ids) &gt; 1\">Voici quelques nouvelles de vos classes de <t t-esc=\"', '.join([discipline.name for discipline in object.teacher_id.discipline_ids])\" /> en disciplines principales pour l’Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                    <t t-foreach=\"object.scheduler_id.event_id.get_teacher_disciplines(object.teacher_id)\" t-as=\"discipline\">\n"
+"                        \n"
+"                        <p>Pour la discipline : <span t-esc=\"discipline.name\" /></p>\n"
+"                        <t t-set=\"nb_students_discipline\" t-value=\"len(object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id))\"/>\n"
+"                        \n"
+"                        <t t-if=\"nb_students_discipline == 0\">\n"
+"                            <p> - À ce stade, nous n'avons encore reçu aucune inscription.</p>\n"
+"                        </t>\n"
+"                        <t t-elif=\"nb_students_discipline &gt; 0 \">\n"
+"                            <p> - Il y a <span t-esc=\"nb_students_discipline\" /> étudiant(s) en cours d’inscription. Voici les détails :</p>\n"
+"                            <div style=\"margin: 0px; padding: 0px;\">\n"
+"                                <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                    <thead>\n"
+"                                    <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                            <th width=\"20%\">Nom</th>\n"
+"                                            <th width=\"20%\">Prénom</th>\n"
+"                                            <th width=\"10%\">École</th>\n"
+"                                            <th width=\"10%\">Professeur Habituel</th>                                    \n"
+"                                            <th width=\"10%\">Niveau</th>\n"
+"                                            <th width=\"10%\">Âge</th>\n"
+"                                            <th width=\"20%\">Partition</th>\n"
+"                                        </tr>\n"
+"                                    </thead>\n"
+"                                    <tbody>\n"
+"                                <t t-foreach=\"object.scheduler_id.event_id.get_teacher_discipline_participants(object.teacher_id.id, discipline.id)\" t-as=\"student\">\n"
+"                                            <tr >\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.lastname or '/'\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.firstname or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.school or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.usual_teacher or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                                <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"student.old\"/></div></td>\n"
+"                                                <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"student.partition or '/'\"/></div></td>\n"
+"                                            </tr>\n"
+"                                    </t>\n"
+"                                    </tbody>\n"
+"                                    </table>\n"
+"                            </div>\n"
+"                        </t>\n"
+"                        <p><br/></p>\n"
+"                \n"
+"                    </t>\n"
+"                </t>\n"
+"                \n"
+"                <t t-set=\"options\" t-value=\"object.scheduler_id.event_id.get_teacher_options(object.teacher_id.id)\"/>\n"
+"                <t t-if=\"object.teacher_id.id not in object.scheduler_id.event_id.teacher_ids.ids\">\n"
+"                    <p t-if=\"len(options) &lt; 2\">Voici quelques nouvelles de votre classe pour l’Académie Musicalta <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <p t-if=\"len(options) &gt; 1\">Voici quelques nouvelles de vos classes pour l’Académie Musicalta  <span t-esc=\"object.create_date.year\"/>.</p>\n"
+"                    <br/>\n"
+"                </t>\n"
+"                <t t-foreach=\"options\" t-as=\"option\">\n"
+"                    <t t-set=\"option_students\" t-value=\"object.scheduler_id.event_id.get_teacher_options_participants(object.teacher_id.id, option.option_id.id, option.product_id.id)\"/>\n"
+"                    <t t-set=\"nb_option_students\" t-value=\"len(option_students)\"/>\n"
+"                    \n"
+"                    <p>Pour l'option \"<span t-esc=\"option.option_id.name\" />\" (<span t-esc=\"option.product_id.name\"/>):</p>\n"
+"                    <t t-if=\"nb_option_students == 0\">\n"
+"                        <p> - À ce stade, nous n'avons encore reçu aucune inscription pour cette option.</p>\n"
+"                    </t>\n"
+"                    <t t-elif=\"nb_option_students &gt; 0 \">\n"
+"                        \n"
+"                        <p> - Il y a <span t-esc=\"nb_option_students\" /> étudiant(s) en cours d’inscription. Voici les détails :</p>\n"
+"                        <div style=\"margin: 0px; padding: 0px;\">\n"
+"                            <table border=\"1\" cellspacing=\"0\" width=\"100%\" class=\"table table-bordered table-striped\">\n"
+"                                <thead>\n"
+"                                <tr style=\"border-bottom: 2px solid #dee2e6 !important;\">\n"
+"                                        <th width=\"20%\">Nom</th>\n"
+"                                        <th width=\"20%\">Prénom</th>\n"
+"                                        <th width=\"10%\">École</th>\n"
+"                                        <th width=\"10%\">Professeur Habituel</th>\n"
+"                                        <th width=\"10%\">Niveau</th>\n"
+"                                        <th width=\"10%\">Âge</th>\n"
+"                                        <th width=\"20%\">Partition</th>\n"
+"                                    </tr>\n"
+"                                </thead>\n"
+"                                <tbody>\n"
+"                                    <t t-foreach=\"option_students\" t-as=\"option_student\">\n"
+"                                        <tr >\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.lastname or '/'\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.firstname or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.school or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.usual_teacher or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.musical_level_id.name or '/'\"/></div></td>\n"
+"                                            <td width=\"10%\"><div  width=\"100%\"><span t-esc=\"option_student.old\"/></div></td>\n"
+"                                            <td width=\"20%\"><div  width=\"100%\"><span t-esc=\"option_student.partition or '/'\"/></div></td>\n"
+"                                        </tr>\n"
+"                                    </t>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                    <p><br/></p>\n"
+"                </t>\n"
+"                <t t-if=\"nb_students &lt;= 5\">\n"
+"                    <p>N’hésitez pas à relancer vos contacts et à faire connaître votre présence à l'académie au plus grand nombre d'étudiants et collègues autour de vous (réseaux sociaux, mails…).</p>\n"
+"                </t>\n"
+"                <p>La brochure pdf est pratique pour communiquer, la voici en attaché. Les étudiants peuvent s’inscrire directement sur <a href=\"https://www.musicalta.com\">www.musicalta.com</a></p>\n"
+"                <p>Nous restons à votre disposition pour toute information du lundi au vendredi de 9h à 18h à :<br/>\n"
+"                academie@musicalta.com<br/>\n"
+"                +33 (0) 9 72 32 87 84</p>\n"
+"                <p>Au plaisir de vous retrouver cet été !</p>\n"
+"            </div>"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__registration_id
+msgid "Attendee"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event__available_product_ids
+msgid "Available Products"
+msgstr ""
 
 #. module: musicalta_event
 #: model:ir.model.fields,help:musicalta_event.field_event_registration__teacher_id
@@ -23,14 +533,58 @@ msgid "Choose the teacher related to this ticket"
 msgstr "Choisissez le professeur correspondant à ce billet"
 
 #. module: musicalta_event
-#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__discipline_id
-msgid "Discipline"
-msgstr "Discipline"
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher__mail_registration_ids
+msgid "Communication related to event registrations"
+msgstr ""
 
 #. module: musicalta_event
-#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__discipline_ids
-msgid "Disciplines"
-msgstr "Disciplines"
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__create_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__create_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__create_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__create_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__create_date
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__create_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__create_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__create_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__interval_unit__days
+msgid "Days"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__discipline_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__discipline_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_registration__discipline_id
+msgid "Discipline"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__display_name
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__display_name
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__display_name
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__display_name
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__sequence
+msgid "Display order"
+msgstr ""
 
 #. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_registration_editor_line
@@ -38,9 +592,28 @@ msgid "Edit Attendee Line on Sales Confirmation"
 msgstr "Editer la ligne du participant sur la confirmation de la vente"
 
 #. module: musicalta_event
+#: model:mail.template,description:musicalta_event.weekly_student_follow_up_email_template
+#: model:mail.template,description:musicalta_event.weekly_student_musicalta_follow_up_email_template
+msgid "Email template for weekly student follow-up"
+msgstr ""
+
+#. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_event_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__event_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__event_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__event_id
 msgid "Event"
 msgstr "Événement"
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_mail_teacher
+msgid "Event Automated Mailing for teachers"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event__event_options_ids
+msgid "Event Options"
+msgstr ""
 
 #. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_event_registration
@@ -48,9 +621,316 @@ msgid "Event Registration"
 msgstr "Inscription à l'événement"
 
 #. module: musicalta_event
+#. odoo-python
+#: code:addons/musicalta_event/models/event_mail_teachers.py:0
+#, python-format
+msgid ""
+"Event Scheduler for:\n"
+"  - Event: %(event_name)s (%(event_id)s)\n"
+"  - Scheduled: %(date)s\n"
+"  - Template: %(template_name)s (%(template_id)s)\n"
+"\n"
+"Failed with error:\n"
+"  - %(error)s\n"
+"\n"
+"You receive this email because you are:\n"
+"  - the organizer of the event,\n"
+"  - or the responsible of the event,\n"
+"  - or the last writer of the template.\n"
+msgstr ""
+
+#. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_event_event_ticket
 msgid "Event Ticket"
 msgstr "Ticket d'événement"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event__event_mail_teacher_ids
+msgid "Event teachers mail"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.actions.server,name:musicalta_event.event_mail_teacher_scheduler_ir_actions_server
+#: model:ir.cron,cron_name:musicalta_event.event_mail_teacher_scheduler
+msgid "Event: Mail Scheduler"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__mail_state
+msgid "Global communication Status"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__interval_unit__hours
+msgid "Hours"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__id
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__id
+msgid "ID"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__message_has_error
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__interval_unit__now
+msgid "Immediately"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__interval_nbr
+msgid "Interval"
+msgstr "Intervalle"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__is_option
+msgid "Is option"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__is_supplement
+msgid "Is supplement"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training____last_update
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option____last_update
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher____last_update
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration____last_update
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__write_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__write_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__write_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__write_uid
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__write_date
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__write_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__write_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__write_date
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__notification_type__mail
+msgid "Mail"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__mail_registration_ids
+msgid "Mail Registration"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__scheduler_id
+msgid "Mail Scheduler"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__mail_sent
+msgid "Mail Sent"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__interval_unit__months
+msgid "Months"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__number_of_student
+msgid "Nombre d'élèves"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_registration__number_of_repas
+msgid "Nombre de repas"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_employee_option__name
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__option_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_registration__option_id
+msgid "Option"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.actions.act_window,name:musicalta_event.action_view_event_options
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_ticket_tree_view
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_ticket_tree_view_options
+msgid "Options"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__price
+msgid "Prix"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__product_id
+msgid "Product"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__professor_id
+msgid "Professor"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_mail_teacher_registration
+msgid "Registration Mail Scheduler for teachers"
+msgstr ""
+
+#. module: musicalta_event
+#: model:mail.template,name:musicalta_event.weekly_student_musicalta_follow_up_email_template
+msgid "Relance professeurs Musicalta Académie Musicalta"
+msgstr ""
+
+#. module: musicalta_event
+#: model:mail.template,name:musicalta_event.weekly_student_follow_up_email_template
+msgid "Relance professeurs Musicalta Printemps Musical"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__mail_state__running
+msgid "Running"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__sale_order_id
+msgid "Sale Order"
+msgstr ""
 
 #. module: musicalta_event
 #: model:ir.model,name:musicalta_event.model_sale_order_line
@@ -58,18 +938,65 @@ msgid "Sales Order Line"
 msgstr "Ligne de commande"
 
 #. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__scheduled_date
+msgid "Schedule Date"
+msgstr "Date planifiée"
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__mail_state__scheduled
+msgid "Scheduled"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__scheduled_date
+msgid "Scheduled Time"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: musicalta_event
 #. odoo-python
 #: code:addons/musicalta_event/models/event_event.py:0
 #, python-format
 msgid ""
-"Selected teacher have no discipline registred. You must fill a discpline "
-"for this teacher \"{teacher}\""
+"Selected teacher have no discipline registred. You must fill a discpline for"
+" this teacher \"{teacher}\""
 msgstr ""
 "L'enseignant sélectionné n'a pas de discipline enregistrée. Vous devez "
 "renseigner une discipline pour cet enseignant \"{teacher}\""
 
 #. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__notification_type
+msgid "Send"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__mail_done
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__mail_state__sent
+msgid "Sent"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_courses_training__student_id
+msgid "Student"
+msgstr ""
+
+#. module: musicalta_event
 #: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__teacher_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__teacher_id
+#: model:ir.model.fields,field_description:musicalta_event.field_event_option__teacher_id
 #: model:ir.model.fields,field_description:musicalta_event.field_event_registration__teacher_id
 #: model:ir.model.fields,field_description:musicalta_event.field_registration_editor_line__teacher_id
 #: model:ir.model.fields,field_description:musicalta_event.field_sale_order_line__teacher_id
@@ -78,12 +1005,94 @@ msgstr "Professeur"
 
 #. module: musicalta_event
 #: model:ir.model.fields,field_description:musicalta_event.field_event_event__teacher_ids
-#: model:ir.model.fields,field_description:musicalta_event.field_event_event_ticket__teacher_ids
 #: model:ir.model.fields,field_description:musicalta_event.field_event_registration__teacher_ids
 #: model:ir.model.fields,field_description:musicalta_event.field_sale_order_line__teacher_ids
 #: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_view_form_inherit
 msgid "Teachers"
 msgstr "Professeurs"
+
+#. module: musicalta_event
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_view_form_inherit
+msgid "Teachers mails"
+msgstr "Relances Professeurs"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__template_ref
+msgid "Template"
+msgstr "Modèle"
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__template_model_id
+msgid "Template Model"
+msgstr ""
+
+#. module: musicalta_event
+#. odoo-python
+#: code:addons/musicalta_event/models/event_mail_teachers.py:0
+#, python-format
+msgid ""
+"The template which is referenced should be coming from %(model_name)s model."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_employee_option
+msgid "This model represents an option like a musical level"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.actions.act_window,name:musicalta_event.action_view_event_tickets
+#: model_terms:ir.ui.view,arch_db:musicalta_event.event_event_form_view_inherit
+msgid "Tickets"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher__interval_unit
+msgid "Unit"
+msgstr "Unité de temps"
+
+#. module: musicalta_event
+#. odoo-python
+#: code:addons/musicalta_event/models/event_mail_teachers.py:0
+#, python-format
+msgid "WARNING: Event Scheduler Error for event: %s"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,help:musicalta_event.field_event_mail_teacher_registration__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: musicalta_event
+#: model:mail.template,subject:musicalta_event.weekly_student_musicalta_follow_up_email_template
+msgid ""
+"Weekly Student report - Musicalta Academy - {{ (object.teacher_id.name) }} -"
+"  {{ (object.scheduler_id.event_id.name) }}"
+msgstr ""
+"Suivi étudiant hebdomadaire - Académie Musicalta - {{ "
+"(object.teacher_id.name) }} -  {{ (object.scheduler_id.event_id.name) }}"
+
+#. module: musicalta_event
+#: model:mail.template,subject:musicalta_event.weekly_student_follow_up_email_template
+msgid ""
+"Weekly student report - Printemps Musical - {{ (object.teacher_id.name) }}"
+msgstr ""
+"Suivi étudiant hebdomadaire - Printemps Musical - {{ "
+"(object.teacher_id.name) }}"
+
+#. module: musicalta_event
+#: model:ir.model.fields.selection,name:musicalta_event.selection__event_mail_teacher__interval_unit__weeks
+msgid "Weeks"
+msgstr ""
 
 #. module: musicalta_event
 #. odoo-python
@@ -105,5 +1114,25 @@ msgid ""
 "event, but there is already a registration for this event with this teacher."
 msgstr ""
 "Vous avez supprimé un enseignant de la liste des enseignants disponibles "
-"pour cet événement, mais il y a déjà une inscription pour cet événement "
-"avec cet enseignant."
+"pour cet événement, mais il y a déjà une inscription pour cet événement avec"
+" cet enseignant."
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_courses_training
+msgid "courses.training"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model,name:musicalta_event.model_event_option
+msgid "event.option"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_event__options_event_ticket_id
+msgid "string"
+msgstr ""
+
+#. module: musicalta_event
+#: model:ir.model.fields,field_description:musicalta_event.field_event_mail_teacher_registration__activity_team_user_ids
+msgid "test field"
+msgstr ""

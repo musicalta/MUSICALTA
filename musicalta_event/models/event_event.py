@@ -17,6 +17,11 @@ class Event(models.Model):
         'event_id',
         string='Event Options'
     )
+    event_mail_teacher_ids = fields.One2many(
+        'event.mail.teacher',
+        'event_id',
+        string='Event teachers mail'
+    )
     options_event_ticket_id = fields.One2many(
         'event.event.ticket',
         'event_id',
@@ -28,9 +33,41 @@ class Event(models.Model):
         string='Available Products',
     )
 
+    def get_teacher_participants(self, teacher_id):
+        event_registration = self.registration_ids.filtered(
+            lambda registration: registration.teacher_id.id == teacher_id.id and registration.discipline_id.id in teacher_id.discipline_ids.ids)
+        return event_registration.mapped('partner_id')
+
+    def get_teacher_disciplines(self, teacher_id):
+        teacher_discipline_ids = teacher_id.discipline_ids
+        return teacher_discipline_ids
+
+    def get_teacher_discipline_participants(self, teacher_id, discipline_id):
+        participants = self.registration_ids.filtered(
+            lambda registration: registration.teacher_id.id == teacher_id and registration.discipline_id.id == discipline_id)
+        return participants.mapped('partner_id')
+
+    def get_teacher_options(self, teacher_id):
+        teacher_option_ids = self.options_event_ticket_id.filtered(
+            lambda option: option.teacher_id.id == teacher_id)
+        return teacher_option_ids
+
+    def get_teacher_options_participants(self, teacher_id, option_id, product_id):
+        options = self.registration_ids.filtered(
+            lambda registration: (
+                registration.teacher_id.id == teacher_id and
+                any(
+                    option.option_id.id == option_id and option.product_id.id == product_id
+                    for option in registration.inscription_id.options_ids
+                )
+            )
+        )
+        return options.mapped('partner_id')
+
     def action_view_tickets(self):
         self.ensure_one()
-        view_id = self.env.ref('musicalta_event.event_event_ticket_tree_view').id
+        view_id = self.env.ref(
+            'musicalta_event.event_event_ticket_tree_view').id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Tickets',
@@ -39,10 +76,11 @@ class Event(models.Model):
             'domain': [('event_id', '=', self.id), ('is_option', '=', False)],
             'context': {'default_event_id': self.id},
         }
-    
+
     def action_view_event_options(self):
         self.ensure_one()
-        view_id = self.env.ref('musicalta_event.event_event_ticket_tree_view_options').id
+        view_id = self.env.ref(
+            'musicalta_event.event_event_ticket_tree_view_options').id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Options',
@@ -54,7 +92,6 @@ class Event(models.Model):
             ],
             'context': {'default_event_id': self.id},
         }
-    
 
     @api.model_create_multi
     def create(self, vals_list):

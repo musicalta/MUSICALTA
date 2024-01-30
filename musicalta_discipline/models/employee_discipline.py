@@ -10,6 +10,7 @@ class EmployeeDiscipline(models.Model):
     name = fields.Char(
         string='Discipline',
         required=True,
+        translate=True,
     )
     teacher_ids = fields.Many2many(
         string='Teachers',
