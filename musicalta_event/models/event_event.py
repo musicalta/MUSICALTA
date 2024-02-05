@@ -108,7 +108,9 @@ class Event(models.Model):
     def remove_old_ticket(self):
         for ticket in self.event_ticket_ids:
             teacher = ticket.teacher_id
-            if teacher.id not in self.teacher_ids.ids:
+            list_teachers = self.teacher_ids | self.options_event_ticket_id.mapped(
+                'teacher_id')
+            if teacher.id not in list_teachers.ids:
                 if ticket.seats_reserved or ticket.seats_unconfirmed:
                     raise UserError(_('You have deleted a teacher from the list of teachers available for this '
                                       'event, but there is already a registration for this event with this '
