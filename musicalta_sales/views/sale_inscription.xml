@@ -5,8 +5,14 @@
         <field name="arch" type="xml">
             <form string="Event Registration">
                 <header>
+                    <field name="active" invisible="1"/>
                     <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight"/>
+                    <button string="Désarchiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <button string="Archiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '!=', True)]}"/>
                 </header>
+                <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('active', '=', True)]}">
+                    <strong>Archivé !</strong>
+                </div>
                 <div
                     class="alert alert-warning"
                     role="alert"
@@ -47,6 +53,7 @@
                             </div>
                         </button>
                     </div>
+                    
                     <field name="avatar_128" invisible="1"/>
                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     <group>

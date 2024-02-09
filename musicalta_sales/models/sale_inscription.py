@@ -21,6 +21,8 @@ class SaleInscription(models.Model):
         string='Name',
     )
 
+    active = fields.Boolean(string='Active', default=True)
+
     image_1920 = fields.Image(related='partner_id.image_1920')
 
     session_id = fields.Many2one(
@@ -302,6 +304,14 @@ class SaleInscription(models.Model):
             rec.product_work_room_domain_id = json.dumps(
                 [('is_work_rooms', '=', True), ('id', 'in', available_product_ids)]
             )
+
+    def toggle_active(self):
+        for record in self:
+            if record.active == True and record.sale_order_id:
+                self.env['event.registration'].search([
+                    ('sale_order_id', '=', record.sale_order_id.id),
+                ]).unlink()
+            record.active = not record.active
 
     def _get_discipline_specific_products(self):
         """
