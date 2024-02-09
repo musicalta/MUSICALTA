@@ -308,7 +308,7 @@ class SaleInscription(models.Model):
     def toggle_active(self):
         for record in self:
             if record.active == True and record.sale_order_id:
-                record.sale_order_id.action_cancel()
+                record.sale_order_id._action_cancel()
                 self.env['event.registration'].search([
                     ('sale_order_id', '=', record.sale_order_id.id),
                 ]).unlink()
