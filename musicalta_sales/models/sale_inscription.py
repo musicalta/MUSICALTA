@@ -293,7 +293,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-                rec.discipline_id_2.is_harpe:
+            rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -553,6 +553,10 @@ class SaleInscription(models.Model):
                     'name': additional_cost_product.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_2.name,
                 })
+            if event_ticket_id.seats_unconfirmed >= event_ticket_id.seats_max:
+                raise UserError(
+                    _('No more seats available for this teacher and discipline : %s %s (max %s reached)' % (self.teacher_id_2.name, self.discipline_id_2.name, event_ticket_id.seats_max)))
+
             event_registration.append({
                 'teacher_id': self.teacher_id_2.id,
                 'discipline_id': self.discipline_id_2.id,
