@@ -542,6 +542,10 @@ class SaleInscription(models.Model):
                     'name': additional_cost_product.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_2.name,
                 })
+            if event_ticket_id.seats_unconfirmed == event_ticket_id.seats_max or event_ticket_id.seats_unconfirmed > event_ticket_id.seats_max:
+                raise UserError(
+                    _('No more seats available for this teacher and discipline : %s %s (max %s reached)' % (self.teacher_id_2.name, self.discipline_id_2.name, event_ticket_id.seats_max)))
+
             event_registration.append({
                 'teacher_id': self.teacher_id_2.id,
                 'discipline_id': self.discipline_id_2.id,
