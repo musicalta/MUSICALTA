@@ -291,7 +291,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-            rec.discipline_id_2.is_harpe:
+                rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -813,3 +813,18 @@ class SaleInscription(models.Model):
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
+
+    def _get_fields_to_check_before_order_update(self):
+        return ['session_id', 'partner_id', 'date_order_arrival', 'date_of_departure', 'pricelist_id', 'product_pack_id', 'product_hebergement_id', 'product_bedroom_id', 'product_launch_id', 'discipline_id_1', 'teacher_id_1', 'discipline_id_2', 'teacher_id_2', 'options_ids', 'product_work_rooms_id']
+
+    def write(self, vals):
+        fields_to_check = self._get_fields_to_check_before_order_update()
+        needs_action = any(field in vals for field in fields_to_check)
+
+        result = super(SaleInscription, self).write(vals)
+
+        if needs_action:
+            for record in self:
+                record.action_update_or_create()
+
+        return result

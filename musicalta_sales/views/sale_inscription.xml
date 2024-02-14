@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <form string="Event Registration">
                 <header>
-                    <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight"/>
+                    <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight" attrs="{'invisible': [('sale_order_id', '=', False)]}"/>
                 </header>
                 <div
                     class="alert alert-warning"
