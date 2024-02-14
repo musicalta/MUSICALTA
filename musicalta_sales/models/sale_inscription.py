@@ -433,6 +433,11 @@ class SaleInscription(models.Model):
 
     def _update_or_create(self, vals):
         if self.sale_order_id:
+            self.sale_order_id.with_context(disable_cancel_warning=True).action_cancel()
+            self.sale_order_id.action_draft()
+            invoices = self.sale_order_id.invoice_ids
+            invoices.button_draft()
+            invoices.button_cancel()
             self.sale_order_id.order_line.filtered(
                 lambda x: x.inscription_id.id == self.id).unlink()
             events_registrations_ids = self.env['event.registration'].search([
@@ -461,7 +466,7 @@ class SaleInscription(models.Model):
         return sale_order
 
     def process_registration(self):
-        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
+        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT# 
         if not self.product_pack_id:
             raise UserError(_('You must select a pack'))
         if not self.sale_order_id:
