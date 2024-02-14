@@ -21,6 +21,8 @@ class SaleInscription(models.Model):
         string='Name',
     )
 
+    active = fields.Boolean(string='Active', default=True)
+
     image_1920 = fields.Image(related='partner_id.image_1920')
 
     session_id = fields.Many2one(
@@ -303,6 +305,15 @@ class SaleInscription(models.Model):
                 [('is_work_rooms', '=', True), ('id', 'in', available_product_ids)]
             )
 
+    def toggle_active(self):
+        for record in self:
+            if record.active == True and record.sale_order_id:
+                record.sale_order_id._action_cancel()
+                self.env['event.registration'].search([
+                    ('sale_order_id', '=', record.sale_order_id.id),
+                ]).unlink()
+            record.active = not record.active
+
     def _get_discipline_specific_products(self):
         """
         Récupère les ID de produits associés aux disciplines spécifiques (harpe, piano).
@@ -422,6 +433,8 @@ class SaleInscription(models.Model):
 
     def _update_or_create(self, vals):
         if self.sale_order_id:
+            self.sale_order_id.with_context(disable_cancel_warning=True).action_cancel()
+            self.sale_order_id.action_draft()
             self.sale_order_id.order_line.filtered(
                 lambda x: x.inscription_id.id == self.id).unlink()
             events_registrations_ids = self.env['event.registration'].search([
@@ -450,7 +463,7 @@ class SaleInscription(models.Model):
         return sale_order
 
     def process_registration(self):
-        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
+        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT# 
         if not self.product_pack_id:
             raise UserError(_('You must select a pack'))
         if not self.sale_order_id:
