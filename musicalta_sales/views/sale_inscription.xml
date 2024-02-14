@@ -6,7 +6,7 @@
             <form string="Event Registration">
                 <header>
                     <field name="active" invisible="1"/>
-                    <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight" attrs="{'invisible': [('sale_order_id', '=', False)]}"/>
+                    <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight" attrs="{'invisible': [('sale_order_id', '!=', False)]}"/>
                     <button string="Désarchiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '=', True)]}"/>
                     <button string="Archiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '!=', True)]}"/>
                 </header>
