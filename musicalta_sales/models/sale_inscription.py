@@ -435,9 +435,6 @@ class SaleInscription(models.Model):
         if self.sale_order_id:
             self.sale_order_id.with_context(disable_cancel_warning=True).action_cancel()
             self.sale_order_id.action_draft()
-            invoices = self.sale_order_id.invoice_ids
-            invoices.button_draft()
-            invoices.button_cancel()
             self.sale_order_id.order_line.filtered(
                 lambda x: x.inscription_id.id == self.id).unlink()
             events_registrations_ids = self.env['event.registration'].search([
