@@ -33,7 +33,7 @@
             </t>
             
             <tr class="border-black fw-bold o_total">
-                <td><strong>Amount Residual</strong></td>
+                <td><strong>Amount Due</strong></td>
                 <td  class="text-end">
                     <span  
                         t-field="doc.amount_residual" 
