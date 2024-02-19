@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-03 16:39+0000\n"
-"PO-Revision-Date: 2023-12-03 16:39+0000\n"
+"POT-Creation-Date: 2024-02-19 15:23+0000\n"
+"PO-Revision-Date: 2024-02-19 15:23+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -213,8 +213,36 @@ msgid ""
 msgstr ""
 
 #. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                                    Factures\n"
+"                                </span>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.document_amount_paid_residual
+msgid "<strong>Amount Due</strong>"
+msgstr "<strong>Montant dû</strong>"
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "<strong>Archivé !</strong>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__folder_state__to_complete
+msgid "A compléter"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_needaction
 msgid "Action Needed"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__active
+msgid "Active"
 msgstr ""
 
 #. module: musicalta_sales
@@ -238,8 +266,18 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_mail_activity_team__activity_type_id
+msgid "Activity Type for sale inscription"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_adult
 msgid "Adulte"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Archiver"
 msgstr ""
 
 #. module: musicalta_sales
@@ -253,6 +291,16 @@ msgid "Auditeur"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_autorisation_bar
+msgid "Autorisation bar"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_autorisation_exit
+msgid "Autorisation sortie"
+msgstr ""
+
+#. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Autres informations"
 msgstr ""
@@ -263,10 +311,50 @@ msgid "Available Products"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__avatar_1920
+msgid "Avatar"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__avatar_1024
+msgid "Avatar 1024"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__avatar_128
+msgid "Avatar 128"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__avatar_256
+msgid "Avatar 256"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__avatar_512
+msgid "Avatar 512"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_bus_going
+msgid "Bus aller"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_bus_return
+msgid "Bus retour"
+msgstr ""
+
+#. module: musicalta_sales
 #. odoo-python
 #: code:addons/musicalta_sales/models/sale_inscription.py:0
 #, python-format
 msgid "Cette personne est déjà inscrite à cette session"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_bedroom_id
+msgid "Chambres"
 msgstr ""
 
 #. module: musicalta_sales
@@ -283,11 +371,26 @@ msgid ""
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__folder_state__completed
+msgid "Complété"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.ui.menu,name:musicalta_sales.musicalta_configuration_menu
+msgid "Configuration"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:mail.template,subject:musicalta_sales.mail_template_sale_inscription_confirm
 msgid ""
 "Confirmation for {{ "
 "(object.event_inscription_ids[0].session_id.display_name) or ''}} "
 "Registration - {{ object.partner_id.display_name }}"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__state__confirmed
+msgid "Confirmé"
 msgstr ""
 
 #. module: musicalta_sales
@@ -306,6 +409,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__create_uid
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__create_uid
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__create_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -315,12 +420,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__create_date
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__create_date
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__create_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Créer/Mettre à jour le devis"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__date_of_arrival
+msgid "Date d'arrivée"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__date_of_departure
+msgid "Date de départ"
 msgstr ""
 
 #. module: musicalta_sales
@@ -339,6 +461,16 @@ msgid "Demande d'inscription"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__is_ask_description
+msgid "Demander la description"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__sale_origin_description
+msgid "Description provenance"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_product_pricelist_item__discipline_id
 msgid "Discipline"
 msgstr ""
@@ -354,17 +486,46 @@ msgid "Discipline 2"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__discipline_ids
+msgid "Disciplines"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__display_name
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__display_name
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__display_name
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__display_name
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__display_name
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Documents"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__folder_state
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
+msgid "Dossier"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Désarchiver"
 msgstr ""
 
 #. module: musicalta_sales
 #: model:ir.ui.menu,name:musicalta_sales.menu_registration
 msgid "Enregistrement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__state
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
+msgid "Etat"
 msgstr ""
 
 #. module: musicalta_sales
@@ -417,6 +578,11 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
+msgid "Group By"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_harpiste
 msgid "Harpe"
 msgstr ""
@@ -438,6 +604,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__id
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__id
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__id
 msgid "ID"
 msgstr ""
 
@@ -463,6 +631,31 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Informations"
 msgstr ""
@@ -473,13 +666,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_registration__inscription_id
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_order__registration_count
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_order_line__inscription_id
+#: model:ir.ui.menu,name:musicalta_sales.sale_inscription_configuration_menu
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_order_form_inherit
 msgid "Inscription"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_order__inscription_note
+msgid "Inscription Note"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__invoice_ids
+msgid "Invoices"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_is_follower
 msgid "Is Follower"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__sale_origin_display_description
+msgid "Is display origin description"
 msgstr ""
 
 #. module: musicalta_sales
@@ -493,6 +702,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture____last_update
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family____last_update
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location____last_update
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -502,6 +713,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__write_uid
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__write_uid
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__write_uid
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -511,7 +724,46 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__write_date
 #: model:ir.model.fields,field_description:musicalta_sales.field_res_family__write_date
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__write_date
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_location__name
+msgid "Lieu"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__arrival_location_outbound_id
+msgid "Lieu d'arrivée (aller)"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__arrival_location_return_id
+msgid "Lieu d'arrivée (retour)"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__departure_location_outbound_id
+msgid "Lieu de départ (aller)"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__departure_location_return_id
+msgid "Lieu de départ (retour)"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.actions.act_window,name:musicalta_sales.action_sale_inscription_location
+#: model:ir.ui.menu,name:musicalta_sales.menu_sale_inscription_location
+msgid "Lieux"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_location_form
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_location_tree
+msgid "Locations"
 msgstr ""
 
 #. module: musicalta_sales
@@ -528,6 +780,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:musicalta_sales.action_lunch_order
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_lunch_order_tree
 msgid "Lunch Orders"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_mail_activity_team
+msgid "Mail Activity Team"
 msgstr ""
 
 #. module: musicalta_sales
@@ -565,6 +822,11 @@ msgid ""
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__invoices_amount_total
+msgid "Montant Total factures"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model,name:musicalta_sales.model_musical_level
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_level__name
 msgid "Musical Level"
@@ -591,6 +853,11 @@ msgid "Name"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr ""
@@ -606,6 +873,8 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__musical_level_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__musical_level_id
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__musical_level_id
 msgid "Niveau musical"
 msgstr ""
@@ -622,7 +891,29 @@ msgstr ""
 #: code:addons/musicalta_sales/models/sale_inscription.py:0
 #: code:addons/musicalta_sales/models/sale_inscription.py:0
 #, python-format
+msgid ""
+"No more seats available for this teacher and discipline : %s %s (max %s "
+"reached)"
+msgstr ""
+
+#. module: musicalta_sales
+#. odoo-python
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#, python-format
 msgid "No ticket found for this teacher and discipline"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__state__unconfirmed
+msgid "Non confirmé"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__note
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_order_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes"
 msgstr ""
 
 #. module: musicalta_sales
@@ -679,6 +970,13 @@ msgid "Pack/Discipline"
 msgstr ""
 
 #. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.document_amount_paid_residual
+msgid "Paid on"
+msgstr "Payé le"
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__partition
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__partition
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__partition
 msgid "Partition"
 msgstr ""
@@ -715,6 +1013,8 @@ msgid "Professeur 2"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__usual_teacher
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__usual_teacher
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__usual_teacher
 msgid "Professeur habituel"
 msgstr ""
@@ -722,6 +1022,14 @@ msgstr ""
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__teacher_ids
 msgid "Professeurs"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.actions.act_window,name:musicalta_sales.action_sale_inscription_origin
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__sale_origin_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription_origin__name
+#: model:ir.ui.menu,name:musicalta_sales.menu_sale_inscription_origin
+msgid "Provenance"
 msgstr ""
 
 #. module: musicalta_sales
@@ -758,6 +1066,11 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__invoices_amount_residual
+msgid "Reste à payer"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
@@ -770,6 +1083,16 @@ msgstr ""
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__sale_order_id
 msgid "Sale Order"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_sale_inscription_location
+msgid "Sale inscription location"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_sale_inscription_origin
+msgid "Sale inscription origin"
 msgstr ""
 
 #. module: musicalta_sales
@@ -815,6 +1138,7 @@ msgstr ""
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__session_id
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__session_id
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
 msgid "Session"
 msgstr ""
 
@@ -834,8 +1158,20 @@ msgstr ""
 
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture__name
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__tessiture_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__tessiture_id
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__tessiture_id
 msgid "Tessiture"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_train_going
+msgid "Train aller"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_train_return
+msgid "Train retour"
 msgstr ""
 
 #. module: musicalta_sales
@@ -859,6 +1195,13 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: musicalta_sales
+#. odoo-python
+#: code:addons/musicalta_sales/models/sale_inscription.py:0
+#, python-format
+msgid "You must select a pack"
+msgstr ""
+
+#. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "est majeur(e)."
 msgstr ""
@@ -866,6 +1209,17 @@ msgstr ""
 #. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "est mineur(e)."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_origin_form
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_origin_tree
+msgid "origins"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__activity_team_user_ids
+msgid "test field"
 msgstr ""
 
 #. module: musicalta_sales
