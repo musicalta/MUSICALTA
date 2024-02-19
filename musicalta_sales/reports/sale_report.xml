@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2016 Andrea Cometa - Apulia Software
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).
+ -->
+<odoo>
+        <template
+        id="report_saleorder_document"
+        inherit_id="sale.report_saleorder_document"
+    >
+            <xpath expr="//div[@name='total']" position="after">
+                <br></br>
+                <br></br>
+                <div id="amount_paid_total" class="row" name="amount_paidtotal">
+                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                        <table class="table table-sm table-borderless">
+                            <t t-call="musicalta_sales.document_amount_paid_residual"/>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="document_amount_paid_residual">
+            <t t-foreach="doc.account_payment_ids" t-as="payment">
+                <tr class="border-black o_subtotal">
+                    <td>Paiement at : <strong t-esc="payment.date"/></td>
+
+                    <td class="text-end">
+                        <span
+                            t-att-class="oe_subtotal_footer_separator"
+                            t-field="payment.amount_company_currency_signed"
+                        />
+                    </td>
+                </tr>
+            </t>
+            
+            <tr class="border-black o_total">
+                <td><strong>Amount Residual</strong></td>
+                <td  class="text-end">
+                    <span  
+                        t-field="doc.amount_residual" 
+                        t-field-options='{"widget": "monetary", "display_currency": "doc.currency_id"}'
+                    />
+                </td>
+            </tr>
+        </template>
+</odoo>

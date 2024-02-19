@@ -24,6 +24,8 @@
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",
+        ## REPORTS
+        "reports/sale_report.xml",
         # # VIEWS
         "views/external_layout_template.xml",
         "views/sale_report_saleorder_document_template.xml",
