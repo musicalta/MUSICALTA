@@ -529,6 +529,22 @@ class SaleInscription(models.Model):
                     'sale_order_id': sale_order.id,
                     'inscription_id': self.id,
                 })
+        else:
+            if self.product_pack_id:
+                product_pack = self.product_pack_id.with_context(
+                    {'lang': self.partner_id.lang, 'partner_id': self.partner_id.id})
+                price = self.pricelist_id._get_product_price(
+                    self.product_pack_id, 1)
+                sale_order_line.append({
+                    'sequence': 0,
+                    'order_id': sale_order.id,
+                    'product_id': self.product_pack_id.id,
+                    'price_unit': price,
+                    'inscription_id': self.id,
+                    'name': product_pack.display_name + ' - ' +
+                    self.session_id.name,
+                })
+
         if self.discipline_id_2 and self.teacher_id_2:
             product_fees = self.env['product.product'].with_context({'lang': self.partner_id.lang, 'partner_id': self.partner_id.id}).search([
                 ('is_fees', '=', True),
