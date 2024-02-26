@@ -78,10 +78,6 @@ class SaleInscription(models.Model):
         comodel_name='product.product',
         domain="['|',('is_product_for_adults_and_minors', '=', True),('is_product_for_adults', '=', is_adult),('pack_ok', '=', True), ('id', 'in', available_product_ids)]",
     )
-    is_auditor = fields.Boolean(
-        string='Auditeur',
-        default=False,
-    )
     product_hebergement_id = fields.Many2one(
         'product.product',
         string='Hébergement',
@@ -544,7 +540,7 @@ class SaleInscription(models.Model):
                     'inscription_id': self.id,
                 })
         else:
-            if self.product_pack_id:
+            if self.product_pack_id and self.product_pack_id.is_auditor:
                 product_pack = self.product_pack_id.with_context(
                     {'lang': self.partner_id.lang, 'partner_id': self.partner_id.id})
                 price = self.pricelist_id._get_product_price(
