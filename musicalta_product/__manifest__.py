@@ -2,7 +2,7 @@
 
 {
     "name": "Product Specifics for Musicalta",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "summary": """Add product specifics for Musicalta.""",
     "category": "customization",
     "website": "https://irokoo.fr",
