@@ -180,7 +180,8 @@ class SaleInscription(models.Model):
     invoice_ids = fields.Many2many(
         comodel_name='account.move',
         string="Invoices",
-        related='sale_order_id.invoice_ids')
+        store=True,
+        compute='_get_invoiced')
 
     invoices_amount_residual = fields.Monetary(
         string='Reste à payer',
@@ -212,6 +213,19 @@ class SaleInscription(models.Model):
                 invoice.amount_residual for invoice in record.invoice_ids) if record.invoice_ids else record.sale_order_id.amount_total if record.sale_order_id else False
             record.invoices_amount_total = sum(
                 invoice.amount_total for invoice in record.invoice_ids)
+
+    @api.depends('sale_order_id.order_line.invoice_lines')
+    def _get_invoiced(self):
+        # The invoice_ids are obtained thanks to the invoice lines of the SO
+        # lines, and we also search for possible refunds created directly from
+        # existing invoices. This is necessary since such a refund is not
+        # directly linked to the SO.
+        for inscription in self:
+            invoices_from_sale = inscription.sale_order_id.order_line.invoice_lines.move_id.filtered(
+                lambda r: r.move_type in ('out_invoice', 'out_refund'))
+            invoices_from_search = self.env['account.move'].search(
+                [('inscription_id', '=', inscription.id)])
+            inscription.invoice_ids = invoices_from_sale | invoices_from_search
 
     @api.onchange('session_id')
     def _onchange_session_id(self):
