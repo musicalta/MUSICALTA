@@ -17,6 +17,8 @@
         "product_pack",
         "sale_product_pack",
         "mail_activity_team",
+        "sale_advance_payment",
+
     ],
     "data": [
         # #DATA
@@ -24,7 +26,7 @@
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",
-        ## REPORTS
+        # REPORTS
         "reports/sale_report.xml",
         # # VIEWS
         "views/external_layout_template.xml",
