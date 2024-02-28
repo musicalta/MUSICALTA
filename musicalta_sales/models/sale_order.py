@@ -65,6 +65,7 @@ class SaleOrder(models.Model):
             return self.env.ref('musicalta_sales.mail_template_sale_inscription', raise_if_not_found=False)
         return res
 
+
     @api.depends(
         "currency_id",
         "company_id",
@@ -125,3 +126,11 @@ class SaleOrder(models.Model):
             order.payment_line_ids = mls
             order.amount_residual = amount_residual
             order.advance_payment_status = payment_state
+
+    def _create_invoices(self, grouped=False, final=False, date=None):
+        moves = super(SaleOrder, self)._create_invoices(grouped, final, date)
+        for move in moves:
+            if move.line_ids.sale_line_ids.order_id.event_inscription_ids.ids:
+                move.write(
+                    {'inscription_id': move.line_ids.sale_line_ids.order_id.event_inscription_ids.ids[0]})
+        return moves

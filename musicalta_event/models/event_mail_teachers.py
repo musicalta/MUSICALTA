@@ -115,6 +115,9 @@ class EventMailTeacherScheduler(models.Model):
                 ) - scheduler.mail_registration_ids.registration_id
                 scheduler._create_missing_mail_registrations(new_registrations)
 
+                # remove deleted teachers from mail registrations
+                scheduler._remove_deleted_teachers_mail_registrations()
+
                 # execute scheduler on registrations
                 scheduler.mail_registration_ids.execute()
                 total_sent = len(scheduler.mail_registration_ids.filtered(
@@ -141,6 +144,13 @@ class EventMailTeacherScheduler(models.Model):
                         'mail_count_done': len(scheduler.event_id.teacher_ids),
                     })
         return True
+
+    def _remove_deleted_teachers_mail_registrations(self):
+        for scheduler in self:
+            teachers = scheduler.event_id.teacher_ids | scheduler.event_id.options_event_ticket_id.mapped(
+                'teacher_id')
+            scheduler.mail_registration_ids.filtered(
+                lambda reg: reg.teacher_id not in teachers).unlink()
 
     def _create_missing_mail_registrations(self, registrations):
         new = []

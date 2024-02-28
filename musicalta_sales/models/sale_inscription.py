@@ -21,6 +21,8 @@ class SaleInscription(models.Model):
         string='Name',
     )
 
+    active = fields.Boolean(string='Active', default=True)
+
     image_1920 = fields.Image(related='partner_id.image_1920')
 
     session_id = fields.Many2one(
@@ -75,10 +77,6 @@ class SaleInscription(models.Model):
         string='Pack',
         comodel_name='product.product',
         domain="['|',('is_product_for_adults_and_minors', '=', True),('is_product_for_adults', '=', is_adult),('pack_ok', '=', True), ('id', 'in', available_product_ids)]",
-    )
-    is_auditor = fields.Boolean(
-        string='Auditeur',
-        default=False,
     )
     product_hebergement_id = fields.Many2one(
         'product.product',
@@ -178,7 +176,8 @@ class SaleInscription(models.Model):
     invoice_ids = fields.Many2many(
         comodel_name='account.move',
         string="Invoices",
-        related='sale_order_id.invoice_ids')
+        store=True,
+        compute='_get_invoiced')
 
     invoices_amount_residual = fields.Monetary(
         string='Reste à payer',
@@ -210,6 +209,19 @@ class SaleInscription(models.Model):
                 invoice.amount_residual for invoice in record.invoice_ids) if record.invoice_ids else record.sale_order_id.amount_total if record.sale_order_id else False
             record.invoices_amount_total = sum(
                 invoice.amount_total for invoice in record.invoice_ids)
+
+    @api.depends('sale_order_id.order_line.invoice_lines')
+    def _get_invoiced(self):
+        # The invoice_ids are obtained thanks to the invoice lines of the SO
+        # lines, and we also search for possible refunds created directly from
+        # existing invoices. This is necessary since such a refund is not
+        # directly linked to the SO.
+        for inscription in self:
+            invoices_from_sale = inscription.sale_order_id.order_line.invoice_lines.move_id.filtered(
+                lambda r: r.move_type in ('out_invoice', 'out_refund'))
+            invoices_from_search = self.env['account.move'].search(
+                [('inscription_id', '=', inscription.id)])
+            inscription.invoice_ids = invoices_from_sale | invoices_from_search
 
     @api.onchange('session_id')
     def _onchange_session_id(self):
@@ -302,6 +314,15 @@ class SaleInscription(models.Model):
             rec.product_work_room_domain_id = json.dumps(
                 [('is_work_rooms', '=', True), ('id', 'in', available_product_ids)]
             )
+
+    def toggle_active(self):
+        for record in self:
+            if record.active == True and record.sale_order_id:
+                record.sale_order_id._action_cancel()
+                self.env['event.registration'].search([
+                    ('sale_order_id', '=', record.sale_order_id.id),
+                ]).unlink()
+            record.active = not record.active
 
     def _get_discipline_specific_products(self):
         """
@@ -505,6 +526,10 @@ class SaleInscription(models.Model):
                         self.session_id.name + ' - ' + self.teacher_id_1.name,
                     })
 
+                if event_ticket_id.seats_unconfirmed == event_ticket_id.seats_max or event_ticket_id.seats_unconfirmed > event_ticket_id.seats_max:
+                    raise UserError(
+                        _('No more seats available for this teacher and discipline : %s %s (max %s reached)' % (self.teacher_id_1.name, self.discipline_id_1.name, event_ticket_id.seats_max)))
+
                 event_registration.append({
                     'teacher_id': self.teacher_id_1.id,
                     'discipline_id': self.discipline_id_1.id,
@@ -514,6 +539,22 @@ class SaleInscription(models.Model):
                     'sale_order_id': sale_order.id,
                     'inscription_id': self.id,
                 })
+        else:
+            if self.product_pack_id and self.product_pack_id.is_auditor:
+                product_pack = self.product_pack_id.with_context(
+                    {'lang': self.partner_id.lang, 'partner_id': self.partner_id.id})
+                price = self.pricelist_id._get_product_price(
+                    self.product_pack_id, 1)
+                sale_order_line.append({
+                    'sequence': 0,
+                    'order_id': sale_order.id,
+                    'product_id': self.product_pack_id.id,
+                    'price_unit': price,
+                    'inscription_id': self.id,
+                    'name': product_pack.display_name + ' - ' +
+                    self.session_id.name,
+                })
+
         if self.discipline_id_2 and self.teacher_id_2:
             product_fees = self.env['product.product'].with_context({'lang': self.partner_id.lang, 'partner_id': self.partner_id.id}).search([
                 ('is_fees', '=', True),
@@ -544,6 +585,10 @@ class SaleInscription(models.Model):
                     'name': additional_cost_product.display_name + ' - ' +
                     self.session_id.name + ' - ' + self.teacher_id_2.name,
                 })
+            if event_ticket_id.seats_unconfirmed >= event_ticket_id.seats_max:
+                raise UserError(
+                    _('No more seats available for this teacher and discipline : %s %s (max %s reached)' % (self.teacher_id_2.name, self.discipline_id_2.name, event_ticket_id.seats_max)))
+
             event_registration.append({
                 'teacher_id': self.teacher_id_2.id,
                 'discipline_id': self.discipline_id_2.id,
@@ -807,3 +852,18 @@ class SaleInscription(models.Model):
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
+
+    def _get_fields_to_check_before_order_update(self):
+        return ['session_id', 'partner_id', 'date_order_arrival', 'date_of_departure', 'pricelist_id', 'product_pack_id', 'product_hebergement_id', 'product_bedroom_id', 'product_launch_id', 'discipline_id_1', 'teacher_id_1', 'discipline_id_2', 'teacher_id_2', 'options_ids', 'product_work_rooms_id']
+
+    def write(self, vals):
+        fields_to_check = self._get_fields_to_check_before_order_update()
+        needs_action = any(field in vals for field in fields_to_check)
+
+        result = super(SaleInscription, self).write(vals)
+
+        if needs_action:
+            for record in self:
+                record.action_update_or_create()
+
+        return result

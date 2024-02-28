@@ -2,7 +2,7 @@
 
 {
     "name": "Sales For musicalta",
-    "version": "16.0.6.0.0",
+    "version": "16.0.6.0.2",
     "summary": """Add Sales customization.""",
     "category": "customization",
     "website": "https://irokoo.fr",
