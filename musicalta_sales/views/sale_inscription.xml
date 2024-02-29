@@ -53,7 +53,7 @@
                             </div>
                         </button>
                     </div>
-                    
+                    <div class="alert alert-danger text-center" colspan="2" attrs="{'invisible': [('invoice_ids', '=', [])]}">Attention, une facture est présente pour cette inscription.<br/>Si vous souhaitez la modifiez, veuillez d'abord extourner la facture présente (faire un avoir intégral).</div>
                     <field name="avatar_128" invisible="1"/>
                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     <group>
