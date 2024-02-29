@@ -47,3 +47,9 @@ class AccountVoucherWizard(models.TransientModel):
                 wizard.payment_method_line_id = available_payment_method_lines[0]._origin
             else:
                 wizard.payment_method_line_id = False
+
+    def _prepare_payment_vals(self, sale):
+        vals = super(AccountVoucherWizard, self)._prepare_payment_vals(sale)
+        if self.payment_method_line_id:
+            vals['payment_method_line_id'] = self.payment_method_line_id.id
+        return vals
