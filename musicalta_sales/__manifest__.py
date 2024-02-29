@@ -2,7 +2,7 @@
 
 {
     "name": "Sales For musicalta",
-    "version": "16.0.6.0.1",
+    "version": "16.0.6.0.3",
     "summary": """Add Sales customization.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -17,6 +17,8 @@
         "product_pack",
         "sale_product_pack",
         "mail_activity_team",
+        "sale_advance_payment",
+
     ],
     "data": [
         # #DATA
@@ -24,6 +26,8 @@
         # "data/ir_sequence_data.xml",
         # # SECURITY
         "security/ir_model_access.xml",
+        # REPORTS
+        "reports/sale_report.xml",
         # # VIEWS
         "views/external_layout_template.xml",
         "views/sale_report_saleorder_document_template.xml",
@@ -37,6 +41,8 @@
         "views/res_partner.xml",
         "views/product_pricelist_item_views.xml",
         "views/mail_activity_team_views.xml",
+        # WIZARDS
+        "wizard/sale_advance_payment_wzd.xml",
     ],
     "installable": True,
     "license": "LGPL-3",

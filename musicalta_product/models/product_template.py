@@ -28,6 +28,10 @@ class ProductTemplate(models.Model):
     is_extra_night = fields.Boolean('Nuitée supplémentaire')
     is_additional_cost = fields.Boolean('Coût supplémentaire')
     is_product_bedroom = fields.Boolean('Chambres')
+    is_auditor = fields.Boolean(
+        string='Auditeur',
+        default=False,
+    )
 
     @api.onchange('professor_id')
     def _onchange_professor_id(self):
