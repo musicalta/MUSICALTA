@@ -1,0 +1,14 @@
+<odoo>
+
+    <record id="account_voucher_wizard_form_inherit" model="ir.ui.view">
+        <field name="name">account.voucher.wizard.form.inherit</field>
+        <field name="model">account.voucher.wizard</field>
+        <field name="inherit_id" ref="sale_advance_payment.view_account_voucher_wizard"/>
+        <field name="arch" type="xml">
+            <field name="payment_type" position="after">
+                <field name="available_payment_method_line_ids" invisible="1"/>
+                <field name="payment_method_line_id" required="1"  options="{'no_create': True, 'no_open': True}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
