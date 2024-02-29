@@ -2,7 +2,7 @@
 
 {
     "name": "Sales For musicalta",
-    "version": "16.0.6.0.2",
+    "version": "16.0.6.0.3",
     "summary": """Add Sales customization.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -41,6 +41,8 @@
         "views/res_partner.xml",
         "views/product_pricelist_item_views.xml",
         "views/mail_activity_team_views.xml",
+        # WIZARDS
+        "wizard/sale_advance_payment_wzd.xml",
     ],
     "installable": True,
     "license": "LGPL-3",
