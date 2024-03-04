@@ -71,8 +71,15 @@ class SaleInscription(models.Model):
         'Date de départ')
     is_adult = fields.Boolean(
         'Adulte',
+        store=True,
         compute='_compute_is_adult',
     )
+    partner_age = fields.Integer(
+        'Age',
+        store=True,
+        compute='_compute_is_adult',
+    )
+
     product_pack_id = fields.Many2one(
         string='Pack',
         comodel_name='product.product',
@@ -272,7 +279,7 @@ class SaleInscription(models.Model):
         if self.partner_id and self.partner_id.comment:
             self.note = self.partner_id.comment
 
-    @api.depends('partner_id')
+    @api.depends('partner_id', 'session_id.date_begin')
     def _compute_is_adult(self):
         for record in self:
             if record.partner_id.date_of_birth and record.session_id.date_begin:
@@ -280,8 +287,10 @@ class SaleInscription(models.Model):
                 age_at_session = relativedelta(
                     record.session_id.date_begin, record.partner_id.date_of_birth).years
                 record.is_adult = age_at_session >= 18
+                record.partner_age = age_at_session
             else:
                 record.is_adult = False
+                record.partner_age = 0
 
     @api.depends('discipline_id_1', 'discipline_id_2')
     def _compute_is_harpiste(self):
@@ -303,7 +312,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-                rec.discipline_id_2.is_harpe:
+            rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -443,7 +452,8 @@ class SaleInscription(models.Model):
 
     def _update_or_create(self, vals):
         if self.sale_order_id:
-            self.sale_order_id.with_context(disable_cancel_warning=True).action_cancel()
+            self.sale_order_id.with_context(
+                disable_cancel_warning=True).action_cancel()
             self.sale_order_id.action_draft()
             self.sale_order_id.order_line.filtered(
                 lambda x: x.inscription_id.id == self.id).unlink()
@@ -473,7 +483,7 @@ class SaleInscription(models.Model):
         return sale_order
 
     def process_registration(self):
-        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT# 
+        # MÊME DEVIS POUR LA MÊME ACADÉMIE \ET POUR LE MÊME CLIENT#
         if not self.product_pack_id:
             raise UserError(_('You must select a pack'))
         if not self.sale_order_id:
