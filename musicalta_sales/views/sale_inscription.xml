@@ -183,6 +183,7 @@
                     <filter string="Etat" name="group_by_state" context="{'group_by': 'state'}"/>
                     <filter string="Dossier" name="group_by_folder_state" context="{'group_by': 'folder_state'}"/>
                     <filter string="Age" name="group_by_age" context="{'group_by': 'partner_age'}"/>
+                    <filter string="Majeur" name="group_by_adult" context="{'group_by': 'is_adult'}"/>
                 </group>
             </search>
         </field>

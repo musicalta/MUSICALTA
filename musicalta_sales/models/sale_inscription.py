@@ -71,6 +71,7 @@ class SaleInscription(models.Model):
         'Date de départ')
     is_adult = fields.Boolean(
         'Adulte',
+        store=True,
         compute='_compute_is_adult',
     )
     partner_age = fields.Integer(
