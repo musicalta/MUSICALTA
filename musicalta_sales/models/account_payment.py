@@ -10,7 +10,7 @@ class AccountPayment(models.Model):
             payment_transaction = self.env['payment.transaction'].browse(
                 vals['payment_transaction_id']
             )
-            if payment_transaction and payment_transaction.sale_order_id:
+            if payment_transaction and payment_transaction.sale_order_ids:
                 vals.update(
-                    {'sale_order_id': payment_transaction.sale_order_id[0].id})
+                    {'sale_order_id': payment_transaction.sale_order_ids[0].id})
         return super(AccountPayment, self).create(vals)
