@@ -1,4 +1,5 @@
 from . import account_move
+from . import account_payment
 from . import sale_inscription
 from . import sale_inscription_origin
 from . import sale_inscription_location
