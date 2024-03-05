@@ -12,5 +12,5 @@ class AccountPayment(models.Model):
             )
             if payment_transaction and payment_transaction.sale_order_ids:
                 vals.update(
-                    {'sale_order_id': payment_transaction.sale_order_ids[0].id})
+                    {'sale_id': payment_transaction.sale_order_ids[0].id})
         return super(AccountPayment, self).create(vals)
