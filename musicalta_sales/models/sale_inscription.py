@@ -204,7 +204,7 @@ class SaleInscription(models.Model):
     @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids')
     def _compute_state(self):
         for record in self:
-            if record.invoice_ids or record.sale_order_id and not record.sale_order_id.account_payment_ids:
+            if record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
                 record.state = 'confirmed'
             else:
                 record.state = 'unconfirmed'
