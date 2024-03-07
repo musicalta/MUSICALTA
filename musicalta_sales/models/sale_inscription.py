@@ -201,13 +201,13 @@ class SaleInscription(models.Model):
         ('confirmed', 'Confirmé')
     ], string='Etat', compute='_compute_state', store=True)
 
-    @api.depends('invoice_ids', 'invoice_ids.payment_state')
+    @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids')
     def _compute_state(self):
         for record in self:
-            if not record.invoice_ids or not any(invoice.payment_state in ['paid', 'partial', 'in_payment'] for invoice in record.invoice_ids):
-                record.state = 'unconfirmed'
-            else:
+            if record.invoice_ids or record.sale_order_id and not record.sale_order_id.account_payment_ids:
                 record.state = 'confirmed'
+            else:
+                record.state = 'unconfirmed'
 
     @api.depends('invoice_ids', 'invoice_ids.amount_residual', 'invoice_ids.amount_total', 'sale_order_id.amount_total')
     def _compute_invoice_amount(self):
@@ -312,7 +312,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-            rec.discipline_id_2.is_harpe:
+                rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
