@@ -279,7 +279,7 @@ class SaleInscription(models.Model):
         if self.partner_id and self.partner_id.comment:
             self.note = self.partner_id.comment
 
-    @api.depends('partner_id', 'session_id.date_begin')
+    @api.depends('partner_id', 'session_id.date_begin', 'partner_id.date_of_birth')
     def _compute_is_adult(self):
         for record in self:
             if record.partner_id.date_of_birth and record.session_id.date_begin:
