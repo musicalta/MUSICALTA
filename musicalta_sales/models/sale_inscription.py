@@ -628,6 +628,12 @@ class SaleInscription(models.Model):
         if self.musical_level_id or self.usual_teacher or self.partition or self.tessiture_id:
             self._update_contact_informations()
         self._extra_night_management()
+        if sale_order and sale_order.account_payment_ids:
+            sale_order.account_payment_ids.mapped("move_id.line_ids").filtered(
+                lambda x: x.account_id.account_type == "asset_receivable"
+                and x.parent_state == "posted"
+            )._compute_amount_residual()
+
         return True
 
     def _get_extra_night_line_name(self, arrival=False, departure=False):
