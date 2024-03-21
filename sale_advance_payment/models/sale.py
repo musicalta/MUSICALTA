@@ -64,11 +64,7 @@ class SaleOrder(models.Model):
                 # Exclude reconciled pre-payments amount because once reconciled
                 # the pre-payment will reduce invoice residual amount like any
                 # other payment.
-                line_amount = (
-                    line.amount_residual_currency
-                    if line.currency_id
-                    else line.amount_residual
-                )
+                line_amount = line.balance
                 line_amount *= -1
                 if line_currency != order.currency_id:
                     advance_amount += line.currency_id._convert(
