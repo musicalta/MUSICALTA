@@ -312,7 +312,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-                rec.discipline_id_2.is_harpe:
+            rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -628,6 +628,7 @@ class SaleInscription(models.Model):
         if self.musical_level_id or self.usual_teacher or self.partition or self.tessiture_id:
             self._update_contact_informations()
         self._extra_night_management()
+        sale_order._compute_advance_payment()
         return True
 
     def _get_extra_night_line_name(self, arrival=False, departure=False):
