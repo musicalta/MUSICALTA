@@ -857,11 +857,18 @@ class SaleInscription(models.Model):
                      self.session_id.event_type_id.id),
                     ('id', '!=', self.id),
                 ]):
-                    self.env['sale.order.line'].create({
-                        'order_id': self.sale_order_id.id,
-                        'product_id': self.session_id.event_type_id.product_remise_multi_session_id.id,
-                        'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
-                    })
+                    for orders in self.env['sale.inscription'].search([
+                        ('partner_id', '=', self.partner_id.id),
+                        ('session_id.event_type_id', '=',
+                         self.session_id.event_type_id.id),
+                    ]):
+                        if not orders._check_exist_discount_line():
+                            self.env['sale.order.line'].create({
+                                'order_id': orders.sale_order_id.id,
+                                'product_id': self.session_id.event_type_id.product_remise_multi_session_id.product_variant_id.id,
+                                'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
+                            })
+
             return True
 
     def _get_fields_to_check_before_order_update(self):
