@@ -108,7 +108,7 @@ class SaleOrder(models.Model):
             invoice_paid_amount = 0.0
             for inv in order.invoice_ids.filtered(lambda x: x.payment_state != "reversed" and x.move_type != "out_refund"):
                 invoice_paid_amount += inv.amount_total - inv.amount_residual
-            amount_residual = order.amount_total - advance_amount - invoice_paid_amount
+            amount_residual = order.amount_total - advance_amount
             payment_state = "not_paid"
             if mls:
                 has_due_amount = float_compare(
