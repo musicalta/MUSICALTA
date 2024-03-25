@@ -471,7 +471,6 @@ class SaleInscription(models.Model):
         SaleOrder = self.env['sale.order']
         sale_order = SaleOrder.search([
             ('partner_id', '=', self.partner_id.id),
-            ('state', '=', 'draft'),
             ('event_type_id', '=', self.session_id.event_type_id.id),
         ])
         if not sale_order:
@@ -862,14 +861,11 @@ class SaleInscription(models.Model):
                         ('session_id.event_type_id', '=',
                          self.session_id.event_type_id.id),
                     ])
-                    for order in orders:
-                        if not order._check_exist_discount_line():
-                            self.env['sale.order.line'].create({
-                                'order_id': order.sale_order_id.id,
-                                'product_id': self.session_id.event_type_id.product_remise_multi_session_id.product_variant_id.id,
-                                'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price/len(orders.ids),
-                            })
-
+                    self.env['sale.order.line'].create({
+                        'order_id': self.sale_order_id.id,
+                        'product_id': self.session_id.event_type_id.product_remise_multi_session_id.id,
+                        'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
+                    })
             return True
 
     def _get_fields_to_check_before_order_update(self):
