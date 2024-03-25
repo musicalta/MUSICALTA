@@ -471,7 +471,6 @@ class SaleInscription(models.Model):
         SaleOrder = self.env['sale.order']
         sale_order = SaleOrder.search([
             ('partner_id', '=', self.partner_id.id),
-            ('state', '=', 'draft'),
             ('event_type_id', '=', self.session_id.event_type_id.id),
         ])
         if not sale_order:
