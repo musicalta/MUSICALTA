@@ -863,7 +863,7 @@ class SaleInscription(models.Model):
                     ])
                     self.env['sale.order.line'].create({
                         'order_id': self.sale_order_id.id,
-                        'product_id': self.session_id.event_type_id.product_remise_multi_session_id.id,
+                        'product_template_id': self.session_id.event_type_id.product_remise_multi_session_id.id,
                         'price_unit': -self.session_id.event_type_id.product_remise_multi_session_id.list_price,
                     })
             return True
