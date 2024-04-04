@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="paperformat_empty" model="report.paperformat">
+        <field name="name">No Header and footer</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">100</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="sale_inscription_print_badge" model="ir.actions.report">
+        <field name="name">Print Badge</field>
+        <field name="model">sale.inscription</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">musicalta_sales.inscription_badge</field>
+        <field name="report_file">musicalta_sales.inscription_badge</field>
+        <field name="print_report_name">'Print Badge - %s' % (object.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_sale_inscription"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_empty"/>
+    </record>
+
+    
+
+    <template id="inscription_badge">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-set="number_columns" t-value="int(-1 * len(docs.ids)/2 // 1 * -1)"/>
+                <t t-set="number_inscriptions" t-value="len(docs.ids)"/>
+                <t t-set="loop" t-value="0"/>
+
+                <t t-foreach="range(0, number_columns)" t-as="column">
+                    <div class="col-12 row" style="page-break-inside: avoid;">
+                        <div t-if="docs[loop*2]" class="col-6" style="margin : 5px;break-inside: avoid;">
+                            <t t-set="inscription_1" t-value="docs[loop*2]"/>
+                            
+                            <table style="width:301px; height:195px; max-height:195px; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt; margin-top:2px" cellspacing="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="text-center fw-bold"><span t-field="inscription_1.session_id.name" /></div>
+                                        <div class="row" style="margin-left:4px; margin-right:4px;">
+                                            <div class="col-4" style="background-color:yellow; height:5px;"></div>
+                                            <div class="col-4" style="background-color:orange; height:5px;"></div>
+                                            <div class="col-4" style="background-color:blue; height:5px;"></div>
+                                        </div>
+                                        <div class="text-center fw-bold"><span t-if="inscription_1.is_adult">Majeur</span><span t-if="not inscription_1.is_adult">Mineur</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:67%;">
+                                        <table style="width:155pt;margin-left: 3px;" class="table-borderless" >
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;margin-top:-20px;margin-bottom:20px;">Nom</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-top:-20px;margin-bottom:20px;">: <span t-field="inscription_1.partner_id"/> </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;">Cours 1</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_1.discipline_id_1.name if inscription_1.discipline_id_1 else ''"/> (<t t-esc="inscription_1.teacher_id_1.name if inscription_1.teacher_id_1 else ''"/>)</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;">Cours 2</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_1.discipline_id_2.name if inscription_1.discipline_id_2 else ''"/> (<t t-esc="inscription_1.teacher_id_2.name if inscription_1.teacher_id_2 else ''"/>)</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="margin-top: 10px;" colspan="2"><div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_1.session_id" /></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div align="left" class="fw-bold" style="font-size:6pt;margin-bottom:5pt;">Du <span t-esc="inscription_1.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1.session_id.date_end.strftime('%d/%m/%Y')" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width:33%;" valign="center">
+                                        <table style="width:77pt;" class="table-borderless">
+
+                                            <tr style="height:100%;">
+                                                <td align="center" valign="center">
+                                                    <img t-att-src="image_data_uri(inscription_1.avatar_1920)" style="max-height:85pt;max-width:90%" alt="Employee Image"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div t-if="number_inscriptions > loop*2 +1" class="col-6" style="margin : 5px;break-inside: avoid;">
+                            <t t-set="inscription_2" t-value="docs[loop*2 +1]"/>
+                            <table style="width:301px; height:195px; max-height:195px; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt; margin-top:2px" cellspacing="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="text-center fw-bold"><span t-field="inscription_2.session_id.name" /></div>
+                                        <div class="row" style="margin-left:4px; margin-right:4px;">
+                                            <div class="col-4" style="background-color:yellow; height:5px;"></div>
+                                            <div class="col-4" style="background-color:orange; height:5px;"></div>
+                                            <div class="col-4" style="background-color:blue; height:5px;"></div>
+                                        </div>
+                                        <div class="text-center fw-bold"><span t-if="inscription_2.is_adult">Majeur</span><span t-if="not inscription_2.is_adult">Mineur</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:67%;">
+                                        <table style="width:155pt;margin-left: 3px;" class="table-borderless" >
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;margin-top:-20px;margin-bottom:20px;">Nom</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-top:-20px;margin-bottom:20px;">: <span t-field="inscription_2.partner_id"/> </div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;">Cours 1</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_2.discipline_id_1.name if inscription_2.discipline_id_1 else ''"/> (<t t-esc="inscription_2.teacher_id_1.name if inscription_2.teacher_id_1 else ''"/>)</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;">Cours 2</div></td>
+                                                <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_2.discipline_id_2.name if inscription_2.discipline_id_2 else ''"/> (<t t-esc="inscription_2.teacher_id_2.name if inscription_2.teacher_id_2 else ''"/>)</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="margin-top: 10px;" colspan="2"><div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_2.session_id" /></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div align="left" class="fw-bold" style="font-size:6pt;margin-bottom:5pt;">Du <span t-esc="inscription_2.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2.session_id.date_end.strftime('%d/%m/%Y')" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width:33%;" valign="center">
+                                        <table style="width:77pt;" class="table-borderless">
+
+                                            <tr style="height:100%;">
+                                                <td align="center" valign="center">
+                                                    <img t-att-src="image_data_uri(inscription_2.avatar_1920)" style="max-height:85pt;max-width:90%" alt="Employee Image"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <t t-set="loop" t-value="loop+1"/>
+                    </div>
+                </t>
+               
+            </div>
+        </t>
+    </template>
+</odoo> 
