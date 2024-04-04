@@ -2,7 +2,7 @@
 
 {
     "name": "Sales For musicalta",
-    "version": "16.0.6.0.3",
+    "version": "16.0.6.0.4",
     "summary": """Add Sales customization.""",
     "category": "customization",
     "website": "https://irokoo.fr",
@@ -28,6 +28,7 @@
         "security/ir_model_access.xml",
         # REPORTS
         "reports/sale_report.xml",
+        "reports/sale_inscription_badge_report.xml",
         # # VIEWS
         "views/external_layout_template.xml",
         "views/sale_report_saleorder_document_template.xml",
