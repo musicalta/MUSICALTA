@@ -15,6 +15,7 @@
         <field name="header_line" eval="False"/>
         <field name="header_spacing">100</field>
         <field name="dpi">90</field>
+        <field name="disable_shrinking" eval="True"/>
     </record>
 
     <record id="sale_inscription_print_badge" model="ir.actions.report">
@@ -40,10 +41,10 @@
 
                 <t t-foreach="range(0, number_columns)" t-as="column">
                     <div class="col-12 row" style="page-break-inside: avoid;">
-                        <div t-if="docs[loop*2]" class="col-6" style="margin : 5px;break-inside: avoid;">
+                        <div t-if="docs[loop*2]" class="col-6" align="right" style="break-inside: avoid;">
                             <t t-set="inscription_1" t-value="docs[loop*2]"/>
                             
-                            <table style="width:301px; height:195px; max-height:195px; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt; margin-top:2px" cellspacing="0">
+                            <table style="width:301px; height:195px !important; max-height:195px; border: 1pt solid black; border-collapse:separate;">
                                 <tr>
                                     <td colspan="2">
                                         <div class="text-center fw-bold"><span t-field="inscription_1.session_id.name" /></div>
@@ -56,8 +57,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width:67%;">
-                                        <table style="width:155pt;margin-left: 3px;" class="table-borderless" >
+                                    <td style="width:67%;height:100% !important;position: relative;">
+                                        <table style="width:100%;margin-left: 3px;" class="table-borderless" >
                                             <tr>
                                                 <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;margin-top:-20px;margin-bottom:20px;">Nom</div></td>
                                                 <td><div align="left" style="font-size:8pt;margin-top:-20px;margin-bottom:20px;">: <span t-field="inscription_1.partner_id"/> </div></td>
@@ -70,18 +71,16 @@
                                                 <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;">Cours 2</div></td>
                                                 <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_1.discipline_id_2.name if inscription_1.discipline_id_2 else ''"/> (<t t-esc="inscription_1.teacher_id_2.name if inscription_1.teacher_id_2 else ''"/>)</div></td>
                                             </tr>
-                                            <tr>
-                                                <td style="margin-top: 10px;" colspan="2"><div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_1.session_id" /></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div align="left" class="fw-bold" style="font-size:6pt;margin-bottom:5pt;">Du <span t-esc="inscription_1.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1.session_id.date_end.strftime('%d/%m/%Y')" />
+                                            <td colspan="2">
+                                                <div style="position: absolute; bottom: 0;">
+                                                    <div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_1.session_id" /></div>
+                                                    <div align="left" class="fw-bold" style="font-size:6pt;">Du <span t-esc="inscription_1.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1.session_id.date_end.strftime('%d/%m/%Y')" />
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </div>
+                                            </td>
                                         </table>
                                     </td>
-                                    <td style="width:33%;" valign="center">
+                                    <td style="width:33%;height:100% !important;" valign="center">
                                         <table style="width:77pt;" class="table-borderless">
 
                                             <tr style="height:100%;">
@@ -94,9 +93,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <div t-if="number_inscriptions > loop*2 +1" class="col-6" style="margin : 5px;break-inside: avoid;">
+                        <div t-if="number_inscriptions > loop*2 +1" class="col-6" align="left" style="break-inside: avoid;">
                             <t t-set="inscription_2" t-value="docs[loop*2 +1]"/>
-                            <table style="width:301px; height:195px; max-height:195px; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt; margin-top:2px" cellspacing="0">
+                            <table style="width:301px; height:195px !important; max-height:195px; border: 1pt solid black; border-collapse:separate;" >
                                 <tr>
                                     <td colspan="2">
                                         <div class="text-center fw-bold"><span t-field="inscription_2.session_id.name" /></div>
@@ -109,8 +108,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width:67%;">
-                                        <table style="width:155pt;margin-left: 3px;" class="table-borderless" >
+                                    <td style="width:67%;height:100%;position: relative;">
+                                        <table style="width:100%;margin-left: 3px;" class="table-borderless" >
                                             <tr>
                                                 <td style="width:25%"><div align="left" class="fw-bold" style="font-size:10pt;margin-top:-20px;margin-bottom:20px;">Nom</div></td>
                                                 <td><div align="left" style="font-size:8pt;margin-top:-20px;margin-bottom:20px;">: <span t-field="inscription_2.partner_id"/> </div></td>
@@ -124,17 +123,20 @@
                                                 <td><div align="left" style="font-size:8pt;margin-bottom:5pt;">: <t t-esc="inscription_2.discipline_id_2.name if inscription_2.discipline_id_2 else ''"/> (<t t-esc="inscription_2.teacher_id_2.name if inscription_2.teacher_id_2 else ''"/>)</div></td>
                                             </tr>
                                             <tr>
-                                                <td style="margin-top: 10px;" colspan="2"><div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_2.session_id" /></div></td>
+                                                <td style="margin-top: 10px;" colspan="2"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div align="left" class="fw-bold" style="font-size:6pt;margin-bottom:5pt;">Du <span t-esc="inscription_2.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2.session_id.date_end.strftime('%d/%m/%Y')" />
+                                                    <div style="position: absolute; bottom: 0;">
+                                                        <div align="left" class="fw-bold" style="font-size:10pt;"><span t-field="inscription_2.session_id" /></div>
+                                                        <div align="left" class="fw-bold" style="font-size:6pt;">Du <span t-esc="inscription_2.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2.session_id.date_end.strftime('%d/%m/%Y')" />
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td style="width:33%;" valign="center">
+                                    <td style="width:33%;height:100%;" valign="center">
                                         <table style="width:77pt;" class="table-borderless">
 
                                             <tr style="height:100%;">
