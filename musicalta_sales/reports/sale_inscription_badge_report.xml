@@ -8,10 +8,10 @@
         <field name="page_height">0</field>
         <field name="page_width">0</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">0</field>
-        <field name="margin_bottom">0</field>
-        <field name="margin_left">7</field>
-        <field name="margin_right">7</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
         <field name="header_line" eval="False"/>
         <field name="header_spacing">100</field>
         <field name="dpi">90</field>
@@ -60,9 +60,9 @@
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_1.partner_id"/></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_1.is_adult">Majeur</span><span t-if="not inscription_1.is_adult">Mineur</span></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_1.product_pack_id"/></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_1.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_1.is_adult">Majeur</span><span t-if="not inscription_1.is_adult">Mineur</span></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_1.product_pack_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_1.product_hebergement_id"/></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -108,9 +108,9 @@
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;">
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_2.partner_id"/></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_2.is_adult">Majeur</span><span t-if="not inscription_2.is_adult">Mineur</span></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_2.product_pack_id"/></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_2.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_2.is_adult">Majeur</span><span t-if="not inscription_2.is_adult">Mineur</span></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_2.product_pack_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_2.product_hebergement_id"/></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
