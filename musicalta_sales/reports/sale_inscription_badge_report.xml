@@ -62,7 +62,7 @@
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_1.partner_id"/></div>
                                             <div align="left" style="font-size:8pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_1.is_adult">Majeur</span><span t-if="not inscription_1.is_adult">Mineur</span></div>
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_1.product_pack_id"/></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_1.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_1.product_hebergement_id"/></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -70,7 +70,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_1.avatar_1920)" style="max-height:85pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_1.avatar_1920)" style="max-height:70pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -110,7 +110,7 @@
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_2.partner_id"/></div>
                                             <div align="left" style="font-size:8pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_2.is_adult">Majeur</span><span t-if="not inscription_2.is_adult">Mineur</span></div>
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_2.product_pack_id"/></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_2.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_2.product_hebergement_id"/></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -118,7 +118,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_2.avatar_1920)" style="max-height:85pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_2.avatar_1920)" style="max-height:70pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
