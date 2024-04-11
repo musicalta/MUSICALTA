@@ -44,7 +44,7 @@
                         <div t-if="docs[loop*2]" class="col-6" align="right" style="break-inside: avoid;">
                             <t t-set="inscription_1" t-value="docs[loop*2]"/>
                             
-                            <table style="width:301px; height:195px !important; max-height:195px; border: 1pt solid black; border-collapse:separate;">
+                            <table style="width:301px; height:195px !important; max-height:195px; border: 1px solid black; border-collapse:separate;">
                                 <tr>
                                     <td style="width:20%;" rowspan="3">
                                             <img src="/web/image/res.company/" t-att-src="'/web/image/res.company/' + str(user.company_id.id) + '/logo'" style="transform: rotate(270deg) translateX(-100%); -webkit-transform: rotate(270deg) translateX(-100%);-webkit-transform-origin: left top;height:40px;width:180px;position: absolute;margin-top:9px; margin-left:4px;"/>
@@ -59,10 +59,10 @@
                                 <tr>
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_1.partner_id"/></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_1.partner_id"/></div>
                                             <div align="left" style="font-size:7pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_1.is_adult">Majeur</span><span t-if="not inscription_1.is_adult">Mineur</span></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_1.product_pack_id"/></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_1.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack </strong><span t-field="inscription_1.product_pack_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement </strong><span t-if="inscription_1.product_hebergement_id" t-field="inscription_1.product_hebergement_id"/><span t-if="not inscription_1.product_hebergement_id">/</span></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -70,7 +70,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_1.avatar_1920)" style="max-height:70pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_1.avatar_1920)" style="max-height:60pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -79,10 +79,10 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 1 : </strong><t t-if="inscription_1.discipline_id_1"> <span><span t-esc="inscription_1.discipline_id_1.name" /> | <span t-esc="inscription_1.teacher_id_1.name" /></span></t><t t-else="">/</t></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 2 : </strong><t t-if="inscription_1.discipline_id_2"> <span><span t-esc="inscription_1.discipline_id_2.name" /> | <span t-esc="inscription_1.teacher_id_2.name" /></span></t><t t-else="">/</t></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 1 </strong><t t-if="inscription_1.discipline_id_1"> <span><span t-esc="inscription_1.discipline_id_1.name" /> | <span t-esc="inscription_1.teacher_id_1.name" /></span></t><t t-else="">/</t></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 2 </strong><t t-if="inscription_1.discipline_id_2"> <span><span t-esc="inscription_1.discipline_id_2.name" /> | <span t-esc="inscription_1.teacher_id_2.name" /></span></t><t t-else="">/</t></div>
 
-                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:5px;">Du <span t-esc="inscription_1.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1.session_id.date_end.strftime('%d/%m/%Y')" />
+                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_1.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1.session_id.date_end.strftime('%d/%m/%Y')" />
                                             </div>
 
                                         </div>
@@ -92,7 +92,7 @@
                         </div>
                         <div t-if="number_inscriptions > loop*2 +1" class="col-6" align="left" style="break-inside: avoid;">
                             <t t-set="inscription_2" t-value="docs[loop*2 +1]"/>
-                            <table style="width:301px; height:195px !important; max-height:195px; border: 1pt solid black; border-collapse:separate;">
+                            <table style="width:301px; height:195px !important; max-height:195px; border: 1px solid black; border-collapse:separate;">
                                 <tr>
                                     <td style="width:20%;" rowspan="3">
                                             <img src="/web/image/res.company/" t-att-src="'/web/image/res.company/' + str(user.company_id.id) + '/logo'" style="transform: rotate(270deg) translateX(-100%); -webkit-transform: rotate(270deg) translateX(-100%);-webkit-transform-origin: left top;height:40px;width:180px;position: absolute;margin-top:9px; margin-left:4px;"/>
@@ -107,10 +107,10 @@
                                 <tr>
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;">
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom : </strong><span t-field="inscription_2.partner_id"/></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_2.partner_id"/></div>
                                             <div align="left" style="font-size:7pt;margin-left:10px;" class="fw-bold"><span t-if="inscription_2.is_adult">Majeur</span><span t-if="not inscription_2.is_adult">Mineur</span></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack : </strong><span t-field="inscription_2.product_pack_id"/></div>
-                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement : </strong><span t-field="inscription_2.product_hebergement_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Pack </strong><span t-field="inscription_2.product_pack_id"/></div>
+                                            <div align="left" style="font-size:7pt;margin-left:10px;"><strong>Hébergement </strong><span t-if="inscription_2.product_hebergement_id" t-field="inscription_2.product_hebergement_id"/><span t-if="not inscription_2.product_hebergement_id">/</span></div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -118,7 +118,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_2.avatar_1920)" style="max-height:70pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_2.avatar_1920)" style="max-height:60pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -127,10 +127,10 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 1 : </strong><t t-if="inscription_2.discipline_id_1"> <span><span t-esc="inscription_2.discipline_id_1.name" /> | <span t-esc="inscription_2.teacher_id_1.name" /></span></t><t t-else="">/</t></div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 2 : </strong><t t-if="inscription_2.discipline_id_2"> <span><span t-esc="inscription_2.discipline_id_2.name" /> | <span t-esc="inscription_2.teacher_id_2.name" /></span></t><t t-else="">/</t></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 1 </strong><t t-if="inscription_2.discipline_id_1"> <span><span t-esc="inscription_2.discipline_id_1.name" /> | <span t-esc="inscription_2.teacher_id_1.name" /></span></t><t t-else="">/</t></div>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Cours 2 </strong><t t-if="inscription_2.discipline_id_2"> <span><span t-esc="inscription_2.discipline_id_2.name" /> | <span t-esc="inscription_2.teacher_id_2.name" /></span></t><t t-else="">/</t></div>
 
-                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:5px;">Du <span t-esc="inscription_2.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2.session_id.date_end.strftime('%d/%m/%Y')" />
+                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_2.session_id.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2.session_id.date_end.strftime('%d/%m/%Y')" />
                                             </div>
 
                                         </div>
