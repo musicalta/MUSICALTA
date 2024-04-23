@@ -158,7 +158,7 @@
                                 <field name="note_activity"
                                 nolabel="1"
                                 colspan="2"
-                                placeholder="Notes pour les activités..."/>
+                                placeholder="Notes pour les animations..."/>
                             </group>
                             <group string="Notes hébergements">
                                 <field name="accommodation_comment"
