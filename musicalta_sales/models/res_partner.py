@@ -19,4 +19,4 @@ class ResPartner(models.Model):
     note_internal = fields.Text('Note interne')
     note_kitchen = fields.Text('Note cuisine')
     note_professor = fields.Text('Note professeur')
-    note_activity = fields.Text('Note activité')
+    note_activity = fields.Text('Note animation')
