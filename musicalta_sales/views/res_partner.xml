@@ -46,7 +46,7 @@
                         <field name="accommodation_comment"
                         nolabel="1" 
                         colspan="2"
-                        placeholder="Notes pour les animations..."/>
+                        placeholder="Notes pour l'hébergement..."/>
                     </group>
                 </page>
             </xpath>
