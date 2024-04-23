@@ -45,9 +45,9 @@
                         <!-- <field name="level"/> -->
                         <!-- <field name="range"/> -->
                     </group>
-                    <group name="accommodation_comment" string="COmmentaire Hébergement">
+                    <!-- <group name="accommodation_comment" string="COmmentaire Hébergement">
                         <field colspan="2" nolabel="1" name="accommodation_comment"/>
-                    </group>
+                    </group> -->
                 </page>
             </xpath>
             <xpath expr="//field[@name='vat']" position="before">

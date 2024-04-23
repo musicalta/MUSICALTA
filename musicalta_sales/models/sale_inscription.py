@@ -180,7 +180,7 @@ class SaleInscription(models.Model):
     note_professor = fields.Text(
         'Note professeur', related='partner_id.note_professor', readonly=False)
     note_activity = fields.Text(
-        'Note activité', related='partner_id.note_activity', readonly=False)
+        'Note animation', related='partner_id.note_activity', readonly=False)
     accommodation_comment = fields.Text(
         'Note hébergement', related='partner_id.accommodation_comment', readonly=False)
 
