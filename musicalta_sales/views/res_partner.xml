@@ -36,6 +36,12 @@
                         colspan="2"
                         placeholder="Notes pour les profs..."/>
                     </group>
+                    <group string="Notes activités">
+                        <field name="note_activity"
+                        nolabel="1" 
+                        colspan="2"
+                        placeholder="Notes pour les activités..."/>
+                    </group>
                 </page>
             </xpath>
         </field>

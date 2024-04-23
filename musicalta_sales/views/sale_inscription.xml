@@ -154,6 +154,18 @@
                                 colspan="2"
                                 placeholder="Notes pour les profs..."/>
                             </group>
+                            <group string="Notes activités">
+                                <field name="note_activity"
+                                nolabel="1"
+                                colspan="2"
+                                placeholder="Notes pour les activités..."/>
+                            </group>
+                            <group string="Notes hébergements">
+                                <field name="accommodation_comment"
+                                nolabel="1"
+                                colspan="2"
+                                placeholder="Notes pour l'hébergement..."/>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
