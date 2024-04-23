@@ -15,3 +15,7 @@ class ResPartner(models.Model):
     )
     partition = fields.Char('Partition')
     tessiture_id = fields.Many2one('musical.tessiture', string='Tessiture')
+
+    note_internal = fields.Text('Note interne')
+    note_kitchen = fields.Text('Note cuisine')
+    note_professor = fields.Text('Note professeur')
