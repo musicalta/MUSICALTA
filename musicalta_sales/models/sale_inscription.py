@@ -173,6 +173,16 @@ class SaleInscription(models.Model):
     arrival_location_return_id = fields.Many2one(
         'sale.inscription.location', string="Lieu d'arrivée (retour)")
     note = fields.Html('Notes', related='partner_id.comment', readonly=False)
+    note_internal = fields.Text(
+        'Note interne', related='partner_id.note_internal', readonly=False)
+    note_kitchen = fields.Text(
+        'Note cuisine', related='partner_id.note_kitchen', readonly=False)
+    note_professor = fields.Text(
+        'Note professeur', related='partner_id.note_professor', readonly=False)
+    note_activity = fields.Text(
+        'Note animation', related='partner_id.note_activity', readonly=False)
+    accommodation_comment = fields.Text(
+        'Note hébergement', related='partner_id.accommodation_comment', readonly=False)
 
     currency_id = fields.Many2one(
         'res.currency',
