@@ -13,5 +13,5 @@ class EventRegistration(models.Model):
                 values.get('sale_order_id')) or False
             if sale_id:
                 values.update(
-                    {'event_id': sale_id.event_inscription_ids[0].session_id.id if sale_id.event_inscription_ids[0] and sale_id.event_inscription_ids[0].session_id else False})
+                    {'event_id': sale_id.event_inscription_ids[0].session_id.id if sale_id.event_inscription_ids.ids and sale_id.event_inscription_ids[0].session_id else False})
         return values
