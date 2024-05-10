@@ -122,6 +122,13 @@ class SaleOrder(models.Model):
             order.amount_residual = amount_residual
             order.advance_payment_status = payment_state
 
+    def _get_confirmation_template(self):
+        """ I remove the default confirmation template for the sale order
+        """
+        self.ensure_one()
+        record = super(SaleOrder, self)._get_confirmation_template()
+        return False
+
     def _create_invoices(self, grouped=False, final=False, date=None):
         moves = super(SaleOrder, self)._create_invoices(grouped, final, date)
         for move in moves:
@@ -129,10 +136,3 @@ class SaleOrder(models.Model):
                 move.write(
                     {'inscription_id': move.line_ids.sale_line_ids.order_id.event_inscription_ids.ids[0]})
         return moves
-
-    def _get_confirmation_template(self):
-        """ I remove the default confirmation template for the sale order
-        """
-        self.ensure_one()
-        record = super(SaleOrder, self)._get_confirmation_template()
-        return False
