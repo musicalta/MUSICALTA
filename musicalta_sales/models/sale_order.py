@@ -129,3 +129,10 @@ class SaleOrder(models.Model):
                 move.write(
                     {'inscription_id': move.line_ids.sale_line_ids.order_id.event_inscription_ids.ids[0]})
         return moves
+
+    def _get_confirmation_template(self):
+        """ I remove the default confirmation template for the sale order
+        """
+        self.ensure_one()
+        record = super(SaleOrder, self)._get_confirmation_template()
+        return False
