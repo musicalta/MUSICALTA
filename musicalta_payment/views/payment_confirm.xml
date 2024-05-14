@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_confirm_musicalta" model="ir.ui.view">
+        <field name="name">payment.confirm.musicalta</field>
+        <field name="inherit_id" ref="payment.confirm" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='col-md-4 offset-md-3 mt-2 ps-0']" position="replace">
+            </xpath>
+        </field>
+    </record>
+</odoo>
