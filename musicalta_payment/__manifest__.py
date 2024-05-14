@@ -13,7 +13,7 @@
     ],
     "data": [
         # VIEWS
-        "views/payment_views.xml",
+        "views/payment_confirm.xml",
     ],
     "installable": True,
 }
