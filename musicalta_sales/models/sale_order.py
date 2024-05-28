@@ -136,3 +136,9 @@ class SaleOrder(models.Model):
                 move.write(
                     {'inscription_id': move.line_ids.sale_line_ids.order_id.event_inscription_ids.ids[0]})
         return moves
+
+    def _get_default_payment_link_values(self):
+        self.ensure_one()
+        values = super(SaleOrder, self)._get_default_payment_link_values()
+        values['amount'] = self.amount_residual
+        return values
