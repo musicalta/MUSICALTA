@@ -11,7 +11,6 @@ class AccountPayment(models.Model):
                 vals['payment_transaction_id']
             )
             if payment_transaction and payment_transaction.reference:
-                sale_reference = ""
                 if '-' in payment_transaction.reference:
                     sale_reference = payment_transaction.reference.split(
                         '-')[0]
