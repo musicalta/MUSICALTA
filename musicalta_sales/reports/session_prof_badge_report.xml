@@ -45,6 +45,11 @@
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_1_employee.name"/></div>
+                                            <br/>
+                                            <br/>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
+                                            </div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -61,11 +66,9 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
+                                            
                                             <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
-                                            </div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_1.get('options')])" />
+                                                <i><span t-esc="', '.join([x.name for x in inscription_1.get('options')])" /></i>
                                             </div>
 
 
@@ -98,6 +101,11 @@
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_2_employee.name"/></div>
+                                            <br/>
+                                            <br/>
+                                            <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
+                                            </div>
                                         </div>
                                     </td>
                                     <td style="width:20%;height:100% !important;" valign="center">
@@ -114,13 +122,10 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
+                                            
                                             <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
+                                                <i><span t-esc="', '.join([x.name for x in inscription_2.get('options')])" /></i>
                                             </div>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_2.get('options')])" />
-                                            </div>
-
 
                                             <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_2_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2_session.date_end.strftime('%d/%m/%Y')" />
                                             </div>
