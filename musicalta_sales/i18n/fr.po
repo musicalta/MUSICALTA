@@ -4,16 +4,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20231106\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 15:23+0000\n"
-"PO-Revision-Date: 2024-02-19 15:23+0000\n"
+"POT-Creation-Date: 2024-06-13 15:36+0000\n"
+"PO-Revision-Date: 2024-06-13 15:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: musicalta_sales
+#: model:ir.actions.report,print_report_name:musicalta_sales.sale_inscription_print_badge
+msgid "'Print Badge - %s' % (object.name).replace('/', '')"
+msgstr ""
 
 #. module: musicalta_sales
 #: model:mail.template,body_html:musicalta_sales.mail_template_sale_inscription_missing
@@ -231,9 +236,39 @@ msgid "<strong>Archivé !</strong>"
 msgstr ""
 
 #. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "<strong>Cours 1 </strong>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "<strong>Cours 2 </strong>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "<strong>Hébergement </strong>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "<strong>Nom </strong>"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "<strong>Pack </strong>"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__folder_state__to_complete
 msgid "A compléter"
 msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_account_voucher_wizard
+msgid "Account Voucher Wizard"
+msgstr "Assistant de Configuration Paiement d'Avance"
 
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_needaction
@@ -276,6 +311,12 @@ msgid "Adulte"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__partner_age
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
+msgid "Age"
+msgstr ""
+
+#. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Archiver"
 msgstr ""
@@ -286,8 +327,11 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: musicalta_sales
-#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_auditor
-msgid "Auditeur"
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid ""
+"Attention, une facture est présente pour cette inscription.<br/>Si vous "
+"souhaitez la modifiez, veuillez d'abord extourner la facture présente (faire"
+" un avoir intégral)."
 msgstr ""
 
 #. module: musicalta_sales
@@ -303,6 +347,11 @@ msgstr ""
 #. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Autres informations"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_account_voucher_wizard__available_payment_method_line_ids
+msgid "Available Payment Method Line"
 msgstr ""
 
 #. module: musicalta_sales
@@ -389,6 +438,7 @@ msgid ""
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__force_state__confirmed
 #: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__state__confirmed
 msgid "Confirmé"
 msgstr ""
@@ -513,8 +563,18 @@ msgid "Dossier"
 msgstr ""
 
 #. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "Du"
+msgstr ""
+
+#. module: musicalta_sales
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Désarchiver"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "Employee Image"
 msgstr ""
 
 #. module: musicalta_sales
@@ -526,6 +586,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__state
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
 msgid "Etat"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_account_bank_statement_line__inscription_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_account_move__inscription_id
+#: model:ir.model.fields,field_description:musicalta_sales.field_account_payment__inscription_id
+msgid "Event Inscription"
 msgstr ""
 
 #. module: musicalta_sales
@@ -575,6 +642,11 @@ msgstr ""
 #. module: musicalta_sales
 #: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__force_state
+msgid "Forcer Etat"
 msgstr ""
 
 #. module: musicalta_sales
@@ -697,6 +769,11 @@ msgid "J'ai mon instrument"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order____last_update
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_level____last_update
 #: model:ir.model.fields,field_description:musicalta_sales.field_musical_tessiture____last_update
@@ -799,6 +876,28 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__main_partner_id
+msgid "Main Partner"
+msgstr "Partenaire rattaché"
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_search
+msgid "Majeur"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,help:musicalta_sales.field_account_voucher_wizard__payment_method_line_id
+msgid ""
+"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Payment Providers: Each payment provider has its own Payment Method. Request a transaction on/to a card thanks to a payment token saved by the partner when buying or subscribing online.\n"
+"Check: Pay bills by check and print it from Odoo.\n"
+"Batch Deposit: Collect several customer checks at once generating and submitting a batch deposit to your bank. Module account_batch_payment is necessary.\n"
+"SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit Transfer file to your bank. Module account_sepa is necessary.\n"
+"SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your partner will have granted to you. Module account_sepa is necessary.\n"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_event_lunch_order__meal_product_id
 msgid "Meal Type"
 msgstr ""
@@ -811,6 +910,11 @@ msgstr ""
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__message_ids
 msgid "Messages"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "Mineur"
 msgstr ""
 
 #. module: musicalta_sales
@@ -905,8 +1009,43 @@ msgid "No ticket found for this teacher and discipline"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__force_state__unconfirmed
 #: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__state__unconfirmed
 msgid "Non confirmé"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__note_activity
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__note_activity
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__note_activity
+msgid "Note animation"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__note_kitchen
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__note_kitchen
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__note_kitchen
+msgid "Note cuisine"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__accommodation_comment
+msgid "Note hébergement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__note_internal
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__note_internal
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__note_internal
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Note interne"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_partner__note_professor
+#: model:ir.model.fields,field_description:musicalta_sales.field_res_users__note_professor
+#: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__note_professor
+msgid "Note professeur"
 msgstr ""
 
 #. module: musicalta_sales
@@ -914,6 +1053,75 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_order_form_inherit
 #: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
 msgid "Notes"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes Musicalta"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes animation"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes cuisine"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+msgid "Notes hébergement"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes hébergements"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+msgid "Notes interne"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes internes..."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes pour l'hébergement..."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes pour la cuisine..."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes pour les animations..."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes pour les profs..."
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.view_sale_inscription_form
+msgid "Notes professeurs"
 msgstr ""
 
 #. module: musicalta_sales
@@ -982,6 +1190,16 @@ msgid "Partition"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields,field_description:musicalta_sales.field_account_voucher_wizard__payment_method_line_id
+msgid "Payment Method"
+msgstr ""
+
+#. module: musicalta_sales
+#: model:ir.model,name:musicalta_sales.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__is_pianiste
 msgid "Piano"
 msgstr ""
@@ -996,6 +1214,11 @@ msgstr "Liste de prix"
 #: model:ir.model,name:musicalta_sales.model_product_pricelist_item
 msgid "Pricelist Rule"
 msgstr "Règle des listes des prix"
+
+#. module: musicalta_sales
+#: model:ir.actions.report,name:musicalta_sales.sale_inscription_print_badge
+msgid "Print Badge"
+msgstr ""
 
 #. module: musicalta_sales
 #: model:ir.model.fields,field_description:musicalta_sales.field_sale_inscription__product_work_room_domain_id
@@ -1143,6 +1366,12 @@ msgid "Session"
 msgstr ""
 
 #. module: musicalta_sales
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__force_state__solded
+#: model:ir.model.fields.selection,name:musicalta_sales.selection__sale_inscription__state__solded
+msgid "Soldé"
+msgstr ""
+
+#. module: musicalta_sales
 #: model:ir.model.fields,help:musicalta_sales.field_sale_inscription__activity_state
 msgid ""
 "Status based on activities\n"
@@ -1199,6 +1428,11 @@ msgstr ""
 #: code:addons/musicalta_sales/models/sale_inscription.py:0
 #, python-format
 msgid "You must select a pack"
+msgstr ""
+
+#. module: musicalta_sales
+#: model_terms:ir.ui.view,arch_db:musicalta_sales.inscription_badge
+msgid "au"
 msgstr ""
 
 #. module: musicalta_sales

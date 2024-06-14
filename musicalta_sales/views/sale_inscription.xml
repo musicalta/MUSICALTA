@@ -65,6 +65,7 @@
                         <field name="date_of_birth"/>
                         <field name="pricelist_id"/>
                         <field name="folder_state"/>
+                        <field name="force_state"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
@@ -106,6 +107,7 @@
                                     <field name="product_work_rooms_id" domain="product_work_room_domain_id" />
                                 </group>
                                 <group string="Autres informations">
+                                    <field name="main_partner_id"/>
                                     <field name="musical_level_id" />
                                     <field name="usual_teacher" />
                                     <field name="partition" />
@@ -198,6 +200,7 @@
                 <field name="invoices_amount_residual" optional="hide" />
                 <field name="invoices_amount_total" optional="hide" />
                 <field name="state" optional="hide" />
+                <field name="force_state" optional="hide" />
                 <field name="folder_state" optional="hide" />
             </tree>
         </field>
