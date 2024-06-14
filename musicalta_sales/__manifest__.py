@@ -29,6 +29,7 @@
         # REPORTS
         "reports/sale_report.xml",
         "reports/sale_inscription_badge_report.xml",
+        "reports/session_prof_badge_report.xml",
         # # VIEWS
         "views/external_layout_template.xml",
         "views/sale_report_saleorder_document_template.xml",
