@@ -21,7 +21,7 @@ class EventInscriptionBadgeProf(models.AbstractModel):
                     lambda x: x.teacher_id.id == emp.id)
 
                 disciplines = badges.mapped('discipline_ids')
-                options = options.mapped('option_id')
+                # options = options.mapped('option_id')
 
                 report_data.append({
                     'session': event,
