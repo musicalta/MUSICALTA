@@ -65,7 +65,7 @@
                                     <td colspan="2">
                                         <div>
                                             <t t-foreach="inscription_1.get('options')" t-as="option_line">
-                                                <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;">
                                                     <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
                                                 </div>
                                             </t>
@@ -120,7 +120,7 @@
                                     <td colspan="2">
                                         <div>
                                             <t t-foreach="inscription_2.get('options')" t-as="option_line">
-                                                <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;">
                                                     <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
                                                 </div>
                                             </t>
