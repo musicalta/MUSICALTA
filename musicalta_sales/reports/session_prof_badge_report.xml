@@ -55,7 +55,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_1_employee.avatar_1920)" style="max-height:60pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_1_employee.avatar_1920)" style="max-height:55pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -65,7 +65,7 @@
                                     <td colspan="2">
                                         <div>
                                             <t t-foreach="inscription_1.get('options')" t-as="option_line">
-                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;">
+                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;margin-bottom:1px;">
                                                     <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
                                                 </div>
                                             </t>
@@ -110,7 +110,7 @@
 
                                             <tr style="height:100%;">
                                                 <td align="center" valign="center">
-                                                    <img t-att-src="image_data_uri(inscription_2_employee.avatar_1920)" style="max-height:60pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
+                                                    <img t-att-src="image_data_uri(inscription_2_employee.avatar_1920)" style="max-height:55pt;max-width:90%;box-shadow: 0 0 0 1px #dca922;border-radius: 8px;" alt="Employee Image"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -120,7 +120,7 @@
                                     <td colspan="2">
                                         <div>
                                             <t t-foreach="inscription_2.get('options')" t-as="option_line">
-                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;">
+                                                <div align="left" style="font-size:7pt;margin-left:10px;margin-top:2px;margin-bottom:1px;">
                                                     <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
                                                 </div>
                                             </t>
