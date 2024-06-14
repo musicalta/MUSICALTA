@@ -44,11 +44,11 @@
                                 <tr>
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
+                                            <br/>
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_1_employee.name"/></div>
                                             <br/>
+                                            <div t-if="inscription_1.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Disciplines : <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
                                             <br/>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
                                             </div>
                                         </div>
                                     </td>
@@ -66,10 +66,12 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <i><span t-esc="', '.join([x.name for x in inscription_1.get('options')])" /></i>
-                                            </div>
+                                            <div style="margin-bottom:10px;"><br/></div>
+                                            <t t-foreach="inscription_1.get('options')" t-as="option_line">
+                                                <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                    <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
+                                                </div>
+                                            </t>
 
 
                                             <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_1_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1_session.date_end.strftime('%d/%m/%Y')" />
@@ -100,11 +102,11 @@
                                 <tr>
                                     <td style="width:70%;height:100% !important;position: relative;" valign="center">
                                         <div style="position: absolute; top: 0;" >
+                                            <br/>
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_2_employee.name"/></div>
                                             <br/>
+                                            <div t-if="inscription_2.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Disciplines : <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
                                             <br/>
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
                                             </div>
                                         </div>
                                     </td>
@@ -122,10 +124,12 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            
-                                            <div align="left" style="font-size:8pt;margin-left:10px;">
-                                                <i><span t-esc="', '.join([x.name for x in inscription_2.get('options')])" /></i>
-                                            </div>
+                                            <div style="margin-bottom:10px;"><br/></div>
+                                            <t t-foreach="inscription_2.get('options')" t-as="option_line">
+                                                <div align="left" style="font-size:8pt;margin-left:10px;">
+                                                    <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
+                                                </div>
+                                            </t>
 
                                             <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_2_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2_session.date_end.strftime('%d/%m/%Y')" />
                                             </div>
