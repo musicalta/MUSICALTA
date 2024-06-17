@@ -46,7 +46,7 @@
                                         <div style="position: absolute; top: 0;" >
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_1_employee.name"/></div>
                                             <br/>
-                                            <div t-if="inscription_1.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Disciplines : <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
+                                            <div t-if="inscription_1.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Discipline(s) : <span t-esc="', '.join([x.name for x in inscription_1.get('disciplines')])" />
                                             </div>
                                         </div>
                                     </td>
@@ -104,7 +104,7 @@
                                         <div style="position: absolute; top: 0;" >
                                             <div align="left" style="font-size:8pt;margin-left:10px;"><strong>Nom </strong><span t-field="inscription_2_employee.name"/></div>
                                             <br/>
-                                            <div t-if="inscription_2.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Disciplines : <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
+                                            <div t-if="inscription_2.get('disciplines')" align="left" style="font-size:8pt;margin-left:10px;">Discipline(s) : <span t-esc="', '.join([x.name for x in inscription_2.get('disciplines')])" />
                                             </div>
                                         </div>
                                     </td>
