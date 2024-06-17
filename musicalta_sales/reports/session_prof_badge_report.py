@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from collections import defaultdict
 
 
 class EventInscriptionBadgeProf(models.AbstractModel):
@@ -19,6 +20,11 @@ class EventInscriptionBadgeProf(models.AbstractModel):
                     lambda x: x.id == emp.id)
                 options = event.options_event_ticket_id.filtered(
                     lambda x: x.teacher_id.id == emp.id)
+                option_data = defaultdict(list)
+
+                for option in options:
+                    option_data[option.product_id.name].append(
+                        option.option_id.name)
 
                 disciplines = badges.mapped('discipline_ids')
                 # options = options.mapped('option_id')
@@ -27,7 +33,7 @@ class EventInscriptionBadgeProf(models.AbstractModel):
                     'session': event,
                     'employee': emp,
                     'disciplines': disciplines,
-                    'options': options,
+                    'option_data': option_data,
                 })
 
         return {
