@@ -63,17 +63,20 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <div>
-                                            <t t-foreach="inscription_1.get('options')" t-as="option_line">
+                                        <div style="margin-top:-5px;">
+                                            <t t-foreach="inscription_1.get('option_data').items()" t-as="option_item">
                                                 <div align="left" style="font-size:7pt;margin-left:10px;margin-top:-5px;margin-bottom:1px;">
-                                                    <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
+                                                    <i>
+                                                        <span t-esc="option_item[0]" />: 
+                                                        <span t-esc="', '.join(option_item[1])" />
+
+                                                    </i>
                                                 </div>
                                             </t>
 
-
-                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_1_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1_session.date_end.strftime('%d/%m/%Y')" />
+                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">
+                                                Du <span t-esc="inscription_1_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_1_session.date_end.strftime('%d/%m/%Y')" />
                                             </div>
-
                                         </div>
                                     </td>
                                 </tr>
@@ -116,18 +119,22 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr> 
                                     <td colspan="2">
                                         <div style="margin-top:-5px;">
-                                            <t t-foreach="inscription_2.get('options')" t-as="option_line">
+                                            <t t-foreach="inscription_2.get('option_data').items()" t-as="option_item">
                                                 <div align="left" style="font-size:7pt;margin-left:10px;margin-top:-5px;margin-bottom:1px;">
-                                                    <i><span t-field="option_line.product_id" /> <span t-field="option_line.option_id" /></i>
+                                                    <i>
+                                                        <span t-esc="option_item[0]" />: 
+                                                        <span t-esc="', '.join(option_item[1])" />
+
+                                                    </i>
                                                 </div>
                                             </t>
 
-                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">Du <span t-esc="inscription_2_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2_session.date_end.strftime('%d/%m/%Y')" />
+                                            <div align="left" style="font-size:6pt;margin-left:10px;margin-top:5px;margin-bottom:15px;">
+                                                Du <span t-esc="inscription_2_session.date_begin.strftime('%d/%m/%Y')" /> au <span t-esc="inscription_2_session.date_end.strftime('%d/%m/%Y')" />
                                             </div>
-
                                         </div>
                                     </td>
                                 </tr>
