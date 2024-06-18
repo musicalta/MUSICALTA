@@ -9,6 +9,7 @@
                     <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight" attrs="{'invisible': [('sale_order_id', '!=', False)]}"/>
                     <button string="Désarchiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '=', True)]}"/>
                     <button string="Archiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '!=', True)]}"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('active', '=', True)]}">
                     <strong>Archivé !</strong>
@@ -65,7 +66,7 @@
                         <field name="date_of_birth"/>
                         <field name="pricelist_id"/>
                         <field name="folder_state"/>
-                        <field name="force_state"/>
+                        <field name="state_is_forced"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
@@ -200,7 +201,7 @@
                 <field name="invoices_amount_residual" optional="hide" />
                 <field name="invoices_amount_total" optional="hide" />
                 <field name="state" optional="hide" />
-                <field name="force_state" optional="hide" />
+                <field name="state_is_forced" optional="hide" />
                 <field name="folder_state" optional="hide" />
             </tree>
         </field>
