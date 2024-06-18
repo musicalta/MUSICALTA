@@ -210,24 +210,26 @@ class SaleInscription(models.Model):
         ('unconfirmed', 'Non confirmé'),
         ('confirmed', 'Confirmé'),
         ('solded', 'Soldé')
-    ], string='Etat', compute='_compute_state', store=True)
+    ], string='Etat', compute='_compute_state', inverse='_inverse_state', store=True, readonly=False,)
 
-    force_state = fields.Selection([
-        ('unconfirmed', 'Non confirmé'),
-        ('confirmed', 'Confirmé'),
-        ('solded', 'Soldé')
-    ], string='Forcer Etat')
+    state_is_forced = fields.Boolean(
+        'Etat forcé',
+    )
 
     main_partner_id = fields.Many2one(
         'res.partner',
         string='Main Partner',
     )
 
-    @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids', 'force_state', 'sale_order_id.amount_residual')
+    def _inverse_state(self):
+        for record in self:
+            record.state_is_forced = True
+
+    @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids', 'state_is_forced', 'sale_order_id.amount_residual')
     def _compute_state(self):
         for record in self:
-            if record.force_state:
-                record.state = record.force_state
+            if record.state_is_forced:
+                continue
             else:
                 if record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
                     record.state = 'confirmed'
