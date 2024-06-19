@@ -223,7 +223,10 @@ class SaleInscription(models.Model):
 
     def _inverse_state(self):
         for record in self:
-            record.state_is_forced = True
+            if record.state_is_forced:
+                record.state_is_forced = False
+            else:
+                record.state_is_forced = True
 
     @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids', 'state_is_forced', 'sale_order_id.amount_residual')
     def _compute_state(self):
