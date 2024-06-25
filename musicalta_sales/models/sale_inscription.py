@@ -344,7 +344,7 @@ class SaleInscription(models.Model):
             if rec.discipline_id_1.is_piano or \
                 rec.discipline_id_2.is_piano or \
                     rec.discipline_id_1.is_harpe or \
-            rec.discipline_id_2.is_harpe:
+                rec.discipline_id_2.is_harpe:
                 available_product_ids = rec._get_discipline_specific_products()
 
             if rec.is_harpiste_with_instruments:
@@ -503,7 +503,6 @@ class SaleInscription(models.Model):
         SaleOrder = self.env['sale.order']
         sale_order = SaleOrder.search([
             ('partner_id', '=', self.partner_id.id),
-            ('state', '=', 'draft'),
             ('event_type_id', '=', self.session_id.event_type_id.id),
         ])
         if not sale_order:
@@ -889,6 +888,11 @@ class SaleInscription(models.Model):
                      self.session_id.event_type_id.id),
                     ('id', '!=', self.id),
                 ]):
+                    orders = self.env['sale.inscription'].search([
+                        ('partner_id', '=', self.partner_id.id),
+                        ('session_id.event_type_id', '=',
+                         self.session_id.event_type_id.id),
+                    ])
                     self.env['sale.order.line'].create({
                         'order_id': self.sale_order_id.id,
                         'product_id': self.session_id.event_type_id.product_remise_multi_session_id.product_variant_id.id,
