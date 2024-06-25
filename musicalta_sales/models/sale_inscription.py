@@ -208,16 +208,38 @@ class SaleInscription(models.Model):
 
     state = fields.Selection([
         ('unconfirmed', 'Non confirmé'),
-        ('confirmed', 'Confirmé')
-    ], string='Etat', compute='_compute_state', store=True)
+        ('confirmed', 'Confirmé'),
+        ('solded', 'Soldé')
+    ], string='Etat', compute='_compute_state', inverse='_inverse_state', store=True, readonly=False,)
 
-    @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids')
+    state_is_forced = fields.Boolean(
+        'Etat forcé',
+    )
+
+    main_partner_id = fields.Many2one(
+        'res.partner',
+        string='Main Partner',
+    )
+
+    def _inverse_state(self):
+        for record in self:
+            if record.state_is_forced:
+                record.state_is_forced = False
+            else:
+                record.state_is_forced = True
+
+    @api.depends('invoice_ids', 'sale_order_id', 'sale_order_id.account_payment_ids', 'state_is_forced', 'sale_order_id.amount_residual')
     def _compute_state(self):
         for record in self:
-            if record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
-                record.state = 'confirmed'
+            if record.state_is_forced:
+                continue
             else:
-                record.state = 'unconfirmed'
+                if record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
+                    record.state = 'confirmed'
+                elif record.sale_order_id and record.sale_order_id.amount_residual == 0:
+                    record.state = 'solded'
+                else:
+                    record.state = 'unconfirmed'
 
     @api.depends('invoice_ids', 'invoice_ids.amount_residual', 'invoice_ids.amount_total', 'sale_order_id.amount_residual')
     def _compute_invoice_amount(self):

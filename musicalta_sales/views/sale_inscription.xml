@@ -9,6 +9,7 @@
                     <button name="action_update_or_create" type="object" string="Créer/Mettre à jour le devis" class="oe_highlight" attrs="{'invisible': [('sale_order_id', '!=', False)]}"/>
                     <button string="Désarchiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '=', True)]}"/>
                     <button string="Archiver" type="object" name="toggle_active" class="oe_highlight" attrs="{'invisible': [('active', '!=', True)]}"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('active', '=', True)]}">
                     <strong>Archivé !</strong>
@@ -65,6 +66,7 @@
                         <field name="date_of_birth"/>
                         <field name="pricelist_id"/>
                         <field name="folder_state"/>
+                        <field name="state_is_forced" invisible="1"/>
                     </group>
                     <notebook>
                         <page name="information" string="Informations">
@@ -106,6 +108,7 @@
                                     <field name="product_work_rooms_id" domain="product_work_room_domain_id" />
                                 </group>
                                 <group string="Autres informations">
+                                    <field name="main_partner_id"/>
                                     <field name="musical_level_id" />
                                     <field name="usual_teacher" />
                                     <field name="partition" />
@@ -182,7 +185,7 @@
         <field name="name">sale.inscription.tree</field>
         <field name="model">sale.inscription</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'confirmed' and folder_state == 'completed' and invoices_amount_residual == 0">
+            <tree decoration-success="state in ['confirmed','solded'] and folder_state == 'completed' and invoices_amount_residual == 0">
                 <field name="currency_id" invisible="1"/>
                 <field name="session_id"/>
                 <field name="partner_id"/>
@@ -198,6 +201,7 @@
                 <field name="invoices_amount_residual" optional="hide" />
                 <field name="invoices_amount_total" optional="hide" />
                 <field name="state" optional="hide" />
+                <field name="state_is_forced" optional="hide" />
                 <field name="folder_state" optional="hide" />
             </tree>
         </field>
