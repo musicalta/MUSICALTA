@@ -234,10 +234,10 @@ class SaleInscription(models.Model):
             if record.state_is_forced:
                 continue
             else:
-                if record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
-                    record.state = 'confirmed'
-                elif record.sale_order_id and record.sale_order_id.amount_residual == 0:
+                if record.sale_order_id and record.sale_order_id.amount_residual == 0:
                     record.state = 'solded'
+                elif record.invoice_ids or record.sale_order_id and record.sale_order_id.account_payment_ids:
+                    record.state = 'confirmed'
                 else:
                     record.state = 'unconfirmed'
 
